@@ -1,0 +1,3 @@
+[submodule "path_tracking/external/pure_pursuit"]
+	path = path_tracking/external/pure_pursuit
+	url = https://github.com/iscumd/pure_pursuit

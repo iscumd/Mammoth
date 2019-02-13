@@ -1,0 +1,38 @@
+<launch>
+
+	<!-- Joystick -->
+	<node pkg="joy" type="joy_node" name="joy_node" />
+	<node pkg="isc_joy" type="joystick_xbox360" name="joystick_xbox360"/>
+	<param name="manual_control_speed_multiplier" value="0.3" />
+	<param name="manual_control_turn_multiplier" value="3" />
+	<node pkg="isc_joy" type="manual_control" name="manual_control"/>
+
+	<!-- Auto Control Logic -->
+	<param name="auto_control_logic_enable_logging" value="false" />
+	<node pkg="yeti_snowplow" type="auto_control_logic" name="auto_control_logic" output="screen" />
+
+	<!-- Drive Mode Control -->
+	<node pkg="yeti_snowplow" type="yeti_drive_mode_control" name="yeti_drive_mode_control" />
+	<remap from="yeti/cmd_vel" to="manual_control"/>
+
+<!-- Start Gazebo Simulation -->
+	<param name="use_sim_time" value="true" />
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_with_snow.sdf"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+	<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_zed" args="0 0 0 0 0 0 base_link zed_camera_center 10" />
+	<node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_sick_laser_link" args="0.33 0 0.75 0 0 0 base_link sick_laser_link 10" />
+
+	<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+		<param name="map_update_interval" value="2.0" />
+	</node>
+
+	<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"></node>
+
+</launch>
