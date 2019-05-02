@@ -1,0 +1,11 @@
+float64 x
+float64 y
+float64 distance
+float64 heading
+bool isAMovingObstacle
+int32 objStartIndex
+int32 objEndIndex
+float64 obsRoughSize
+float64 obsLineSize
+lidar_point startPoint
+lidar_point endPoint

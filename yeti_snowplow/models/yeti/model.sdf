@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.4'>
+  <model name="yeti">
+    <static>false</static>
+    <link name='chassis'>
+      <inertial>
+        <mass>136.0</mass>
+      </inertial>
+      <pose>0 0 0.395 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size> .93 .495 .625 </size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='visual'>
+        <pose>.52 -0.247 -.32 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://yeti/meshes/chassis.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='left_front_wheel'>
+      <pose>0.233 0.315 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.00</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <emissive>0.0 0.0 0.0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+    <link name='right_front_wheel'>
+      <pose>0.233 -0.315 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.00</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <emissive>0.0 0.0 0.0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+    <link name='left_back_wheel'>
+      <pose>-0.233 0.315 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.00</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <emissive>0.0 0.0 0.0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+    <link name='right_back_wheel'>
+      <pose>-0.233 -0.315 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.165</radius>
+            <length>.13</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.00</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <emissive>0.0 0.0 0.0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+    <link name="lidar">
+      <pose>0.33 0 0.75 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.05</size>
+          </box>
+        </geometry>
+      </collision>
+      <inertial name='inertial'>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+      <sensor type="gpu_ray" name="head_sick_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-2.356</min_angle>
+              <max_angle>2.356</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_ros_head_sick_controller" filename="libgazebo_ros_gpu_laser.so">
+          <topicName>/scan</topicName>
+          <frameName>sick_laser_link</frameName>
+        </plugin>
+      </sensor>
+    </link>
+    <joint type='revolute' name='left_front_wheel_hinge'>
+      <pose>0 0 -0.065 0 0 0</pose>
+      <child>left_front_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint type='revolute' name='right_front_wheel_hinge'>
+      <pose>0 0 0.065 0 0 0</pose>
+      <child>right_front_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint type='revolute' name='left_back_wheel_hinge'>
+      <pose>0 0 -0.065 0 0 0</pose>
+      <child>left_back_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint type='revolute' name='right_back_wheel_hinge'>
+      <pose>0 0 0.065 0 0 0</pose>
+      <child>right_back_wheel</child>
+      <parent>chassis</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+    <joint type='fixed' name='lidar_fixed'>
+      <child>chassis</child>
+      <parent>lidar</parent>
+    </joint>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/yeti</robotNamespace>
+      <leftFrontJoint>left_front_wheel_hinge</leftFrontJoint>
+      <rightFrontJoint>right_front_wheel_hinge</rightFrontJoint>
+      <leftRearJoint>left_back_wheel_hinge</leftRearJoint>
+      <rightRearJoint>right_back_wheel_hinge</rightRearJoint>
+      <wheelSeparation>0.495</wheelSeparation>
+      <wheelDiameter>0.33</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>60</torque>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>true</broadcastTF>
+    </plugin>
+  </model>
+</sdf>
