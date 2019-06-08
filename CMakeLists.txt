@@ -15,8 +15,6 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   isc_joy
   isc_roboteq_hdc2460
-  isc_shared_msgs
-  isc_sick
 )
 
 ## System dependencies are found with CMake's conventions
@@ -169,41 +167,41 @@ target_link_libraries(yeti_drive_mode_control ${catkin_LIBRARIES})
 #add_dependencies(navigation_pid ${PROJECT_NAME}_generate_messages_cpp)
 #target_link_libraries(navigation_pid ${catkin_LIBRARIES})
 
-add_executable(navigation_pid_speed src/navigation_pid_speed.cpp)
-add_dependencies(navigation_pid_speed ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(navigation_pid_speed ${catkin_LIBRARIES})
+#add_executable(navigation_pid_speed src/navigation_pid_speed.cpp)
+#add_dependencies(navigation_pid_speed ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(navigation_pid_speed ${catkin_LIBRARIES})
 
-add_executable(navigation_pid_turn src/navigation_pid_turn.cpp)
-add_dependencies(navigation_pid_turn ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(navigation_pid_turn ${catkin_LIBRARIES})
+#add_executable(navigation_pid_turn src/navigation_pid_turn.cpp)
+#add_dependencies(navigation_pid_turn ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(navigation_pid_turn ${catkin_LIBRARIES})
 
-add_executable(navigation_pid_velocity src/navigation_pid_velocity.cpp)
-add_dependencies(navigation_pid_velocity ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(navigation_pid_velocity ${catkin_LIBRARIES})
+#add_executable(navigation_pid_velocity src/navigation_pid_veslocity.cpp)
+#add_dependencies(navigation_pid_velocity ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(navigation_pid_velocity ${catkin_LIBRARIES})
 
-add_executable(navigation_pid_test src/navigation_pid_test.cpp)
-add_dependencies(navigation_pid_test ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(navigation_pid_test ${catkin_LIBRARIES})
+#add_executable(navigation_pid_test src/navigation_pid_test.cpp)
+#add_dependencies(navigation_pid_test ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(navigation_pid_test ${catkin_LIBRARIES})
 
-add_executable(obstacle_detection src/obstacle_detection.cpp)
-add_dependencies(obstacle_detection ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(obstacle_detection ${catkin_LIBRARIES})
+#add_executable(obstacle_detection src/obstacle_detection.cpp)
+#add_dependencies(obstacle_detection ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(obstacle_detection ${catkin_LIBRARIES})
 
-add_executable(obstacle_reaction src/obstacle_reaction.cpp src/buffer.h)
-add_dependencies(obstacle_reaction ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(obstacle_reaction ${catkin_LIBRARIES})
+#add_executable(obstacle_reaction src/obstacle_reaction.cpp src/buffer.h)
+#add_dependencies(obstacle_reaction ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(obstacle_reaction ${catkin_LIBRARIES})
 
 #add_executable(gpio_monitor src/gpio_monitor.cpp)
 #add_dependencies(gpio_monitor ${PROJECT_NAME}_generate_messages_cpp)
 #target_link_libraries(gpio_monitor ${catkin_LIBRARIES} ${wiringPi})
 
-add_executable(yeti_waypoint_selection src/yeti_waypoint_selection.cpp)
-add_dependencies(yeti_waypoint_selection ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(yeti_waypoint_selection ${catkin_LIBRARIES})
+#add_executable(yeti_waypoint_selection src/yeti_waypoint_selection.cpp)
+#add_dependencies(yeti_waypoint_selection ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(yeti_waypoint_selection ${catkin_LIBRARIES})
 
-add_executable(localization_node src/localization_node.cpp)
-add_dependencies(localization_node ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(localization_node ${catkin_LIBRARIES})
+#add_executable(localization_node src/localization_node.cpp)
+#add_dependencies(localization_node ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(localization_node ${catkin_LIBRARIES})
 
 add_executable(stall_detection src/stall_detection_node.cpp)
 add_dependencies(stall_detection ${PROJECT_NAME}_generate_messages_cpp)
