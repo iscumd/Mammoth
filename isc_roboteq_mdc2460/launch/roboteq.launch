@@ -1,0 +1,14 @@
+<launch>
+	<arg name="device" default="/dev/ttyUSB0" />
+	<arg name="enable_logging" default="false" />
+	<arg name="has_encoders" default="false" />
+	<arg name="gear_reduction" default="1.0" />
+	<arg name="flip_inputs" default="false" />
+	<node pkg="isc_roboteq_mdc2460" name="roboteq" type="roboteq_mdc2460">
+		<param name="serial_port" value="$(arg device)" />
+		<param name="enable_logging" value="$(arg enable_logging)" />
+		<param name="has_encoders" value="$(arg has_encoders)" />
+		<param name="gear_reduction" value="$(arg gear_reduction)" />
+		<param name="flip_inputs" value="$(arg flip_inputs)" />
+	</node>
+</launch>
