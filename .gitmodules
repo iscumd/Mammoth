@@ -4,3 +4,6 @@
 [submodule "isc_joy"]
 	path = isc_joy
 	url = https://github.com/iscumd/isc_joy.git
+[submodule "isc_roboteq_hdc2460"]
+	path = isc_roboteq_hdc2460
+	url = https://github.com/iscumd/isc_roboteq_hdc2460.git
