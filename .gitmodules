@@ -10,6 +10,6 @@
 [submodule "isc_shared_msgs"]
 	path = isc_shared_msgs
 	url = https://github.com/iscumd/isc_shared_msgs.git
-[submodule "isc_roboteq_mdc2460"]
-	path = isc_roboteq_mdc2460
-	url = https://github.com/iscumd/isc_roboteq_mdc2460.git
+[submodule "isc_ouster"]
+	path = isc_ouster
+	url = https://github.com/iscumd/isc_ouster.git
