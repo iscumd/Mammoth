@@ -8,6 +8,9 @@
     <!-- Roboteq -->
     <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
     
+    <!-- LiDAR -->
+    <include file="$(find isc_ouster)/ouster_ros/launch/start_ouster_2d.launch" />
+    
     <!-- === Yeti Main === -->
     <!-- LiDAR -->
    <!-- <arg name="host" default="192.168.0.100"/>
