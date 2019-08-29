@@ -5,6 +5,9 @@
         <arg name="turn_multiplier" value="0.4"/>   
     </include>
     
+    <!-- Roboteq -->
+    <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
+    
     <!-- === Yeti Main === -->
     <!-- LiDAR -->
    <!-- <arg name="host" default="192.168.0.100"/>
@@ -118,7 +121,4 @@
 
     <!-- Drive Mode Control -->
   <!-- PLEASE ADD BACK IN ROSE  <node pkg="yeti_snowplow" type="yeti_drive_mode_control" name="yeti_drive_mode_control"/> -->
-
-    <!-- Roboteq -->
-<include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
 </launch>
