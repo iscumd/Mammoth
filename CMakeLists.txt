@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(yeti_snowplow)
+project(mammoth_snowplow)
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
 # compile with C++11
 # https://github.com/ros-planning/geometric_shapes/pull/50#issuecomment-236972774
@@ -15,11 +15,12 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   isc_joy
   isc_roboteq_hdc2460
+  isc_ouster
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-find_library(wiringPi wiringPi ./src/wiringPi)
+# find_library(wiringPi wiringPi ./src/wiringPi)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -51,17 +52,17 @@ find_library(wiringPi wiringPi ./src/wiringPi)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  gpio_inputs.msg
-  gpio_leds.msg
-  lidar_point.msg
-  location_point.msg
-  obstacle.msg
-  obstacles.msg
-  target.msg
-  turn.msg
-)
+# add_message_files(
+#  FILES
+#  gpio_inputs.msg
+#  gpio_leds.msg
+#  lidar_point.msg
+#  location_point.msg
+#  obstacle.msg
+#  obstacles.msg
+#  target.msg
+#  turn.msg
+#)
 
 ## Generate services in the 'srv' folder
 add_service_files(
@@ -82,7 +83,7 @@ generate_messages(
   std_msgs  # Or other packages containing msgs
   sensor_msgs
   isc_joy
-  isc_shared_msgs
+#  isc_shared_msgs
 )
 
 ################################################
@@ -117,7 +118,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES yeti_snowplow
-  CATKIN_DEPENDS roscpp std_msgs message_runtime sensor_msgs isc_joy isc_roboteq_hdc2460 isc_shared_msgs isc_sick
+  CATKIN_DEPENDS roscpp std_msgs message_runtime sensor_msgs isc_joy isc_roboteq_hdc2460 isc_ouster
 #  DEPENDS system_lib
 )
 
@@ -155,18 +156,17 @@ include_directories(
 # )
 
 # ADD NEW CPPs HERE
-add_executable(auto_control_logic src/auto_control_logic.cpp)
-add_dependencies(auto_control_logic ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(auto_control_logic ${catkin_LIBRARIES})
+#add_executable(auto_control_logic src/auto_control_logic.cpp)
+#add_dependencies(auto_control_logic ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(auto_control_logic ${catkin_LIBRARIES})
 
-add_executable(yeti_drive_mode_control src/yeti_drive_mode_control.cpp)
-add_dependencies(yeti_drive_mode_control ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(yeti_drive_mode_control ${catkin_LIBRARIES})
+#add_executable(yeti_drive_mode_control src/yeti_drive_mode_control.cpp)
+#add_dependencies(yeti_drive_mode_control ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(yeti_drive_mode_control ${catkin_LIBRARIES})
 
 #add_executable(navigation_pid src/navigation_pid.cpp)
 #add_dependencies(navigation_pid ${PROJECT_NAME}_generate_messages_cpp)
 #target_link_libraries(navigation_pid ${catkin_LIBRARIES})
-
 #add_executable(navigation_pid_speed src/navigation_pid_speed.cpp)
 #add_dependencies(navigation_pid_speed ${PROJECT_NAME}_generate_messages_cpp)
 #target_link_libraries(navigation_pid_speed ${catkin_LIBRARIES})
@@ -203,9 +203,9 @@ target_link_libraries(yeti_drive_mode_control ${catkin_LIBRARIES})
 #add_dependencies(localization_node ${PROJECT_NAME}_generate_messages_cpp)
 #target_link_libraries(localization_node ${catkin_LIBRARIES})
 
-add_executable(stall_detection src/stall_detection_node.cpp)
-add_dependencies(stall_detection ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries(stall_detection ${catkin_LIBRARIES})
+#add_executable(stall_detection src/stall_detection_node.cpp)
+#add_dependencies(stall_detection ${PROJECT_NAME}_generate_messages_cpp)
+#target_link_libraries(stall_detection ${catkin_LIBRARIES})
 
 #############
 ## Install ##
