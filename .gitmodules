@@ -13,3 +13,6 @@
 [submodule "isc_ouster"]
 	path = isc_ouster
 	url = https://github.com/iscumd/isc_ouster.git
+[submodule "robot_state_controller"]
+	path = robot_state_controller
+	url = https://github.com/iscumd/robot_state_controller.git
