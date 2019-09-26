@@ -38,7 +38,7 @@
     <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
 
     <!-- LiDAR -->
-    <include file="$(find isc_ouster)/ouster_ros/launch/start_ouster_2d.launch" />
+    <include file="$(find ouster_ros)/launch/start_ouster_2d.launch" />
     
     <!-- Intel Realsense T265 -->
     <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
