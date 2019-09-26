@@ -23,7 +23,7 @@
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
-    <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" />
+    <!-- <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
 
     <!-- drive mode switch -->
     <remap from="robot_state" to="$(arg state_base)/system" />
@@ -39,6 +39,9 @@
 
     <!-- LiDAR -->
     <include file="$(find isc_ouster)/ouster_ros/launch/start_ouster_2d.launch" />
+    
+    <!-- Intel Realsense T265 -->
+    <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
 
     <!-- === Yeti Main === -->
     <!-- LiDAR -->
@@ -57,6 +60,15 @@
 
     <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_sick_laser_link"
           args="0.33 0 0.75 0 0 0 base_link sick_laser_link 10"/> -->
+          
+        <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_ouster_laser_link" args="0.33 0 0.75 0 0 0 base_link os1_sensor 10"/>
+        <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_link" args="0.40 0 0.65 0 0 0 base_link camera_link 10"/>
+          
+          
+          
+          
+          
+          
     <!-- Localization-->
    <!-- <node pkg="odom_sub" type="odom_sub_node" name="odom_sub_node"/>
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen"> -->
