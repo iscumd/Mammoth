@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
     <!-- Topic Bases -->
     <arg name="input_base" value="/yeti/input" />
@@ -143,6 +144,9 @@
     <!--node pkg="rostopic" type="rostopic" name="linear_velocity_setpoint" args="pub -r 10 /linear_velocity_setpoint std_msgs/Float64 '0.5'" output="screen"/-->
 
      <!-- Guidance -->
+     <!-- move_base ROS Nav Stack Navigation -->
+    <include file="$(find mammoth_snowplow)/launch/start_move_base.launch"/>
+     
   <!--  <node pkg="path_tracking" name="pure_pursuit" type="pure_pursuit_node"/>
     <param name="publish_lookahead" value="true"/>
     <remap from="pure_pursuit/heading_to_point" to="rotation_setpoint"/>
