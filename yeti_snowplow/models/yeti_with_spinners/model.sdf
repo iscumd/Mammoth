@@ -1,0 +1,137 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+   <model name="yeti_spinners">
+    <static>false</static>
+	<include>
+	  <uri>model://yeti</uri>
+	  <name>yeti_body</name>
+	</include>	
+    <link name='left_back_spinner'>
+
+      <pose>-0.233 0.385 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.14</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <pose>-0.1 -.15 -.01 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://yeti/meshes/spinners.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+    <joint type='revolute' name='left_back_spinner_hinge'>
+      <pose>0 0 .065 0 0 0</pose>
+      <child>yeti_body::left_back_wheel</child>
+      <parent>left_back_spinner</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='right_back_spinner'>
+
+      <pose>-0.233 -0.385 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.14</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <pose>-0.1 -.15 -.01 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://yeti/meshes/spinners.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+    <joint type='revolute' name='right_back_spinner_hinge'>
+      <pose>0 0 -.065 0 0 0</pose>
+      <child>yeti_body::right_back_wheel</child>
+      <parent>right_back_spinner</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='right_front_spinner'>
+
+      <pose>0.233 -0.385 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.14</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <pose>-0.1 -.15 -.01 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://yeti/meshes/spinners.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+    <joint type='revolute' name='right_front_spinner_hinge'>
+      <pose>0 0 -.065 0 0 0</pose>
+      <child>yeti_body::right_front_wheel</child>
+      <parent>right_front_spinner</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='left_front_spinner'>
+
+      <pose>0.233 0.385 0.165 0 1.5707 1.5707</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.14</radius>
+            <length>.01</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <pose>-0.1 -.15 -.01 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://yeti/meshes/spinners.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+    </link>
+
+    <joint type='revolute' name='left_front_spinner_hinge'>
+      <pose>0 0 .065 0 0 0</pose>
+      <child>yeti_body::left_front_wheel</child>
+      <parent>left_front_spinner</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+  </model>
+</sdf>

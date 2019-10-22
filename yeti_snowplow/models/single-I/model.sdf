@@ -1,0 +1,135 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="single-I">
+    <static>true</static>
+
+    <link name='left_side'>
+      <pose>0 0 0 0 1.5707 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='lvisual'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 .5 1.00</diffuse>
+          <specular>0.0 0.0 .5 1.0</specular>
+          <emissive>0.0 0.0 .5 1.0</emissive>
+        </material>
+      </visual>
+
+    </link>
+    <link name='right_side'>
+
+      <pose>0 4 0 0 1.5707 0</pose>
+      <collision name='rcollision'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='rvisual'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 .5 1.00</diffuse>
+          <specular>0.0 0.0 .5 1.0</specular>
+          <emissive>0.0 0.0 .5 1.0</emissive>
+        </material>
+      </visual>
+
+    </link>
+    <link name='garage_side'>
+
+      <pose>7.5 2 0 0 1.5707 1.5707</pose>
+      <collision name='gcollision'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='gvisual'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>4</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 .5 1.00</diffuse>
+          <specular>0.0 0.0 .5 1.0</specular>
+          <emissive>0.0 0.0 .5 1.0</emissive>
+        </material>
+      </visual>
+
+    </link>
+    <link name='manuevering_side'>
+
+      <pose>-7.5 2 0 0 1.5707 1.5707</pose>
+      <collision name='mcollision'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name='mvisual'>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>4</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 .5 1.00</diffuse>
+          <specular>0.0 0.0 .5 1.0</specular>
+          <emissive>0.0 0.0 .5 1.0</emissive>
+        </material>
+      </visual>
+
+    </link>
+    <joint type='fixed' name='gr'>
+      <child>right_side</child>
+      <parent>garage_side</parent>
+    </joint>
+    <joint type='fixed' name='gl'>
+      <child>left_side</child>
+      <parent>garage_side</parent>
+    </joint>
+    <joint type='fixed' name='mr'>
+      <child>right_side</child>
+      <parent>manuevering_side</parent>
+    </joint>
+    <joint type='fixed' name='ml'>
+      <child>manuevering_side</child>
+      <parent>left_side</parent>
+    </joint>
+
+  </model>
+</sdf>

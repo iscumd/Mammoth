@@ -1,0 +1,18 @@
+<launch>
+	<!-- Navigation PID -->
+	<node pkg="yeti_snowplow" type="navigation_pid_speed" name="navigation_pid_speed" output="screen">
+		<param name="proportional_constant" value="0.5" />
+		<param name="derivative_constant" value="0.0" />
+		<param name="integral_constant" value="0.0" />
+		<param name="integral_max_error" value="0.5" />
+	</node>
+	<node pkg="yeti_snowplow" type="navigation_pid_turn" name="navigation_pid_turn" output="screen">
+		<param name="proportional_constant" value="0.5" />
+		<param name="derivative_constant" value="0.0" />
+		<param name="integral_constant" value="0.0" />
+		<param name="integral_max_error" value="0.5" />
+	</node>
+	<node pkg="yeti_snowplow" type="navigation_pid_velocity" name="navigation_pid_velocity" output="screen" />
+
+    <node pkg="yeti_snowplow" type="navigation_pid_test" name="navigation_pid_test" output="screen" />
+</launch>

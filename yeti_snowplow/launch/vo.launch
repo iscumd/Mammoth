@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_zed_camera_center" args="0.40 0 0.65 -1.57 0 -1.57 base_link camera 10" />
+    <include file="$(find zed_opencv_ros)/launch/zed_native.launch" />
+    <include file="$(find lvt)/launch/lvt_node.launch" />
+</launch>
