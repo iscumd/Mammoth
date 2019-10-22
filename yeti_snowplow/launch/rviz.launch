@@ -1,0 +1,14 @@
+    <launch>
+    <param name="robot_description" textfile="$(find yeti_snowplow)/models/yeti/model.urdf"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="left_front_wheel_hinge"
+          args="0 0 0 0 0 0 base_link left_front_wheel 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="right_front_wheel_hinge"
+          args="0 0 0 0 0 0 base_link right_front_wheel 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="left_back_wheel_hinge"
+          args="0 0 0 0 0 0 base_link left_back_wheel 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="right_back_wheel_hinge"
+          args="0 0 0 0 0 0 base_link right_back_wheel 10"/>
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find yeti_snowplow)/launch/sim.rviz"/>
+    </launch>

@@ -1,0 +1,8 @@
+<launch>
+    <group ns="sim1">
+        <node pkg="yeti_snowplow" type="yeti_drive_mode_control" name="turtle" />
+    </group>
+    <group ns="sim2">
+        <node pkg="yeti_snowplow" type="yeti_drive_mode_control" name="turtle" />
+    </group>
+</launch>

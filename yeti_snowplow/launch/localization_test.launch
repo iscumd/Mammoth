@@ -1,0 +1,4 @@
+<launch>
+	<param name="localizaion_landmark_location_file" value="$(find yeti_snowplow)/data/landmark_locations_Qualification.txt" />
+	<node pkg="yeti_snowplow" type="localization_node" name="localization_node" output="screen" />
+</launch>

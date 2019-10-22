@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="yeti">
+    <material name="black">
+        <color rgba="0 0 0 1" />
+    </material>
+    <link name="base_link">
+        
+        <visual name="visual">
+<origin xyz="0 0 0.395" rpy="0 0 0" />
+            <geometry>
+                <box size=".93 .495 .625" />
+            </geometry>
+        </visual>
+    </link>
+    <link name="left_front_wheel">
+        
+        <visual name="visual">
+<origin xyz="0.233 0.315 0.165" rpy="0 1.5707 1.5707" />
+            <geometry>
+                <cylinder radius=".165" length=".13" />
+            </geometry>
+            <material name="black" />
+        </visual>
+    </link>
+    <link name="right_front_wheel">
+        
+        <visual name="visual">
+<origin xyz="0.233 -0.315 0.165" rpy="0 1.5707 1.5707" />
+            <geometry>
+                <cylinder radius=".165" length=".13" />
+            </geometry>
+            <material name="black" />
+        </visual>
+    </link>
+    <link name="left_back_wheel">
+        
+        <visual name="visual">
+<origin xyz="-0.233 0.315 0.165" rpy="0 1.5707 1.5707" />
+            <geometry>
+                <cylinder radius=".165" length=".13" />
+            </geometry>
+            <material name="black" />
+        </visual>
+    </link>
+    <link name="right_back_wheel">
+        
+        <visual name="visual">
+<origin xyz="-0.233 -0.315 0.165" rpy="0 1.5707 1.5707" />
+            <geometry>
+                <cylinder radius=".165" length=".13" />
+            </geometry>
+            <material name="black" />
+        </visual>
+    </link>
+    <joint type="fixed" name="left_front_wheel_hinge">
+        <origin xyz="0 0 -0.065" rpy="0 0 0" />
+        <child link="left_front_wheel"/>
+        <parent link="base_link"/>
+    </joint>
+    <joint type="fixed" name="right_front_wheel_hinge">
+        <origin xyz="0 0 -0.065" rpy="0 0 0" />
+        <child link="right_front_wheel"/>
+        <parent link="base_link"/>
+    </joint>
+    <joint type="fixed" name="left_back_wheel_hinge">
+        <origin xyz="0 0 -0.065" rpy="0 0 0" />
+        <child link="left_back_wheel"/>
+        <parent link="base_link"/>
+    </joint>
+    <joint type="fixed" name="right_back_wheel_hinge">
+        <origin xyz="0 0 -0.065" rpy="0 0 0" />
+        <child link="right_back_wheel"/>
+        <parent link="base_link"/>
+    </joint>
+</robot>

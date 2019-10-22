@@ -1,4 +1,4 @@
-global_frame: camera_odom_frame
+global_frame: os1_sensor
 rolling_window: true
 
 plugins:
