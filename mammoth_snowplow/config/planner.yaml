@@ -38,7 +38,7 @@ TrajectoryPlannerROS:
 
   # Trajectory scoring parameters
   meter_scoring: true # Whether the gdist_scale and pdist_scale parameters should assume that goal_distance and path_distance are expressed in units of meters or cells. Cells are assumed by default (false).
-  occdist_scale:  0.2 #The weighting for how much the controller should attempt to avoid obstacles. default 0.01
+  occdist_scale:  0.3 #The weighting for how much the controller should attempt to avoid obstacles. default 0.01
   pdist_scale: 0.75  #     The weighting for how much the controller should stay close to the path it was given . default 0.6
   gdist_scale: 1.0 #     The weighting for how much the controller should attempt to reach its local goal, also controls speed  default 0.8
 
@@ -76,7 +76,7 @@ DWAPlannerROS:
   latch_xy_goal_tolerance: false
 
   # # Forward Simulation Parameters
-  # sim_time: 2.0
+  sim_time: 1.0
   # sim_granularity: 0.02
   # vx_samples: 6
   # vy_samples: 0
@@ -86,7 +86,7 @@ DWAPlannerROS:
   # # Trajectory scoring parameters
   # path_distance_bias: 32.0 # The weighting for how much the controller should stay close to the path it was given
   # goal_distance_bias: 24.0 # The weighting for how much the controller should attempt to reach its local goal, also controls speed
-  # occdist_scale: 0.01 # The weighting for how much the controller should attempt to avoid obstacles
+  occdist_scale: 0.02 # The weighting for how much the controller should attempt to avoid obstacles
   # forward_point_distance: 0.325 # The distance from the center point of the robot to place an additional scoring point, in meters
   # stop_time_buffer: 0.2  # The amount of time that the robot must stThe absolute value of the veolicty at which to start scaling the robot's footprint, in m/sop before a collision in order for a trajectory to be considered valid in seconds
   # scaling_speed: 0.25 # The absolute value of the veolicty at which to start scaling the robot's footprint, in m/s
