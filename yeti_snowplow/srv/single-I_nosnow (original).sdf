@@ -1663,32 +1663,32 @@
         </link>
       </model>
       <model name='pylon_orange'>
-        <pose frame=''>7.5 1 0 0 0 0</pose>
+        <pose frame=''>1.44449 1.05156 0 0 0 -8.1e-05</pose>
         <scale>1 1 1</scale>
         <link name='pylon_base'>
-          <pose frame=''>7.5 1 0 0 0 0</pose>
+          <pose frame=''>1.44449 1.05156 0.025 0 0 -8.1e-05</pose>
           <velocity>-1e-06 0 0.0043 0 -3.7e-05 0</velocity>
           <acceleration>-0.002633 8e-06 8.60049 -7.2e-05 -0.074271 -2.9e-05</acceleration>
           <wrench>-0.002633 8e-06 8.60049 0 -0 0</wrench>
         </link>
         <link name='pylon_body'>
-          <pose frame=''>7.5 1 0 0 0 0</pose>
+          <pose frame=''>1.44449 1.05156 0.775 0 0 -8.1e-05</pose>
           <velocity>-2.8e-05 0 0.0043 0 -3.7e-05 0</velocity>
           <acceleration>-0.056429 5e-06 8.60053 -1.2e-05 -0.073583 -4e-06</acceleration>
           <wrench>-0.056429 5e-06 8.60053 0 -0 0</wrench>
         </link>
       </model>
       <model name='pylon_yellow'>
-        <pose frame=''>5 0 0 0 0 0</pose>
+        <pose frame=''>-2.47353 0.023057 0 0 0 -8.1e-05</pose>
         <scale>1 1 1</scale>
         <link name='pylon_base'>
-          <pose frame=>''5 0 0 0 0 0</pose>
+          <pose frame=''>-2.47353 0.023057 0.025 0 0 -8.1e-05</pose>
           <velocity>-2e-06 0 0.004275 0 -9.7e-05 0</velocity>
           <acceleration>-0.005618 0 8.55064 0 -0.194657 0</acceleration>
           <wrench>-0.005618 0 8.55064 0 -0 0</wrench>
         </link>
         <link name='pylon_body'>
-          <pose frame=''>5 0 0 0 0 0</pose>
+          <pose frame=''>-2.47353 0.023057 0.775 0 0 -8.1e-05</pose>
           <velocity>-7.4e-05 0 0.004275 0 -9.7e-05 0</velocity>
           <acceleration>-0.149625 0 8.55089 0 -0.193961 0</acceleration>
           <wrench>-0.149625 0 8.55089 0 -0 0</wrench>
@@ -1725,31 +1725,31 @@
         </link>
       </model>
       <model name='single-I'>
-        <pose frame=''>6 -2 .03 0 0 0</pose>
+        <pose frame=''>-0.465032 -1.9092 0.030503 -0.000121 6.3e-05 0.005487</pose>
         <scale>1 1 1</scale>
         <link name='garage_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>7.02388 0.131923 0.029776 2.0337 1.57072 -2.67329</pose>
+          <velocity>0.000116 0.000274 -0.054774 -0.009086 0.00442 4e-06</velocity>
+          <acceleration>-0.013308 0.559279 6.09308 0.319646 -0.84014 0.006523</acceleration>
+          <wrench>-0.013308 0.559279 6.09308 0 -0 0</wrench>
         </link>
         <link name='left_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-0.465032 -1.9092 0.030503 -1.30494 1.57067 -1.29946</pose>
+          <velocity>0.00011 0.00021 -0.007448 -0.00779 0.004532 1.1e-05</velocity>
+          <acceleration>0.077854 0.133738 29.9295 2.72566 -0.466605 0.055767</acceleration>
+          <wrench>0.077854 0.133738 29.9295 0 -0 0</wrench>
         </link>
         <link name='manuevering_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.97589 0.049611 0.030856 1.88074 1.57072 -2.82626</pose>
+          <velocity>0.000121 0.00024 0.005049 -0.007549 0.003075 2e-06</velocity>
+          <acceleration>-0.001849 -0.094786 -3.43139 -0.259975 -1.17198 -3.09444</acceleration>
+          <wrench>-0.001849 -0.094786 -3.43139 0 -0 0</wrench>
         </link>
         <link name='right_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-0.486982 2.09074 0.030024 -1.58421 1.57067 -1.57872</pose>
+          <velocity>0.000178 0.000211 -0.035013 -0.008459 0.005892 -7e-06</velocity>
+          <acceleration>0.071817 0.177933 -24.2176 -1.77368 0.785277 3.09589</acceleration>
+          <wrench>0.071817 0.177933 -24.2176 0 -0 0</wrench>
         </link>
       </model>
       <model name='suv'>
@@ -1764,37 +1764,37 @@
       </model>
       
       <model name='yeti'>
-        <pose frame=''>0 0 0 0 0 0</pose><!-- 0 0 0 is on the ground or atleast looks like it-->
+        <pose frame=''>-7.33813 -0.02564 9e-06 2.4e-05 6e-06 0</pose>
         <scale>1 1 1</scale>
         <link name='chassis'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.33813 -0.025649 0.395009 2.4e-05 6e-06 0</pose>
+          <velocity>0.002005 -0.000244 0.009386 0.000538 0.002263 -9.8e-05</velocity>
+          <acceleration>0.435103 0.269708 18.7727 2.50964 1.24348 -3.12941</acceleration>
+          <wrench>0.435103 0.269708 18.7727 0 -0 0</wrench>
         </link>
         <link name='left_back_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.57113 0.289356 0.165017 1.5702 1.39894 3.14089</pose>
+          <velocity>0.001517 -0.000105 0.010069 0.000738 0.009919 -9.8e-05</velocity>
+          <acceleration>-0.013344 0.09239 18.9955 -0.691944 0.018443 0.012554</acceleration>
+          <wrench>-0.013344 0.09239 18.9955 0 -0 0</wrench>
         </link>
         <link name='left_front_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.10513 0.289356 0.165005 1.57084 0.297781 3.14148</pose>
+          <velocity>0.001517 -0.000121 0.009005 0.000726 0.009233 -9.8e-05</velocity>
+          <acceleration>0.01828 0.202152 18.1174 -0.672782 -0.122923 0.011688</acceleration>
+          <wrench>0.01828 0.202152 18.1174 0 -0 0</wrench>
         </link>
         <link name='right_back_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.57113 -0.340644 0.165007 1.57065 1.10249 3.14133</pose>
+          <velocity>0.001461 -0.000116 0.00977 0.000706 0.008814 -9.7e-05</velocity>
+          <acceleration>-0.020863 0.030956 19.4317 -0.700484 0.094219 0.01298</acceleration>
+          <wrench>-0.020863 0.030956 19.4317 0 -0 0</wrench>
         </link>
         <link name='right_front_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose frame=''>-7.10513 -0.340644 0.165007 1.57076 0.793487 3.14143</pose>
+          <velocity>0.001453 -0.00015 0.008709 0.000721 0.009302 -9.9e-05</velocity>
+          <acceleration>-0.006327 0.096849 18.5549 -0.692216 0.01799 0.010539</acceleration>
+          <wrench>-0.006327 0.096849 18.5549 0 -0 0</wrench>
         </link>
       </model>
       <light name='sun'>
@@ -1860,13 +1860,13 @@
       <include>
         <uri>model://single-I</uri>
       </include>
-      <pose frame=''>6 -2 .03 0 0 0</pose>
+      <pose frame=''>-0.143919 -2.10016 0 0 -0 0</pose>
     </model>
     <model name='yeti'>
       <include>
         <uri>model://yeti_with_spinners</uri>
       </include>
-      <pose frame=''>0 0 0 0 0 0</pose>
+      <pose frame=''>-6.85122 0 0 0 0 0</pose>
     </model>
     <model name='person_standing'>
       <link name='link'>
@@ -2838,13 +2838,14 @@
       <include>
         <uri>model://pylon_yellow</uri>
       </include>
-      <pose frame=''>5 0 0 0 0 0</pose>
+      <pose frame=''>-2.47425 0.023075 0 0 -0 0</pose>
     </model>
     <model name='pylon_orange'>
       <include>
         <uri>model://pylon_orange</uri>
       </include>
-      <pose frame=''>7.5 1 0 0 0 0</pose>
+      <pose frame=''>1.44377 1.05158 0 0 -0 0</pose>
     </model>
+    
   </world>
 </sdf>
