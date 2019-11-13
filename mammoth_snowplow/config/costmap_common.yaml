@@ -16,9 +16,12 @@ static:
     map_topic: /map
     subscribe_to_updates: true
 
+static_wall:
+    map_topic: /map_boundary
+    subscribe_to_updates: true
+
 obstacles_laser:
     observation_sources: laser
     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /os1_cloud_node/scan, inf_is_valid: true}
 
-inflation:
-    inflation_radius: 3
+

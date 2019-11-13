@@ -4,22 +4,20 @@
     <static>true</static>
 
     <link name='left_side'>
-      <pose>0 0 0 0 1.5707 0</pose>
+      <pose>0 0 0 0 0 1.5707</pose>
       <collision name='collision'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+         <box>
+            <size>0.03 15 .03</size>
+         </box>
         </geometry>
       </collision>
 
       <visual name='lvisual'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+          <box>
+            <size>0.03 15 .03</size>
+         </box>
         </geometry>
         <material>
           <ambient>0.0 0.0 0.5 1.0</ambient>
@@ -32,22 +30,20 @@
     </link>
     <link name='right_side'>
 
-      <pose>0 4 0 0 1.5707 0</pose>
+      <pose>0 4 0 0 0 1.5707</pose>
       <collision name='rcollision'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+          <box>
+            <size>0.03 15 .03</size>
+         </box>
         </geometry>
       </collision>
 
       <visual name='rvisual'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+          <box>
+            <size>0.03 15 .03</size>
+         </box>
         </geometry>
         <material>
           <ambient>0.0 0.0 0.5 1.0</ambient>
@@ -60,22 +56,20 @@
     </link>
     <link name='garage_side'>
 
-      <pose>7.5 2 0 0 1.5707 1.5707</pose>
+      <pose>7.5 2 0 0 0 0</pose>
       <collision name='gcollision'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+          <box>
+            <size>0.03 4 .03</size>
+         </box>
         </geometry>
       </collision>
 
       <visual name='gvisual'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>4</length>
-          </cylinder>
+          <box>
+            <size>0.03 4 .03</size>
+         </box>
         </geometry>
         <material>
           <ambient>0.0 0.0 0.5 1.0</ambient>
@@ -88,22 +82,20 @@
     </link>
     <link name='manuevering_side'>
 
-      <pose>-7.5 2 0 0 1.5707 1.5707</pose>
+      <pose>-7.5 2 0 0 0 0</pose>
       <collision name='mcollision'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>15</length>
-          </cylinder>
+          <box>
+            <size>0.03 4 .03</size>
+         </box>
         </geometry>
       </collision>
 
       <visual name='mvisual'>
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>4</length>
-          </cylinder>
+          <box>
+            <size>0.03 4 .03</size>
+         </box>
         </geometry>
         <material>
           <ambient>0.0 0.0 0.5 1.0</ambient>

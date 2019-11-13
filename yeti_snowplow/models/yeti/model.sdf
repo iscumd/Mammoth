@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sdf version='1.4'>
+<?xml version="1.0"?>
+<!-- Still Slids with high Frction-->
+<!--Bottom center of yeti is 0 0 0 -->
+<sdf version='1.4'><!--Change Base Link to wheel Axel -->
   <model name="yeti">
     <static>false</static>
     <link name='chassis'>
       <inertial>
         <mass>136.0</mass>
       </inertial>
-      <pose>0 0 0.395 0 0 0</pose>
-      <collision name='collision'>
+      <pose>0 0 0.395 0 0 0</pose><!-- Starting position-->
+      <collision name='collision'><!--Collision box isn't visualized-->
         <geometry>
           <box>
             <size> .93 .495 .625 </size>
           </box>
         </geometry>
       </collision>
-      <visual name='visual'>
+      <visual name='visual'><!--Where the Model Appears and its cad file-->
         <pose>.52 -0.247 -.32 0 0 0</pose>
         <geometry>
           <mesh>
@@ -24,7 +26,7 @@
       </visual>
     </link>
     <link name='left_front_wheel'>
-      <pose>0.233 0.315 0.165 0 1.5707 1.5707</pose>
+	  <pose>0.24 0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
           <cylinder>
@@ -57,7 +59,7 @@
       </visual>
     </link>
     <link name='right_front_wheel'>
-      <pose>0.233 -0.315 0.165 0 1.5707 1.5707</pose>
+      <pose>0.24 -0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
           <cylinder>
@@ -90,7 +92,7 @@
       </visual>
     </link>
     <link name='left_back_wheel'>
-      <pose>-0.233 0.315 0.165 0 1.5707 1.5707</pose>
+	  <pose>-0.24 0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
           <cylinder>
@@ -123,7 +125,7 @@
       </visual>
     </link>
     <link name='right_back_wheel'>
-      <pose>-0.233 -0.315 0.165 0 1.5707 1.5707</pose>
+	  <pose>-0.24 -0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
           <cylinder>
@@ -200,7 +202,7 @@
       </sensor>
     </link>
     <joint type='revolute' name='left_front_wheel_hinge'>
-      <pose>0 0 -0.065 0 0 0</pose>
+      <pose>0 0 .165 0 0 0</pose>
       <child>left_front_wheel</child>
       <parent>chassis</parent>
       <axis>
@@ -208,7 +210,7 @@
       </axis>
     </joint>
     <joint type='revolute' name='right_front_wheel_hinge'>
-      <pose>0 0 0.065 0 0 0</pose>
+      <pose>0 0 .165 0 0 0</pose>
       <child>right_front_wheel</child>
       <parent>chassis</parent>
       <axis>
@@ -216,7 +218,8 @@
       </axis>
     </joint>
     <joint type='revolute' name='left_back_wheel_hinge'>
-      <pose>0 0 -0.065 0 0 0</pose>
+      <!--<pose>0 0 -0.065 0 0 0</pose>-->
+      <pose>0 0 .165 0 0 0</pose>
       <child>left_back_wheel</child>
       <parent>chassis</parent>
       <axis>
@@ -224,7 +227,7 @@
       </axis>
     </joint>
     <joint type='revolute' name='right_back_wheel_hinge'>
-      <pose>0 0 0.065 0 0 0</pose>
+      <pose>0 0 .165 0 0 0</pose>
       <child>right_back_wheel</child>
       <parent>chassis</parent>
       <axis>
@@ -236,13 +239,13 @@
       <parent>lidar</parent>
     </joint>
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
-      <updateRate>100.0</updateRate>
-      <robotNamespace>/yeti</robotNamespace>
+      <updateRate>90.0</updateRate>
+	  <robotNamespace>/yeti</robotNamespace>
       <leftFrontJoint>left_front_wheel_hinge</leftFrontJoint>
       <rightFrontJoint>right_front_wheel_hinge</rightFrontJoint>
       <leftRearJoint>left_back_wheel_hinge</leftRearJoint>
       <rightRearJoint>right_back_wheel_hinge</rightRearJoint>
-      <wheelSeparation>0.495</wheelSeparation>
+      <wheelSeparation>0.48</wheelSeparation>
       <wheelDiameter>0.33</wheelDiameter>
       <robotBaseFrame>base_link</robotBaseFrame>
       <torque>60</torque>

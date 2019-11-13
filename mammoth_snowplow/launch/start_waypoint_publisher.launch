@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="mammoth_snowplow" type="mammoth_waypoint_publisher.py" name="mammoth_waypoint_publisher" output="screen">
+		<param name="filename" value="$(find mammoth_snowplow)/config/waypoints/single-I.csv"/>
+		<!--<param name="filename" value="$(find mammoth_snowplow)/config/waypoints/double-I.csv"/>-->
+	</node>
+</launch>

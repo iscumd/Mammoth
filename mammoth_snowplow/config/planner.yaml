@@ -1,8 +1,7 @@
-controller_frequency: 5.0
 recovery_behavior_enabled: true
 recovery_behavior: aggressive_reset
-max_planning_retries: -1.0
-
+clearing_rotation_allowed: false
+controller_frequency: 5.0
 
 NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
@@ -13,7 +12,7 @@ TrajectoryPlannerROS:
   acc_lim_x: 2.5
   acc_lim_theta:  3.2
 
-  max_vel_x: 1.0
+  max_vel_x: 2.0
   min_vel_x: 0.0
 
   max_vel_theta: 1.0
@@ -55,31 +54,30 @@ TrajectoryPlannerROS:
   escape_reset_theta: 0.1
 
 DWAPlannerROS:
-  # Robot configuration parameters  
+  # # Robot configuration parameters  
   acc_lim_x: 2.5
   acc_lim_y: 0
   acc_lim_th: 3.2
 
-  max_vel_x: 0.5
+  max_vel_x: 2
   min_vel_x: 0.0
   max_vel_y: 0
   min_vel_y: 0
 
-  max_trans_vel: 0.5
+  max_trans_vel: 2
   min_trans_vel: 0.1
   max_rot_vel: 1.0
   min_rot_vel: 0.2
 
-  # Goal Tolerance Parameters
+  # # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.1
   xy_goal_tolerance: 0.2
-  latch_xy_goal_tolerance: false
+  latch_xy_goal_tolerance: true
 
   # # Forward Simulation Parameters
   sim_time: 1.0
-  # sim_granularity: 0.02
+  # sim_granularity: 0.025
   # vx_samples: 6
-  # vy_samples: 0
   # vtheta_samples: 20
   # penalize_negative_x: true
 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+		<remap from="scan" to="/os1_cloud_node/scan"/>
+		<remap from="odom" to="/camera/odom/sample"/>
+		<param name="scan_frame" value="os1_sensor"/>
+		<param name="odom_frame" value="odom"/>
+		<!--param name="temporalUpdate" value="0.5" />-->
+		<param name="base_frame" value="base_link"/>
+		<param name="map_update_interval" value="1"/>
+		<param name="xmin" value="-5"/>
+		<param name="xmax" value="20"/>
+		<param name="ymin" value="10"/>
+		<param name="ymax" value="10"/>
+	</node>
+	
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find mammoth_snowplow)/config/I_Map.yaml">
+		<remap  from="map_metadata" to="map_boundary_metadata"/>
+		<remap  from="map" to="map_boundary"/>
+	</node>
+	
+</launch>
