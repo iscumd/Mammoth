@@ -6,7 +6,7 @@
     <static>false</static>
     <link name='chassis'>
       <inertial>
-        <mass>132.0</mass>
+        <mass>136.0</mass>
       </inertial>
       <pose>0 0 0.395 0 0 0</pose><!-- Starting position-->
       <collision name='collision'><!--Collision box isn't visualized-->
@@ -26,9 +26,6 @@
       </visual>
     </link>
     <link name='left_front_wheel'>
-      <inertial>
-        <mass>1</mass>
-      </inertial>
 	  <pose>0.24 0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
@@ -40,8 +37,8 @@
         <surface>
           <friction>
             <ode>
-              <mu>1000</mu>
-              <mu2>1000</mu2>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
             </ode>
           </friction>
         </surface>
@@ -62,10 +59,7 @@
       </visual>
     </link>
     <link name='right_front_wheel'>
-      <inertial>
-        <mass>1</mass>
-      </inertial>
-	  <pose>0.24 -0.315 0.165 0 1.5707 1.5707</pose>
+      <pose>0.24 -0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
           <cylinder>
@@ -76,8 +70,8 @@
         <surface>
           <friction>
             <ode>
-              <mu>1000</mu>
-              <mu2>1000</mu2>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
             </ode>
           </friction>
         </surface>
@@ -98,9 +92,6 @@
       </visual>
     </link>
     <link name='left_back_wheel'>
-      <inertial>
-        <mass>1</mass>
-      </inertial>
 	  <pose>-0.24 0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
@@ -112,8 +103,8 @@
         <surface>
           <friction>
             <ode>
-              <mu>1000</mu>
-              <mu2>1000</mu2>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
             </ode>
           </friction>
         </surface>
@@ -134,9 +125,6 @@
       </visual>
     </link>
     <link name='right_back_wheel'>
-      <inertial>
-        <mass>1</mass>
-      </inertial>
 	  <pose>-0.24 -0.315 0.165 0 1.5707 1.5707</pose>
       <collision name='collision'>
         <geometry>
@@ -148,8 +136,8 @@
         <surface>
           <friction>
             <ode>
-              <mu>1000</mu>
-              <mu2>1000</mu2>
+              <mu>0.9</mu>
+              <mu2>0.9</mu2>
             </ode>
           </friction>
         </surface>

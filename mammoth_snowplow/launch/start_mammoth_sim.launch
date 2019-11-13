@@ -69,7 +69,8 @@
 	<param name="use_sim_time" value="true" />
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>
-		<!--<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>-->
+		<!--<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow_(original).sdf"/>
+		<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>-->
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="true"/>
@@ -80,8 +81,8 @@
     <!-- Localization-->   
     <remap from="/yeti/odom" to="/camera/odom/sample" />
     <include file="$(find mammoth_snowplow)/launch/start_gmapping.launch"/>
-    <node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>
-    <!--<node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
+    <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>
+    <node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
 
     <!-- Obstacle Detection -->
     <!-- <node pkg="obstacle_detection" name="obstacle_detection" type="obstacle_detection_node">
@@ -142,8 +143,9 @@
     <!-- move_base ROS Nav Stack Navigation -->
     <remap from="/cmd_vel" to="/yeti/cmd_vel"/>
     <include file="$(find mammoth_snowplow)/launch/start_move_base.launch"/>
+    <!--<include file="$(find mammoth_snowplow)/launch/start_waypoint_publisher.launch"/>
      
-  <!--  <node pkg="path_tracking" name="pure_pursuit" type="pure_pursuit_node"/>
+    <node pkg="path_tracking" name="pure_pursuit" type="pure_pursuit_node"/>
     <param name="publish_lookahead" value="true"/>
     <remap from="pure_pursuit/heading_to_point" to="rotation_setpoint"/>
     <node pkg="path_planning" name="path_planning_node" type="path_planning_node"/> -->

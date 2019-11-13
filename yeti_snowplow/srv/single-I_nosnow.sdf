@@ -1682,7 +1682,7 @@
         <pose frame=''>5 0 0 0 0 0</pose>
         <scale>1 1 1</scale>
         <link name='pylon_base'>
-          <pose frame=>''5 0 0 0 0 0</pose>
+          <pose frame=''>5 0 0 0 0 0</pose>
           <velocity>-2e-06 0 0.004275 0 -9.7e-05 0</velocity>
           <acceleration>-0.005618 0 8.55064 0 -0.194657 0</acceleration>
           <wrench>-0.005618 0 8.55064 0 -0 0</wrench>

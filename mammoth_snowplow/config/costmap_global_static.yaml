@@ -3,7 +3,8 @@ rolling_window: false
 track_unknown_space: true
 
 inflation:
-    inflation_radius: .1
+    inflation_radius: .01
+
 
 plugins:
   - {name: static,                  type: "costmap_2d::StaticLayer"}

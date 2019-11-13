@@ -115,7 +115,7 @@ class mammoth_waypoint_manager(object):
         rate = rospy.Rate(10.0)
         #print("Running")
         #print(self.waypoints.iloc[self.waypoint_index])
-        rospy.sleep(1)
+        rospy.sleep(60)#time for sim to start
         self.send_it() #send first waypoint?
         while ((not rospy.is_shutdown()) and self.running):
             self.check_pose()
