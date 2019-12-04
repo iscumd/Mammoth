@@ -33,7 +33,7 @@ DWAPlannerROS:
   latch_xy_goal_tolerance: true
 
   # # Forward Simulation Parameters
-  sim_time: 4.0
+  sim_time: 12.0
   sim_granularity: 0.025
   vx_samples: 10
   vy_samples: 0

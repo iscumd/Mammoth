@@ -11,6 +11,9 @@
 #include <vector>
 //use a deque instead of a queue to insert at the front for adding points
 
+#define setDWATolerance(T) system("rosrun dynamic_reconfigure dynparam set /move_base/DWAPlannerROS xy_goal_tolerance T")
+typedef struct waypoint {geometry_msgs::Pose pose; double tolerance;} waypoint;
+
 class waypoint_class{
 	private:
 		waypoint_class();//private null constructor
@@ -23,15 +26,14 @@ class waypoint_class{
 		void tfToPose(tf::StampedTransform,geometry_msgs::Pose&);
 
 		tf::TransformListener tfListener;
-		std::deque<geometry_msgs::Pose> waypoint_queue;//deque for pushing new waypoints to front of designated path
+		std::deque<waypoint> waypoint_queue;//deque for pushing new waypoints to front of designated path
 		ros::NodeHandle nh;
 		ros::Publisher pose_pub;
 		ros::Subscriber waypoint_sub, map_sub;
 
 		bool running,reached_waypoint;
 
-		double tolerance_x,tolerance_y,
-			tolerance_qz,tolerance_qw;
+		double tolerance_x,tolerance_y,tolerance_qz,tolerance_qw;
 		double target_x,target_y,target_qz,target_qw;
 
 
@@ -45,12 +47,23 @@ class waypoint_class{
 };
 
 waypoint_class::waypoint_class(std::string filename){
-	tolerance_x = 0.25;//25cm
-	tolerance_y = 0.25;
-
-	tolerance_qz = 0.1;//~5 Degree
-	tolerance_qw = 0.1;
-
+	ros::NodeHandle privateNode("~");
+	if(!privateNode.getParam("tolerance_x",tolerance_x)){
+		tolerance_x = 0.2;
+		std::cout << "MISSING PARAM:Defaulted tolerance_x to " << tolerance_x << '\n';
+	}
+	if(!privateNode.getParam("tolerance_y",tolerance_y)){
+		tolerance_y = 0.2;
+		std::cout << "MISSING PARAM:Defaulted tolerance_y to " << tolerance_y << '\n';
+	}
+	if(!privateNode.getParam("tolerance_qz",tolerance_qz)){
+		tolerance_qz = 0.1;
+		std::cout << "MISSING PARAM:Defaulted tolerance_qz to " << tolerance_qz << '\n';
+	}
+	if(!privateNode.getParam("tolerance_qw",tolerance_qw)){
+		tolerance_qw = 0.1;
+		std::cout << "MISSING PARAM:Defaulted tolerance_qw to " << tolerance_qw << '\n';
+	}
 	target_x = target_y = target_qz = target_qw = 0;
 
 	pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal",10);
@@ -66,29 +79,29 @@ waypoint_class::waypoint_class(std::string filename){
 }
 
 int waypoint_class::importWaypoints(std::string filename){
-	geometry_msgs::Pose pose;
+	waypoint tempWaypoint;
 	int position;
 	std::string line,cell;
 	tf::Quaternion quarter;
 	double roll, pitch, yaw;
 
-	std::ifstream waypointfile(filename, std::ifstream::in);
-	std::getline(waypointfile,line); //remove the word line
+	std::ifstream waypointFile(filename, std::ifstream::in);
+	std::getline(waypointFile,line); //remove the word line
 	std::cout << line << '\n';
-	if(waypointfile.is_open()){
-		while(std::getline(waypointfile,line)){
+	if(waypointFile.is_open()){
+		while(std::getline(waypointFile,line)){
 			std::stringstream streamLine(line);
 			position = 0;	
 			while(std::getline(streamLine,cell,',')){
 				switch(position++){
 					case 0:
-						pose.position.x = std::stof(cell);
+						tempWaypoint.pose.position.x = std::stof(cell);
 						break;
 					case 1:
-						pose.position.y = std::stof(cell);
+						tempWaypoint.pose.position.y = std::stof(cell);
 						break;
 					case 2:
-						pose.position.z = std::stof(cell);
+						tempWaypoint.pose.position.z = std::stof(cell);
 						break;
 					case 3:
 						roll = std::stof(cell);
@@ -96,19 +109,22 @@ int waypoint_class::importWaypoints(std::string filename){
 					case 4:
 						pitch = std::stof(cell);
 						break;
-					default:
+					case 5:
 						yaw = std::stof(cell);
-						quarter.setRPY(roll,pitch,yaw);
-						pose.orientation.x = quarter.getX();
-						pose.orientation.y = quarter.getY();
-						pose.orientation.z = quarter.getZ();
-						pose.orientation.w = quarter.getW();
-						waypoint_queue.push_back(pose);
+						break;
+					default:
+						quarter.setRPY(roll,pitch,yaw);//could set roll and pitch to 0 since yeti should be tilting
+						tempWaypoint.pose.orientation.x = quarter.getX();
+						tempWaypoint.pose.orientation.y = quarter.getY();
+						tempWaypoint.pose.orientation.z = quarter.getZ();
+						tempWaypoint.pose.orientation.w = quarter.getW();
+						tempWaypoint.tolerance = std::stof(cell);
+						waypoint_queue.push_back(tempWaypoint);
 						break;
 				}
 			}
 		}
-		waypointfile.close();
+		waypointFile.close();
 	}
 	else{
 		std::cout << "Error opening file:" << filename << '\n';
@@ -118,10 +134,10 @@ int waypoint_class::importWaypoints(std::string filename){
 		running = true;
 		geometry_msgs::Pose p;
 		for(int loopcount = waypoint_queue.size();loopcount > 0;loopcount--){
-			p = waypoint_queue.front();
+			tempWaypoint = waypoint_queue.front();
 			waypoint_queue.pop_front();
-			printPose(p);
-			waypoint_queue.push_back(p);
+			printPose(tempWaypoint.pose);
+			waypoint_queue.push_back(tempWaypoint);
 		}
 		
 	}
@@ -133,17 +149,18 @@ void waypoint_class::publishNextWaypoint(){
 	msgs.header.frame_id = "map";
 	msgs.header.stamp  = ros::Time(0);
 	msgs.header.seq = waypoint_number;	
-	msgs.pose.position = waypoint_queue.front().position;
-	msgs.pose.orientation = waypoint_queue.front().orientation;
+	msgs.pose.position = waypoint_queue.front().pose.position;
+	msgs.pose.orientation = waypoint_queue.front().pose.orientation;
 	pose_pub.publish(msgs);
 
 	target_x = msgs.pose.position.x;
 	target_y = msgs.pose.position.y;
 	target_qz = msgs.pose.orientation.z;
 	target_qw = msgs.pose.orientation.w;
+	setDWATolerance(waypoint_queue.front().tolerance);
 
 	std::cout << "----New Goal Set----\n";
-	printPose(waypoint_queue.front());
+	printPose(waypoint_queue.front().pose);
 	//waypoint_queue.pop_front();//Moved to checkpose because allows for adding points without losing the desired final position
 }
 
@@ -162,7 +179,7 @@ void waypoint_class::checkPose(){
 
 
 	tfToPose(transform,p);//fixes negative w
-	std::cout << "\nTransform\n";printPose(p);printPose(waypoint_queue.front());
+	std::cout << "\nCurrentTf/GoalTf\n";printPose(p);printPose(waypoint_queue.front().pose);
 
 	if(std::abs( target_x - p.position.x) < tolerance_x)
 		if(std::abs( target_y - p.position.y) < tolerance_y)
@@ -184,7 +201,10 @@ void waypoint_class::checkPose(){
 }
 
 void waypoint_class::addWaypoint(geometry_msgs::Pose msgs){
-	waypoint_queue.push_front(msgs);
+	waypoint tempWaypoint;
+	tempWaypoint.pose = msgs;
+	tempWaypoint.tolerance = tolerance_x;//default value for tolerance will be default waypoint tolerance
+	waypoint_queue.push_front(tempWaypoint);
 	this->publishNextWaypoint();
 	//maybe some additional logic or rearrangement of this function
 }
@@ -276,6 +296,6 @@ int main(int argc, char** argv){
 	else{
 		ROS_ERROR("Failed to get Param \'filename\' for waypoint file. %s",filename.c_str());
 		exit(-1);
-	}	
+	}
 }
 
