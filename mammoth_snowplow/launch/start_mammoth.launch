@@ -59,8 +59,8 @@
 
     <!-- Localization-->
     <include file="$(find mammoth_snowplow)/launch/start_gmapping.launch"/>
-    <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>
-    <node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
+    <node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>
+    <!--<node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
 
     <!-- Obstacle Detection -->
     <!-- <node pkg="obstacle_detection" name="obstacle_detection" type="obstacle_detection_node">

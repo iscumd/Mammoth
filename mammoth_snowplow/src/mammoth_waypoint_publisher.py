@@ -40,11 +40,12 @@ class mammoth_waypoint_manager(object):
 
             quaternion = tf.transformations.quaternion_from_euler(imported.iloc[import_counter].Roll,imported.iloc[import_counter].Pitch,imported.iloc[import_counter].Yaw)
             converted.append([imported.iloc[import_counter].X,imported.iloc[import_counter].Y,imported.iloc[import_counter].Z,quaternion[0],quaternion[1],quaternion[2],quaternion[3]])
-        self.maxWaypoints += 1;
+            self.maxWaypoints += 1;
         if(self.maxWaypoints > 0):
             self.running = True
             self.waypoints = pd.DataFrame(converted,columns=["X","Y","Z","QX","QY","QZ","QW"])
         print self.waypoints
+        print self.maxWaypoints
 
 
 
@@ -69,9 +70,9 @@ class mammoth_waypoint_manager(object):
                     #exit()
                     #break
             good_job = 0
-            #print(position)
-            #print(orientation)
-            #print(self.waypoints.iloc[self.waypoint_index])
+            print(position)
+            print(orientation)
+            print(self.waypoints.iloc[self.waypoint_index])
             if abs(position[0] - self.waypoints.iloc[self.waypoint_index].X) < self.tolerance_x:
             #print("tolerance_x")
                 if abs(position[1] - self.waypoints.iloc[self.waypoint_index].Y) < self.tolerance_y:
@@ -133,7 +134,7 @@ if __name__ == '__main__':
             print("Error No Param")
             exit()
         else:
-            waypoint_file = rospy.get_param("~filename")        
+            waypoint_file = rospy.get_param("~filename")
         mammoth = mammoth_waypoint_manager(waypoint_file)
         mammoth.run()
     except rospy.ROSInterruptException:

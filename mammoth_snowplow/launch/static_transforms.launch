@@ -2,17 +2,8 @@
 <launch>
     <!-- Static Transforms -->
     <!--
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_zed_camera_center" args="0.40 0 0.65 -1.5707 0 -1.5707 base_link zed_center 10" />
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_zed_camera_center" args="0.40 0 0.65 0 0 0 base_link zed_center 10"/>
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_zed" args="0 0 0 0 0 0 base_link camera_odom_frame 10" />
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_sick_laser_link" args="0.33 0 0.75 0 0 0 base_link sick_laser_link 10"/>
     <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_ouster_laser_link" args="0.33 0 0.75 0 0 0 base_link os1_sensor 10"/>
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_base_to_ouster" args="0.40 0 0.65 0 0 0 base_link os1_sensor 10"/>
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_link" args="0.40 0 0.65 0 0 0 camera_link base_link 10"/>
-    
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_ouster_laser_link" args="-0.074 -0.02 0.13 0 0 0 camera_odom_frame os1_sensor 10"/> 
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_to_base" args="-0.364 -0.02 -0.63 0 0 0 camera_pose_frame base_link 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_to_base" args="-0.364 -0.02 -0.63 0 0 0 camera_pose_frame base_link 0"/>
     -->
-    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_camera_to_base" args="-0.364 -0.02 -0.63 0 0 0 camera_odom_frame base_link 0"/>
     <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_ouster_laser_link" args="0.29 0.00 0.76 0 0 0 base_link os1_sensor 0"/> 
 </launch>
