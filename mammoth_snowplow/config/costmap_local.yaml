@@ -1,7 +1,9 @@
 global_frame: os1_sensor
-update_frequency: 10
-publish_frequency: 10
+update_frequency: 8
+publish_frequency: 8
 rolling_window: true
+
+footprint_padding: 0.01
 
 plugins:
   - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}

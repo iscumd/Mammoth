@@ -20,30 +20,37 @@
     </include>
 
     <!-- robot state control -->
-	<remap from="state/robot" to="$(arg state_base)/system" />
+    <remap from="state/robot" to="$(arg state_base)/system" />
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
     <!-- <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
 
     <!-- drive mode switch -->
-    
     <remap from="robot_state" to="$(arg state_base)/system" />
-	<remap from="joystick" to="$(arg input_base)/xinput" />
-	<remap from="auto_control_vel" to="$(arg actuation_base)/auto_control" />
+    <remap from="joystick" to="$(arg input_base)/xinput" />
+    <remap from="auto_control_vel" to="$(arg actuation_base)/auto_control" />
     <remap from="control_vel" to="/yeti/cmd_vel" />
+    <!--<remap from="control_vel" to="$(arg actuation_base)/control" />-->
     <remap from="drive_mode" to="$(arg state_base)/drive_mode" />
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
     <!-- Static Transforms -->
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/simulation/static_transforms_simulation.launch"/>
 
-<!-- Start Gazebo Simulation -->
+
+    <!-- Localization-->
+    <include file="$(find mammoth_snowplow)/launch/simulation/start_gmapping_simulation.launch"/>
+
+
+    <!-- Custom Waypoints
+    <remap from="$(arg actuation_base)/control2" to="/yeti/cmd_vel"/>-->
+    <include file="$(find mammoth_snowplow)/launch/simulation/start_waypoint_publisher_simulation.launch"/>
+
+    <!-- Start Gazebo Simulation -->
 	<param name="use_sim_time" value="true" />
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>
-		<!--<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow_(original).sdf"/>
-		<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>-->
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="true"/>
@@ -51,14 +58,7 @@
 		<arg name="debug" value="false"/>
 	</include>
 
-    <!-- Localization-->   
-    <remap from="/yeti/odom" to="/camera/odom/sample" />
-    <include file="$(find mammoth_snowplow)/launch/start_gmapping.launch"/>
-    <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>
-    <node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
-
     <!-- Guidance -->
-    <remap from="/cmd_vel" to="/yeti/cmd_vel"/>
+    <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
     <include file="$(find mammoth_snowplow)/launch/start_move_base.launch"/>
-    <!--<include file="$(find mammoth_snowplow)/launch/start_waypoint_publisher.launch"/>-->
 </launch>
