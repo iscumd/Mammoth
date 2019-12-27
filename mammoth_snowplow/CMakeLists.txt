@@ -14,7 +14,6 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   sensor_msgs
-  std_msgs
   tf
 )
 
@@ -127,10 +126,8 @@ include_directories(
 
 
 add_executable(${PROJECT_NAME}_node src/waypoint_class.cpp)
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} )
 
-add_executable(redirect_node src/redirect.cpp)
-target_link_libraries(redirect_node ${catkin_LIBRARIES} )
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} )
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/mammoth_snowplow.cpp

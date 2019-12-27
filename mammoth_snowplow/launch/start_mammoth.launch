@@ -35,7 +35,7 @@
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
     <!-- Roboteq -->
-    <remap from="/roboteq/motors/wheel_speeds" to="$(arg actuation_base)/control2" />
+    <remap from="/roboteq/motors/wheel_speeds" to="$(arg actuation_base)/control" />
     <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
 
     <!-- LiDAR -->
@@ -59,12 +59,6 @@
 
     <!-- Localization-->
     <include file="$(find mammoth_snowplow)/launch/start_gmapping.launch"/>
-
-
-    <!-- Custom Waypoints-->
-    <include file="$(find mammoth_snowplow)/launch/start_waypoint_publisher.launch"/>
-
-
     <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>-->
     <!--<node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->
 
