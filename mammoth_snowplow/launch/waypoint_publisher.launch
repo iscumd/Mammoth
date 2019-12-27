@@ -17,7 +17,7 @@
 	<node pkg="rostopic" type="rostopic" name="rostopic" args="pub 
 	-1 /yeti/state/system std_msgs/String &quot; data: &apos;ready&apos; &quot; "/>
 	<node pkg="mammoth_snowplow" type="redirect_node" name="redirect_node" output="screen"/>
-	<node pkg="mammoth_snowplow" type="memes.py" name="memes" output="screen"/>
+	<node pkg="mammoth_snowplow" type="auditory_feedback.py" name="auditory_feedback" output="screen"/>
 	<node pkg="mammoth_snowplow" type="fake_laser_node" name="fake_laser_node">
 		<param name="border_offset" value="0.7"/>
 	</node>

@@ -1,12 +1,12 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-#include <std_msgs/Bool.h>
+#include <std_msgs/Int8.h>
 
-bool rotate;
+int rotate;
 ros::Publisher cmd_out;
 ros::Subscriber cmd_in, rotate_callback;
 
-void subCallback(const std_msgs::Bool::ConstPtr msgs){
+void subCallback(const std_msgs::Int8::ConstPtr msgs){
 	rotate = msgs->data;
 }
 
@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 	
 	cmd_out = nh.advertise<geometry_msgs::Twist>("/yeti/actuation/control2",10);
 	cmd_in = nh.subscribe("/yeti/actuation/control",10,subVelocity);
-	rotate_callback = nh.subscribe("/yeti/rotate",1,subCallback);
+	rotate_callback = nh.subscribe("/yeti/auditory_feedback",1,subCallback);
 	ros::spin();
 }
 
