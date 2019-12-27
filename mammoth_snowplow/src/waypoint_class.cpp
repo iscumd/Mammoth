@@ -4,7 +4,9 @@
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/MapMetaData.h>
 #include <nav_msgs/OccupancyGrid.h>
+#include <nav_msgs/Path.h>
 #include <std_msgs/Bool.h>
+#include <actionlib_msgs/GoalStatusArray.h>
 /*
 NavStack make me feel like
 ⢾⣾⣷⣾⣽⣻⣿⣇⣿⣿⣧⣿⢸⣿⣿⡆⢸⣹⣿⣆⢥⢛⡿⣿⣿⣿⡇
@@ -39,19 +41,23 @@ class waypoint_class{
 		void checkPose();
 		void addWaypointCallback(const geometry_msgs::Pose);
 		void mapCallback(const nav_msgs::OccupancyGrid::ConstPtr&);
+		void pathCallback(const nav_msgs::Path::ConstPtr&);
+		void statusCallback(const actionlib_msgs::GoalStatusArray::ConstPtr&);
 		void printPose(geometry_msgs::Pose);
 		void tfToPose(tf::StampedTransform,geometry_msgs::Pose&);
 
 		std::deque<waypoint> waypoint_queue;//deque for pushing new waypoints to front of designated path
 		ros::NodeHandle nh;
 		ros::Publisher pose_pub,rotate_pub;
-		ros::Subscriber waypoint_sub, map_sub;
+		ros::Subscriber waypoint_sub, map_sub, path_sub,status_sub;
 
 		bool running,reached_waypoint;
 
 		double tolerance_x,tolerance_y,tolerance_qz,tolerance_qw;
 		double target_x,target_y,target_qz,target_qw;
-
+		
+		bool check;
+		double lastchecked;
 		int rows,cols;
 		std::vector<std::vector<signed char> > snowMap;
 	public:
@@ -85,6 +91,8 @@ waypoint_class::waypoint_class(std::string filename){
 	rotate_pub = nh.advertise<std_msgs::Bool>("/yeti/rotate",10);
 	waypoint_sub = nh.subscribe<geometry_msgs::Pose>("/yeti/new_waypoints",10,&waypoint_class::addWaypointCallback,this);
 	map_sub = nh.subscribe<nav_msgs::OccupancyGrid>("/map",10, &waypoint_class::mapCallback,this);
+	path_sub = nh.subscribe<nav_msgs::Path>("/move_base/NavfnROS/plan",10, &waypoint_class::pathCallback,this);
+	status_sub = nh.subscribe<actionlib_msgs::GoalStatusArray>("/move_base/status",10, &waypoint_class::statusCallback,this);
 
 	bool running = false;
 	reached_waypoint = false;
@@ -92,6 +100,8 @@ waypoint_class::waypoint_class(std::string filename){
 		std::cout << "Error not a valid file\n";
 		exit(-1);
 	}
+	check = false;
+	lastchecked = ros::Time::now().toSec();
 }
 
 int waypoint_class::importWaypoints(std::string filename){
@@ -177,7 +187,7 @@ void waypoint_class::publishNextWaypoint(){
 	target_y = msgs.pose.position.y;
 	target_qz = msgs.pose.orientation.z;
 	target_qw = msgs.pose.orientation.w;
-
+	
 	
 	rotate.data = false;
 	if(waypoint_queue.front().tolerance > 0.4)
@@ -186,7 +196,7 @@ void waypoint_class::publishNextWaypoint(){
 	cmdString = "rosrun dynamic_reconfigure dyniparam set /move_base/DWAPlannerROS xy_goal_tolerance " + std::to_string(waypoint_queue.front().tolerance);//make sure that new waypoint will be published
 	rotate.data = true;
 	cmd = cmdString.c_str();
-	system(cmd);
+	//system(cmd);
 	tolerance_x = tolerance_y = waypoint_queue.front().tolerance + 0.1;//tolerance should be higher than planner tolerance
 
 
@@ -223,8 +233,10 @@ void waypoint_class::checkPose(){
 	if(std::abs( target_x - p.position.x) < tolerance_x)
 		if(std::abs( target_y - p.position.y) < tolerance_y)
 			if(std::abs( target_qz - p.orientation.z) < tolerance_qz)
-				if(std::abs( target_qw - p.orientation.w) < tolerance_qw)
+				if(std::abs( target_qw - p.orientation.w) < tolerance_qw){
 					reached_waypoint = true;
+					check = false;
+				}
 
 	if(reached_waypoint){
 		std::cout << "Reached Target Waypoint.\n";
@@ -235,7 +247,7 @@ void waypoint_class::checkPose(){
 			std::cout << "All Waypoints Completed\n";
 		}
 		else
-			this->publishNextWaypoint();
+			publishNextWaypoint();
 	}
 }
 
@@ -308,6 +320,33 @@ void waypoint_class::mapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msgs){
 waypoint_queue.pop_front();
 this->publishNextWaypoint();
 */
+}
+
+void waypoint_class::pathCallback(const nav_msgs::Path::ConstPtr& msgs){
+	target_x = msgs->poses.back().pose.position.x;
+	target_y = msgs->poses.back().pose.position.y;
+	target_qz = msgs->poses.back().pose.orientation.z;
+	target_qw =msgs->poses.back().pose.orientation.w;
+	if(target_qw<0){//reverse the negative because the tf messes up part of the 3 quadrant
+		target_qz *= -1;
+		target_qw *= -1;
+	}
+}
+
+void waypoint_class::statusCallback(const actionlib_msgs::GoalStatusArray::ConstPtr& msgs){//publish next waypoint if waypoint publisher fails to send next one after goal is reached
+    if(msgs->status_list.size() > 0)
+	if(msgs->status_list.back().status == 3){
+        	if(!check){
+            		check = true;
+            		lastchecked = ros::Time::now().toSec();
+       		}
+        	else if(lastchecked < ros::Time::now().toSec() - 5){
+            		lastchecked = ros::Time::now().toSec();
+			waypoint_queue.pop_front();
+			publishNextWaypoint();
+            		check = false;
+        	}
+    	}
 }
 
 void waypoint_class::printPose(geometry_msgs::Pose p){

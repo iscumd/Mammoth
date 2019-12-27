@@ -5,11 +5,11 @@ controller_frequency: 15.0
 
 NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
-  default_tolerance: 0.05 # A tolerance on the goal point for the planner.
+  default_tolerance: 0.5 # A tolerance on the goal point for the planner.
   use_dijkstra: false
   use_grid_path: true
-  cost_factor: 0.55
-  neutral_cost: 66
+  cost_factor: 5
+  neutral_cost: 40
   lethal_cost: 253
 
 DWAPlannerROS:
@@ -30,7 +30,7 @@ DWAPlannerROS:
 
   ## Goal Tolerance Parameters
   yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.2
+  xy_goal_tolerance: 0.25
   latch_xy_goal_tolerance: true
 
   ## Forward Simulation Parameters
@@ -42,7 +42,7 @@ DWAPlannerROS:
   # penalize_negative_x: false
 
   ## Trajectory scoring parameters
-  path_distance_bias: 35.0 #32.0 # The weighting for how much the controller should stay close to the path it was given
+  path_distance_bias: 50.0 #32.0 # The weighting for how much the controller should stay close to the path it was given
   goal_distance_bias: 20.0 # The weighting for how much the controller should attempt to reach its local goal, also controls speed
   occdist_scale: 0.1 # The weighting for how much the controller should attempt to avoid obstacles
   # forward_point_distance: 0.325 # The distance from the center point of the robot to place an additional scoring point, in meters
