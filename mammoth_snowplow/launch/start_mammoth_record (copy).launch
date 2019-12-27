@@ -53,8 +53,8 @@
         <param name="use_tf_correction" value="true"/>
     </node>  -->
 
-    <!-- Static Transforms 
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/>-->
+    <!-- Static Transforms -->
+    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/>
 
 
     <!-- Localization-->

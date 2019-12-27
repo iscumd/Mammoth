@@ -1,13 +1,13 @@
 global_frame: map
 update_frequency: 1
 publish_frequency: 1
+static_map: true
 rolling_window: false
 track_unknown_space: true
 
 footprint_padding: 0.05
 
 plugins:
-  - {name: static_wall,             type: "costmap_2d::StaticLayer"}
+  - {name: static_wall,            type: "costmap_2d::StaticLayer"}
   - {name: static,                  type: "costmap_2d::StaticLayer"}
   - {name: inflation,               type: "costmap_2d::InflationLayer"}
-  
