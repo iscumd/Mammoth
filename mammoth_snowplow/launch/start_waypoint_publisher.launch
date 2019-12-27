@@ -18,4 +18,5 @@
 	-1 /yeti/state/system std_msgs/String &quot; data: &apos;ready&apos; &quot; "/>
 	<node pkg="mammoth_snowplow" type="redirect_node" name="redirect_node" output="screen"/>
 	<node pkg="mammoth_snowplow" type="memes.py" name="memes" output="screen"/>
+	<node pkg="mammoth_snowplow" type="fake_laser_node" name="fake_laser_node"/>
 </launch>

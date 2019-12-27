@@ -5,7 +5,7 @@ static_map: false
 rolling_window: true
 
 
-footprint_padding: 0.05
+footprint_padding: 0.01
 
 plugins:
   - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}

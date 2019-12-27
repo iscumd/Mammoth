@@ -14,10 +14,11 @@ static_wall:
     subscribe_to_updates: false
 
 obstacles_laser:
-    observation_sources: laser
+    observation_sources: laser fake_laser
     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /os1_cloud_node/scan, inf_is_valid: true}
+    fake_laser: {data_type: LaserScan, clearing: false, marking: true, topic: /os1_cloud_node/scan2, inf_is_valid: true}
 
 inflation:
-    inflation_radius: 0.7
+    inflation_radius: 0.25
     cost_scaling_factor: 3.0
     
