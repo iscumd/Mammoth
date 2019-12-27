@@ -134,6 +134,11 @@ target_link_libraries(redirect_node ${catkin_LIBRARIES} )
 
 add_executable(fake_laser_node src/map_laser_scan.cpp)
 target_link_libraries(fake_laser_node ${catkin_LIBRARIES} )
+
+add_executable(transform_publisher_node src/transform_publisher.cpp)
+target_link_libraries(transform_publisher_node ${catkin_LIBRARIES} )
+
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/mammoth_snowplow.cpp

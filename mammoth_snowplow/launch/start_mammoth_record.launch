@@ -53,16 +53,12 @@
         <param name="use_tf_correction" value="true"/>
     </node>  -->
 
-    <!-- Static Transforms 
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/>-->
-
-
     <!-- Localization-->
-    <include file="$(find mammoth_snowplow)/launch/start_gmapping.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/gmapping.launch"/>
 
 
     <!-- Custom Waypoints-->
-    <include file="$(find mammoth_snowplow)/launch/start_waypoint_publisher.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/waypoint_publisher.launch"/>
     <include file="$(find mammoth_snowplow)/launch/record_bag.launch"/>
 
     <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>-->
@@ -126,7 +122,7 @@
      <!-- Guidance -->
      <!-- move_base ROS Nav Stack Navigation -->
     <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
-    <include file="$(find mammoth_snowplow)/launch/start_move_base.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/move_base.launch"/>
      
   <!--  <node pkg="path_tracking" name="pure_pursuit" type="pure_pursuit_node"/>
     <param name="publish_lookahead" value="true"/>

@@ -6,22 +6,32 @@
 int main(int argc, char** argv){
 	ros::init(argc, argv, "map_point_cloud");
 
-	ros::NodeHandle n;
+	ros::NodeHandle n("~");
 	ros::Publisher pub = n.advertise<sensor_msgs::LaserScan>("/os1_cloud_node/scan2", 50);
 
-	int num_points = 1024;
+
+	std::string frame_id;
+	int num_points;
+	float border_offset;
+
+	if(!n.getParam("frame_id",frame_id))
+		frame_id = "/os1_lidar";
+	if(!n.getParam("num_points",num_points))
+		num_points = 1024;	
+	if(!n.getParam("border_offset",border_offset))
+		border_offset = 0.7;	
+
 	tf::StampedTransform transform;
 	double ignore,yaw;
 	const double PI = atan(1) * 4.0;
-	const double farX = 13.5+0.7, closeX = -1.5-0.7, leftY = 2.0+0.7, rightY = -2.0-0.7;
+	const double farX = 13.5+border_offset, closeX = -1.5-border_offset, leftY = 2.0+border_offset, rightY = -2.0-border_offset;
 	double stepInRad = PI * 2.0/((double)num_points);
 	double angle,x,y;
 	tf::TransformListener tfListener;
 	
 
 	sensor_msgs::LaserScan cloud;
-	cloud.header.frame_id = "/os1_lidar";
-	//cloud.header.frame_id = "/map";
+	cloud.header.frame_id = frame_id;
 	cloud.angle_min = -3.14f;
 	cloud.angle_max = 3.14f;
 	cloud.angle_increment = 2*PI/num_points;
@@ -34,7 +44,7 @@ int main(int argc, char** argv){
 	ros::Rate r(10);
 	while(ros::ok()){   
 	try{
-			tfListener.lookupTransform("/map", "/os1_lidar", ros::Time(0), transform);
+			tfListener.lookupTransform("/map", frame_id, ros::Time(0), transform);
 		}
 		catch (tf::TransformException ex){
 			ros::Duration(0.1).sleep();
@@ -44,28 +54,23 @@ int main(int argc, char** argv){
 		x = transform.getOrigin().getX();
 		y = transform.getOrigin().getY();
 
-        //	x = y = yaw = 0;	
 		//generate Boarder of the I Field
 		yaw += PI;//correct for scan start location
 		for(int i = 0; i < num_points; i++){
 			angle = yaw + stepInRad*i;
 			angle = std::fmod(angle,2*PI)-PI;
 			if(angle > PI/2.0){
-				//cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
 			    cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 			}
 			else if(angle >= 0){ 
 				cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
-				//cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 			}
 			else if (angle > PI/(-2.0)){
-				//cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 			    cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
 			    
 			}
 			else{
 				
-				//cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
 				cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 				
 			}

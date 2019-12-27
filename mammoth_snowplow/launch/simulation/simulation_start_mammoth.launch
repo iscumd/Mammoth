@@ -30,22 +30,22 @@
     <remap from="robot_state" to="$(arg state_base)/system" />
     <remap from="joystick" to="$(arg input_base)/xinput" />
     <remap from="auto_control_vel" to="$(arg actuation_base)/auto_control" />
-    <remap from="control_vel" to="/yeti/cmd_vel" />
+    <remap from="control_vel" to="$(arg actuation_base)/control" />
     <!--<remap from="control_vel" to="$(arg actuation_base)/control" />-->
     <remap from="drive_mode" to="$(arg state_base)/drive_mode" />
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
     <!-- Static Transforms -->
-    <include file="$(find mammoth_snowplow)/launch/simulation/static_transforms_simulation.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/simulation/transforms_simulation.launch"/>
 
 
     <!-- Localization-->
-    <include file="$(find mammoth_snowplow)/launch/simulation/start_gmapping_simulation.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/simulation/gmapping_simulation.launch"/>
 
 
-    <!-- Custom Waypoints
-    <remap from="$(arg actuation_base)/control2" to="/yeti/cmd_vel"/>-->
-    <include file="$(find mammoth_snowplow)/launch/simulation/start_waypoint_publisher_simulation.launch"/>
+    <!-- Custom Waypoints-->
+    <remap from="$(arg actuation_base)/control2" to="/yeti/cmd_vel"/>
+    <include file="$(find mammoth_snowplow)/launch/simulation/waypoint_publisher_simulation.launch"/>
 
     <!-- Start Gazebo Simulation -->
 	<param name="use_sim_time" value="true" />
@@ -60,5 +60,5 @@
 
     <!-- Guidance -->
     <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
-    <include file="$(find mammoth_snowplow)/launch/start_move_base.launch"/>
+    <include file="$(find mammoth_snowplow)/launch/move_base.launch"/>
 </launch>
