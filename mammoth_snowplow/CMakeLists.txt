@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   sensor_msgs
+  std_msgs
   tf
 )
 
@@ -126,6 +127,7 @@ include_directories(
 
 
 add_executable(${PROJECT_NAME}_node src/waypoint_class.cpp)
+add_executable(redirect_node src/redirect.cpp)
 
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} )
 ## Declare a C++ library
