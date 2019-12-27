@@ -21,6 +21,7 @@ int main(int argc, char** argv){
 
 	sensor_msgs::LaserScan cloud;
 	cloud.header.frame_id = "/os1_lidar";
+	//cloud.header.frame_id = "/map";
 	cloud.angle_min = -3.14f;
 	cloud.angle_max = 3.14f;
 	cloud.angle_increment = 2*PI/num_points;
@@ -43,24 +44,29 @@ int main(int argc, char** argv){
 		x = transform.getOrigin().getX();
 		y = transform.getOrigin().getY();
 
+        //	x = y = yaw = 0;	
 		//generate Boarder of the I Field
 		yaw += PI;//correct for scan start location
 		for(int i = 0; i < num_points; i++){
 			angle = yaw + stepInRad*i;
 			angle = std::fmod(angle,2*PI)-PI;
 			if(angle > PI/2.0){
-				cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
+				//cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
+			    cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 			}
-			else if(angle >= 0){
-				cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((farX-x)/cos(angle))));
+			else if(angle >= 0){ 
+				cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
+				//cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 			}
 			else if (angle > PI/(-2.0)){
-				cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((farX-x)/cos(angle))));
+				//cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((farX-x)/cos(angle))));
+			    cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
 			    
 			}
 			else{
 				
-				cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
+				//cloud.ranges[i] = std::min(std::abs(((y-rightY)/sin(angle))),std::abs(((x-closeX)/cos(angle))));
+				cloud.ranges[i] = std::min(std::abs(((leftY-y)/sin(angle))),std::abs(((farX-x)/cos(angle))));
 				
 			}
 			
