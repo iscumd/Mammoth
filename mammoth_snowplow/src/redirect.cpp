@@ -10,10 +10,10 @@ void subCallback(const std_msgs::Bool::ConstPtr msgs){
 	rotate = msgs->data;
 }
 
-void subVelocity(const geometry_msgs::Twist::ConstPtr &msgs){
+void subVelocity(const geometry_msgs::Twist::ConstPtr msgs){
 	geometry_msgs::Twist mod = *msgs;
-	if(rotate)
-		mod.linear.x = 0;
+	//if(rotate)mod.linear.x = 0;
+	mod.angular.z *=2;
 	cmd_out.publish(mod);
 }
 

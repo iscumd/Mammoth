@@ -63,7 +63,7 @@
 
     <!-- Custom Waypoints-->
     <include file="$(find mammoth_snowplow)/launch/start_waypoint_publisher.launch"/>
-
+    <include file="$(find mammoth_snowplow)/launch/record_bag.launch"/>
 
     <!--<node pkg="pose_publisher" name="pose_publisher" type="pose_publisher_node"/>-->
     <!--<node pkg="state_publisher" name="state_publisher" type="state_publisher_node"/>-->

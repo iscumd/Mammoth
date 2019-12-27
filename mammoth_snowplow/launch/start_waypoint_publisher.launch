@@ -16,4 +16,6 @@
 	</node>
 	<node pkg="rostopic" type="rostopic" name="rostopic" args="pub 
 	-1 /yeti/state/system std_msgs/String &quot; data: &apos;ready&apos; &quot; "/>
+	<node pkg="mammoth_snowplow" type="redirect_node" name="redirect_node" output="screen"/>
+	<node pkg="mammoth_snowplow" type="memes.py" name="memes" output="screen"/>
 </launch>

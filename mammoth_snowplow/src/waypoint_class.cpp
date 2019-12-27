@@ -5,6 +5,23 @@
 #include <nav_msgs/MapMetaData.h>
 #include <nav_msgs/OccupancyGrid.h>
 #include <std_msgs/Bool.h>
+/*
+NavStack make me feel like
+⢾⣾⣷⣾⣽⣻⣿⣇⣿⣿⣧⣿⢸⣿⣿⡆⢸⣹⣿⣆⢥⢛⡿⣿⣿⣿⡇
+⡓⣉⠉⠙⠻⢿⣿⣿⣟⣻⠿⣹⡏⣿⣿⣧⢸⣧⣿⣿⣨⡟⣿⣿⣿⣿⡇
+⣷⣹⣿⠄⠄⠄⠄⠘⢿⣿⣿⣯⣳⣿⣭⣽⢼⣿⣜⣿⣇⣷⡹⣿⣿⣿⠁
+⢻⣷⣿⡄⢈⠿⠇⢸⣿⣿⣿⣿⣿⣿⣟⠛⠲⢯⣿⣒⡾⣼⣷⡹⣿⣿⠄
+⢸⣿⣿⣷⣬⣽⣯⣾⣿⣿⣿⣿⣿⣿⣿⣿⡀⠄⢀⠉⠙⠛⠛⠳⠽⠿⢠
+⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⢄⣹⡿⠃⠄⠄⣰⠎⡈⣾
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣭⣽⣖⣄⣴⣯⣾⢷⣿
+⠸⣿⣿⣿⣿⣿⣿⠯⠊⠙⢻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣾⣿
+⣦⠹⣿⣿⣿⣿⣿⠄⢀⣴⢾⣼⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣾⣿⣿
+⣿⣇⢽⣿⣿⣿⡏⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⡿⣿⣛⣻⠿⣟⣼⣿⣿⣿
+⣿⣿⡎⣷⣽⠻⣇⣿⣿⣿⡿⣟⣵⣿⣟⣽⣾⣿⣿⣿⣿⢯⣾⣿⣿⣿⠟
+⣿⣿⣿⢹⣿⣿⢮⣚⡛⠒⠛⢛⣋⣶⣿⣿⣿⣿⣿⣟⣱⠿⣿⣿⠟⣡
+*/
+
+
 #include <string>
 #include <deque>
 #include <iostream>
@@ -12,7 +29,6 @@
 #include <vector>
 //use a deque instead of a queue to insert at the front for adding points
 
-//#define setDWATolerance(T) system("rosrun dynamic_reconfigure dynparam set /move_base/DWAPlannerROS xy_goal_tolerance" +  T)
 typedef struct waypoint {geometry_msgs::Pose pose; double tolerance;} waypoint;
 
 class waypoint_class{
@@ -26,7 +42,6 @@ class waypoint_class{
 		void printPose(geometry_msgs::Pose);
 		void tfToPose(tf::StampedTransform,geometry_msgs::Pose&);
 
-		tf::TransformListener tfListener;
 		std::deque<waypoint> waypoint_queue;//deque for pushing new waypoints to front of designated path
 		ros::NodeHandle nh;
 		ros::Publisher pose_pub,rotate_pub;
@@ -37,14 +52,13 @@ class waypoint_class{
 		double tolerance_x,tolerance_y,tolerance_qz,tolerance_qw;
 		double target_x,target_y,target_qz,target_qw;
 
-
-		int waypoint_number,rows,cols;
-		std::vector<std::vector<bool> > grid;
+		int rows,cols;
+		std::vector<std::vector<signed char> > snowMap;
 	public:
+		tf::TransformListener tfListener;
 		waypoint_class(std::string);
 		void addWaypoint(geometry_msgs::Pose);
-		int status();
-		int run();
+		void run();
 };
 
 waypoint_class::waypoint_class(std::string filename){
@@ -71,8 +85,8 @@ waypoint_class::waypoint_class(std::string filename){
 	rotate_pub = nh.advertise<std_msgs::Bool>("/yeti/rotate",10);
 	waypoint_sub = nh.subscribe<geometry_msgs::Pose>("/yeti/new_waypoints",10,&waypoint_class::addWaypointCallback,this);
 	map_sub = nh.subscribe<nav_msgs::OccupancyGrid>("/map",10, &waypoint_class::mapCallback,this);
+
 	bool running = false;
-	waypoint_number = 0;
 	reached_waypoint = false;
 	if(importWaypoints(filename)<0){
 		std::cout << "Error not a valid file\n";
@@ -93,7 +107,7 @@ int waypoint_class::importWaypoints(std::string filename){
 	if(waypointFile.is_open()){
 		while(std::getline(waypointFile,line)){
 			std::stringstream streamLine(line);
-			position = 0;	
+			position = 0;
 			while(std::getline(streamLine,cell,',')){
 				switch(position++){
 					case 0:
@@ -115,7 +129,7 @@ int waypoint_class::importWaypoints(std::string filename){
 						yaw = std::stof(cell);
 						break;
 					default:
-						quarter.setRPY(roll,pitch,yaw);//could set roll and pitch to 0 since yeti should be tilting
+						quarter.setRPY(roll,pitch,yaw);//could set roll and pitch to 0 since yeti should never be tilting
 						tempWaypoint.pose.orientation.x = quarter.getX();
 						tempWaypoint.pose.orientation.y = quarter.getY();
 						tempWaypoint.pose.orientation.z = quarter.getZ();
@@ -141,7 +155,6 @@ int waypoint_class::importWaypoints(std::string filename){
 			printPose(tempWaypoint.pose);
 			waypoint_queue.push_back(tempWaypoint);
 		}
-		
 	}
 	return 1;
 }
@@ -149,10 +162,13 @@ int waypoint_class::importWaypoints(std::string filename){
 void waypoint_class::publishNextWaypoint(){
 	geometry_msgs::PoseStamped msgs;
 	std_msgs::Bool rotate;
-	rotate.data = false;
+	std::string cmdString;
+	const char * cmd;
+	static int waypoint_number = 0;
+
 	msgs.header.frame_id = "map";
 	msgs.header.stamp  = ros::Time(0);
-	msgs.header.seq = waypoint_number;	
+	msgs.header.seq = waypoint_number++;
 	msgs.pose.position = waypoint_queue.front().pose.position;
 	msgs.pose.orientation = waypoint_queue.front().pose.orientation;
 	pose_pub.publish(msgs);
@@ -161,15 +177,18 @@ void waypoint_class::publishNextWaypoint(){
 	target_y = msgs.pose.position.y;
 	target_qz = msgs.pose.orientation.z;
 	target_qw = msgs.pose.orientation.w;
-	if(waypoint_queue.front().tolerance > 0.3){
+
+	
+	rotate.data = false;
+	if(waypoint_queue.front().tolerance > 0.4)
 		rotate.data = true;
-		system("rosrun dynamic_reconfigure dyniparam set /move_base/DWAPlannerROS xy_goal_tolerance 1");
-	}
-	else
-	    system("rosrun dynamic_reconfigure dynparam set /move_base/DWAPlannerROS xy_goal_tolerance 0.2");
-	//setDWATolerance(waypoint_queue.front().tolerance);
 	rotate_pub.publish(rotate);
-	tolerance_x = tolerance_y = waypoint_queue.front().tolerance;	
+	cmdString = "rosrun dynamic_reconfigure dyniparam set /move_base/DWAPlannerROS xy_goal_tolerance " + std::to_string(waypoint_queue.front().tolerance);//make sure that new waypoint will be published
+	rotate.data = true;
+	cmd = cmdString.c_str();
+	system(cmd);
+	tolerance_x = tolerance_y = waypoint_queue.front().tolerance + 0.1;//tolerance should be higher than planner tolerance
+
 
 	std::cout << "----New Goal Set----\n";
 	printPose(waypoint_queue.front().pose);
@@ -179,15 +198,23 @@ void waypoint_class::publishNextWaypoint(){
 void waypoint_class::checkPose(){
 	tf::StampedTransform transform;
 	geometry_msgs::Pose p;
+	static double timer = ros::Time::now().toSec();
+	
+	//This when to re-eval the path every 5 secs but it was fixed by making the map update
+	/*if(timer + 5 < ros::Time::now().toSec()){
+		this->publishNextWaypoint();
+		timer = ros::Time::now().toSec();
+	}*/
+	
 
 	try{
 		tfListener.lookupTransform("/map", "/base_link", ros::Time(0), transform);
 	}
 	catch (tf::TransformException ex){
-		ROS_ERROR("%s",ex.what());
+		ROS_ERROR("WAYPOINT_PUBLISHER: %s",ex.what());
 		ros::Duration(1.0).sleep();
 		return;
-		}
+	}
 
 
 	tfToPose(transform,p);//fixes negative w
@@ -226,45 +253,61 @@ void waypoint_class::addWaypointCallback(const geometry_msgs::Pose msgs){
 }
 
 void waypoint_class::mapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msgs){
-/*Manual Recreation/skipping of waypoints if path is determined to have waypoint inside of collision area*/
-/*	std::cout << "------------\n" << "Resolution: " << msgs->info.resolution << " \n"
+//Manual Recreation/skipping of waypoints if path is determined to have waypoint inside of collision area
+/*std::cout << "------------\n" << "Resolution: " << msgs->info.resolution << " \n"
 		<< "Width: " << msgs->info.width << " \n"
 		<< "Height: " << msgs->info.height << " \n"
 		<< "X: " << msgs->info.origin.position.x << " \n"
-		<< "Y: " << msgs->info.origin.position.y << " \n";
+		<< "Y: " << msgs->info.origin.position.y << " \n";*/
 	static bool init = true;
-	std::cout << ros::Time::now() << "\n";
+	//std::cout << "Start Time:" << ros::Time::now() << "\n";
 
 	if(init){//Make Matrix form holding map data
-		rows = msgs->info.height;
-		cols = msgs->info.width;
-		grid.resize(rows);
+		//Hard coded because math is off becuase 
+		rows = 300;//15.0 / msgs->info.resolution;
+		cols = 80;//4.0 / msgs->info.resolution;
+		snowMap.resize(rows);
 		for(int i = 0; i< rows; i++)
-			grid[i].resize(cols);
+			snowMap[i].resize(cols);
 		init = false;
+		std::cout << "Width: " << cols << "Height: " << rows << '\n'; 
 	}
-
-	int currCell = 0;
-	for(int i = 0; i< rows; i++) {
-		for(int j = 0; j < cols; j++) {
-			if(msgs->data[currCell++] == 0) 
-				grid[i][j] = false;
-			else
-				grid[i][j] = true; 
+	
+	//rows is x cols is y
+	/*
+	Map of the Matrix
+	---------------------
+	|x,y                |
+	|                   |
+	|-------------------|
+	|      |     |      |
+	|      |     |      |
+	|      |     |      |
+	|      |     |      |
+	|      |     |      |
+	|      |     |      |
+	|-------------------|
+	|                   |
+	|       Start       |
+	|                0,0|
+	---------------------
+	*/
+	//std::cout << "----OCCUPANCY GRID-----\n";
+	for(int x = 0; x< rows; x++) {
+		for(int y = 0; y < cols; y++) { 
+				snowMap[x][y] = (signed char) msgs->data[4000*(y+1960)+(x+1970)];
+				//std::cout << (signed int)snowMap[x][y] << " "; 
 		}
+		//std::cout << "\n";
 	}
 
-	std::cout << ros::Time::now() << "\n";
-*/
-
+	//std::cout << "Stop Time:" << ros::Time::now() << "\n";
 
 /*
-//run next waypoint
+//run new waypoint
 waypoint_queue.pop_front();
 this->publishNextWaypoint();
 */
-
-
 }
 
 void waypoint_class::printPose(geometry_msgs::Pose p){
@@ -281,20 +324,15 @@ void waypoint_class::tfToPose(tf::StampedTransform t,geometry_msgs::Pose& p){
 	}
 }
 
-int waypoint_class::status(){
-	return (int) running;//chagne later
-}
-
-int waypoint_class::run(){
+void waypoint_class::run(){
 	ros::Rate r(10);//10hz
-	ros::Duration(1).sleep();//Delay for Sub/Pub to init
+	ros::Duration(10).sleep();//Delay for Sub/Pub to Initalize
 	this->publishNextWaypoint();
 	while(ros::ok() && this->running){
 		ros::spinOnce();
 		this->checkPose();
 		r.sleep();
 	}
-	return 1;//Status of how path was. ie missed nodes and terminated
 }
 
 int main(int argc, char** argv){
@@ -303,6 +341,9 @@ int main(int argc, char** argv){
 	std::string filename;
 	if(privateNode.getParam("filename",filename)){
 		waypoint_class client(filename);
+		//wait for the Map to be read before sending the waypoints
+		while(ros::ok() && !client.tfListener.waitForTransform("/map", "/base_link", ros::Time(0), ros::Duration(3.0)))
+			std::cout << "WaypointGen: Waiting for /Map\n";
 		client.run();
 	}
 	else{

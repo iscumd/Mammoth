@@ -3,7 +3,9 @@ update_frequency: 8
 publish_frequency: 8
 rolling_window: true
 
+footprint_padding: 0.05
 
 plugins:
   - {name: obstacles_laser,           type: "costmap_2d::ObstacleLayer"}
   - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+  - {name: static_wall,               type: "costmap_2d::StaticLayer"}
