@@ -1727,26 +1727,26 @@
       <model name='single-I'>
         <pose frame=''>6 -2 .03 0 0 0</pose>
         <scale>1 1 1</scale>
-        <link name='garage_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+        <link name='left_side'>
+          <pose frame=''>0 0 0 0 0 1.5707</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
         </link>
-        <link name='left_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+		<link name='right_side'>
+          <pose frame=''>0 4 0 0 0 1.5707</pose>
+          <velocity>0 0 0 0 0 0</velocity>
+          <acceleration>0 0 0 0 0 0</acceleration>
+          <wrench>0 0 0 0 0 0</wrench>
+        </link>
+        <link name='garage_side'>
+          <pose frame=''>7.5 2 0 0 0 0</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
         </link>
         <link name='manuevering_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
-        </link>
-        <link name='right_side'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+          <pose frame=''>-7.5 2 0 0 0 0</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
@@ -1767,35 +1767,36 @@
         <pose frame=''>0 0 0 0 0 0</pose><!-- 0 0 0 is on the ground or atleast looks like it-->
         <scale>1 1 1</scale>
         <link name='chassis'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+          <pose frame=''>0 0 0.395 0 0 0</pose>
+          <velocity>0 0 0 0 0 0</velocity>
+          <acceleration>0 0 0 0 0 0</acceleration>
+          <wrench>0 0 0 0 0 0</wrench>
+        </link>
+		<link name='left_front_wheel'>
+          <pose frame=''>0.24 0.315 0.165 0 1.5707 1.5707</pose>
+          <velocity>0 0 0 0 0 0</velocity>
+          <acceleration>0 0 0 0 0 0</acceleration>
+          <wrench>0 0 0 0 0 0</wrench>
+        </link>
+		<link name='right_front_wheel'>
+          <pose frame=''>0.24 -0.315 0.165 0 1.5707 1.5707</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
         </link>
         <link name='left_back_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
-        </link>
-        <link name='left_front_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+          <pose frame=''>-0.24 0.315 0.165 0 1.5707 1.5707</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
         </link>
         <link name='right_back_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
+          <pose frame=''>-0.24 -0.315 0.165 0 1.5707 1.5707</pose>
           <velocity>0 0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 0 0</acceleration>
           <wrench>0 0 0 0 0 0</wrench>
         </link>
-        <link name='right_front_wheel'>
-          <pose frame=''>0 0 0 0 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
-        </link>
+        
       </model>
       <light name='sun'>
         <pose frame=''>0 0 10 0 -0 0</pose>
@@ -2280,7 +2281,7 @@
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
       </link>
-      <pose frame=''>11.1931 2.12797 0 0 -0 1.76606</pose>
+      <pose frame=''>13.2726 6.42799 0 -1e-06 1e-06 -1.39375</pose>
     </model>
     <model name='person_standing_clone_4'>
       <link name='link'>

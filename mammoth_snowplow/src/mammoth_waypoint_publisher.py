@@ -4,7 +4,7 @@ import rospy
 import std_msgs.msg
 import geometry_msgs.msg
 import tf
-import pandas as pd#pandas is used to read in csv files
+import pandas as pd    #pandas is used to read in csv files
 
 
 class mammoth_waypoint_manager(object):
@@ -40,11 +40,12 @@ class mammoth_waypoint_manager(object):
 
             quaternion = tf.transformations.quaternion_from_euler(imported.iloc[import_counter].Roll,imported.iloc[import_counter].Pitch,imported.iloc[import_counter].Yaw)
             converted.append([imported.iloc[import_counter].X,imported.iloc[import_counter].Y,imported.iloc[import_counter].Z,quaternion[0],quaternion[1],quaternion[2],quaternion[3]])
-        self.maxWaypoints += 1;
+            self.maxWaypoints += 1;
         if(self.maxWaypoints > 0):
             self.running = True
             self.waypoints = pd.DataFrame(converted,columns=["X","Y","Z","QX","QY","QZ","QW"])
         print self.waypoints
+        print self.maxWaypoints
 
 
 
@@ -68,14 +69,10 @@ class mammoth_waypoint_manager(object):
                     #print("Something went wrong with Lookup")
                     #exit()
                     #break
-            #print(position)
-            #print(orientation)
-            #print(self.waypoints.iloc[self.waypoint_index])
             good_job = 0
-            #print(self.waypoint_index)
-            #print(position)
-            #print(orientation)
-            #print(self.waypoints.iloc[self.waypoint_index])
+            print(position)
+            print(orientation)
+            print(self.waypoints.iloc[self.waypoint_index])
             if abs(position[0] - self.waypoints.iloc[self.waypoint_index].X) < self.tolerance_x:
             #print("tolerance_x")
                 if abs(position[1] - self.waypoints.iloc[self.waypoint_index].Y) < self.tolerance_y:
@@ -93,34 +90,22 @@ class mammoth_waypoint_manager(object):
             if good_job:
                 print("goodJob")
                 self.waypoint_index = self.waypoint_index + 1
-                self.send_it()
-                print("Max:"+str(self.maxWaypoints) +"   Current:"+str(self.waypoint_index))
-                if(self.maxWaypoints-1 == self.waypoint_index):
-                    #self.running = False
-                    self.waypoint_index = 0
+                if(self.maxWaypoints == self.waypoint_index):
+                    self.running = False
                     print("All Path Goals Completed")
+                else:
                     self.send_it()
-                #send next way point. This should probably have some error checking. IE out of array bounds
-                #print(self.waypoint_index)
-                #print(position)
-                #print(orientation)
-                #print(self.waypoints.iloc[self.waypoint_index])
-                #else:
-             #rospy.sleep(2)
-             #self.send_it()
 
 
     def run(self):
         #rospy.Subscriber("pose", geometry_msgs.msg.PoseStamped, self.callback_pose)
         rate = rospy.Rate(10.0)
-        #print("Running")
-        #print(self.waypoints.iloc[self.waypoint_index])
-        rospy.sleep(60)#time for sim to start
-        self.send_it() #send first waypoint?
+        rospy.sleep(1)#time sub/pub to start
+        self.send_it() #send first waypoint
         while ((not rospy.is_shutdown()) and self.running):
             self.check_pose()
             rate.sleep()
-        if(not rospy.is_shutdown()):
+        if(rospy.is_shutdown()):
             print("Ros not running")
 
 
@@ -130,7 +115,7 @@ class mammoth_waypoint_manager(object):
         goal.header.frame_id = 'map'
         goal.header.stamp = rospy.Time.now()
         goal.header.seq= self.waypoint_index;
-        goal.pose.position.x = self.waypoints.iloc[self.waypoint_index].X #self.target_pose[0]
+        goal.pose.position.x = self.waypoints.iloc[self.waypoint_index].X
         goal.pose.position.y = self.waypoints.iloc[self.waypoint_index].Y
         goal.pose.position.z = self.waypoints.iloc[self.waypoint_index].Z
         goal.pose.orientation.x = self.waypoints.iloc[self.waypoint_index].QX
@@ -150,7 +135,6 @@ if __name__ == '__main__':
             exit()
         else:
             waypoint_file = rospy.get_param("~filename")
-        #waypoint_file = "../config/waypoints.csv"
         mammoth = mammoth_waypoint_manager(waypoint_file)
         mammoth.run()
     except rospy.ROSInterruptException:

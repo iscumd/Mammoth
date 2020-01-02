@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(mammoth_snowplow)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -14,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   sensor_msgs
+  std_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -122,6 +124,20 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+
+
+add_executable(${PROJECT_NAME}_node src/waypoint_class.cpp)
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} )
+
+add_executable(redirect_node src/redirect.cpp)
+target_link_libraries(redirect_node ${catkin_LIBRARIES} )
+
+add_executable(fake_laser_node src/map_laser_scan.cpp)
+target_link_libraries(fake_laser_node ${catkin_LIBRARIES} )
+
+add_executable(transform_publisher_node src/transform_publisher.cpp)
+target_link_libraries(transform_publisher_node ${catkin_LIBRARIES} )
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

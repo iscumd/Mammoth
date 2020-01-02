@@ -2004,7 +2004,7 @@
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
       </link>
-      <pose frame=''>-13.8864 -3.88519 0 0 -0 1.76606</pose>
+      <pose frame=''>-13.8864 -3.88519 0 0 -0 0</pose>
     </model>
     <model name='person_standing_clone_0'>
       <link name='link'>
@@ -2280,7 +2280,7 @@
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
       </link>
-      <pose frame=''>11.1931 2.12797 0 0 -0 1.76606</pose>
+      <pose frame=''>13.2726 6.42799 0 -1e-06 1e-06 -1.39375</pose>
     </model>
     <model name='person_standing_clone_4'>
       <link name='link'>
