@@ -11,6 +11,12 @@ The Mammoth repository contains code which will be used on the Mammoth robot. Fo
 3. Change directory back to catkin workspace: `cd ..`
 4. Build the catkin workspace: `catkin_make` (hint: Don't forget to source your workspace)
 
+## Launching
+
+For information on launching and running the project, head to the following packages and view the readme.
+- Robot -> mammoth_snowplow
+- Simulation -> mammoth_simulation
+
 ## Development
 
 1. Create a issue describing a bug found or a feature to add.
