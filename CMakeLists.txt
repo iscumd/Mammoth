@@ -16,6 +16,9 @@ find_package(catkin REQUIRED COMPONENTS
   isc_joy
   isc_roboteq_hdc2460
   isc_ouster
+  robot_state_controller
+  mammoth_snowplow
+  mammoth_simulation
 )
 
 ## System dependencies are found with CMake's conventions

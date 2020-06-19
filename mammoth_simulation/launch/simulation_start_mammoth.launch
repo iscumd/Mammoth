@@ -50,7 +50,7 @@
     <!-- Start Gazebo Simulation -->
 	<param name="use_sim_time" value="true" />
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find yeti_snowplow)/srv/single-I_nosnow.sdf"/>
+		<arg name="world_name" value="$(find mammoth_simulation)/worlds/single-I_nosnow.sdf"/>
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="true"/>
