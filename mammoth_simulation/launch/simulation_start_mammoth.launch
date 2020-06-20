@@ -24,14 +24,13 @@
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
-    <!-- <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
+    <!-- TODO: <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
 
     <!-- drive mode switch -->
     <remap from="robot_state" to="$(arg state_base)/system" />
     <remap from="joystick" to="$(arg input_base)/xinput" />
     <remap from="auto_control_vel" to="$(arg actuation_base)/auto_control" />
     <remap from="control_vel" to="$(arg actuation_base)/control" />
-    <!--<remap from="control_vel" to="$(arg actuation_base)/control" />-->
     <remap from="drive_mode" to="$(arg state_base)/drive_mode" />
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
@@ -42,7 +41,7 @@
     <include file="$(find mammoth_simulation)/launch/include/gmapping_simulation.launch"/>
 
     <!-- Custom Waypoints-->
-    <remap from="$(arg actuation_base)/control2" to="/yeti/cmd_vel"/>
+    <remap from="$(arg actuation_base)/control" to="/yeti/cmd_vel"/> <!-- cmd_vel topic in gazebo(?) -->
     <include file="$(find mammoth_simulation)/launch/include/waypoint_publisher_simulation.launch"/>
 
     <!-- Start Gazebo Simulation -->

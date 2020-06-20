@@ -7,10 +7,9 @@
 		<param name="tolerance_qz" value="0.2"/>
 		<param name="tolerance_qw" value="0.2"/>
 	</node>
-	<node pkg="rostopic" type="rostopic" name="rostopic" args="pub 
+	<node pkg="rostopic" type="rostopic" name="rostopic" args="pub
 	-1 /yeti/state/system std_msgs/String &quot; data: &apos;ready&apos; &quot; "/>
-	<node pkg="mammoth_snowplow" type="redirect_node" name="redirect_node" output="screen"/>
-	<node pkg="mammoth_snowplow" type="auditory_feedback.py" name="auditory_feedback" output="screen"/>
+	<!-- <node pkg="mammoth_snowplow" type="auditory_feedback.py" name="auditory_feedback" output="screen"/> -->
 	<node pkg="mammoth_snowplow" type="fake_laser_node" name="fake_laser_node">
 		<param name="frame_id" value="os1_sensor"/>
 		<param name="num_points" value="1024"/>
