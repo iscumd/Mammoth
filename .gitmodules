@@ -1,15 +1,9 @@
-[submodule "path_tracking/external/pure_pursuit"]
-	path = path_tracking/external/pure_pursuit
-	url = https://github.com/iscumd/pure_pursuit
 [submodule "isc_joy"]
 	path = isc_joy
 	url = https://github.com/iscumd/isc_joy.git
 [submodule "isc_roboteq_hdc2460"]
 	path = isc_roboteq_hdc2460
 	url = https://github.com/iscumd/isc_roboteq_hdc2460.git
-[submodule "isc_shared_msgs"]
-	path = isc_shared_msgs
-	url = https://github.com/iscumd/isc_shared_msgs.git
 [submodule "isc_ouster"]
 	path = isc_ouster
 	url = https://github.com/iscumd/isc_ouster.git

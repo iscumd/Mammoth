@@ -24,7 +24,7 @@
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
-    <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" />
+    <!-- TODO: <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
 
     <!-- drive mode switch -->
     <remap from="robot_state" to="$(arg state_base)/system" />
@@ -34,27 +34,28 @@
     <remap from="drive_mode" to="$(arg state_base)/drive_mode" />
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
-    <!-- Roboteq -->
-    <remap from="/roboteq/motors/wheel_speeds" to="$(arg actuation_base)/control2" />
-    <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
-
-    <!-- LiDAR -->
-    <include file="$(find ouster_ros)/launch/start_ouster_2d.launch" />
-
-    <!-- Intel Realsense T265 -->
-    <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
-
-    <!-- Static Transforms
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/> -->
+    <!-- Static Transforms -->
+    <include file="$(find mammoth_simulation)/launch/include/transforms_simulation.launch"/>
 
     <!-- Localization-->
-    <include file="$(find mammoth_snowplow)/launch/include/gmapping.launch"/>
+    <include file="$(find mammoth_simulation)/launch/include/gmapping_simulation.launch"/>
 
     <!-- Custom Waypoints-->
-    <include file="$(find mammoth_snowplow)/launch/include/waypoint_publisher.launch"/>
+    <remap from="$(arg actuation_base)/control" to="/yeti/cmd_vel"/> <!-- cmd_vel topic in gazebo(?) -->
+    <include file="$(find mammoth_simulation)/launch/include/waypoint_publisher_simulation.launch"/>
 
-     <!-- move_base ROS Nav Stack Navigation -->
+    <!-- Start Gazebo Simulation -->
+	<param name="use_sim_time" value="true" />
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(find mammoth_simulation)/worlds/single-I_nosnow.sdf"/>
+		<arg name="paused" value="false"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+		<arg name="recording" value="false"/>
+		<arg name="debug" value="false"/>
+	</include>
+
+    <!-- Guidance -->
     <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
-    <include file="$(find mammoth_snowplow)/launch/include/move_base.launch"/>
-
+    <include file="$(find mammoth_simulation)/launch/include/move_base.launch"/>
 </launch>

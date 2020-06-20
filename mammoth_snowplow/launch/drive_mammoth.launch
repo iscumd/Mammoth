@@ -20,7 +20,7 @@
     </include>
 
     <!-- robot state control -->
-    <remap from="state/robot" to="$(arg state_base)/system" />
+	<remap from="state/robot" to="$(arg state_base)/system" />
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
@@ -30,31 +30,12 @@
     <remap from="robot_state" to="$(arg state_base)/system" />
     <remap from="joystick" to="$(arg input_base)/xinput" />
     <remap from="auto_control_vel" to="$(arg actuation_base)/auto_control" />
-    <remap from="control_vel" to="$(arg actuation_base)/control" />
+    <remap from="control_vel" to="roboteq/motors/wheel_speeds" />
     <remap from="drive_mode" to="$(arg state_base)/drive_mode" />
     <include file="$(find robot_state_controller)/launch/drive_mode_switch/switch.launch" />
 
     <!-- Roboteq -->
     <remap from="/roboteq/motors/wheel_speeds" to="$(arg actuation_base)/control2" />
     <include file="$(find isc_roboteq_hdc2460)/launch/starthdc.launch" />
-
-    <!-- LiDAR -->
-    <include file="$(find ouster_ros)/launch/start_ouster_2d.launch" />
-
-    <!-- Intel Realsense T265 -->
-    <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
-
-    <!-- Static Transforms
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/> -->
-
-    <!-- Localization-->
-    <include file="$(find mammoth_snowplow)/launch/include/gmapping.launch"/>
-
-    <!-- Custom Waypoints-->
-    <include file="$(find mammoth_snowplow)/launch/include/waypoint_publisher.launch"/>
-
-     <!-- move_base ROS Nav Stack Navigation -->
-    <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
-    <include file="$(find mammoth_snowplow)/launch/include/move_base.launch"/>
 
 </launch>

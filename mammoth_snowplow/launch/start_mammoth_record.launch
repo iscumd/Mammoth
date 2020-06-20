@@ -44,14 +44,14 @@
     <!-- Intel Realsense T265 -->
     <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
 
-    <!-- Static Transforms
-    <include file="$(find mammoth_snowplow)/launch/static_transforms.launch"/> -->
-
     <!-- Localization-->
     <include file="$(find mammoth_snowplow)/launch/include/gmapping.launch"/>
 
     <!-- Custom Waypoints-->
     <include file="$(find mammoth_snowplow)/launch/include/waypoint_publisher.launch"/>
+
+    <!-- Record a bagfile -->
+    <include file="$(find mammoth_snowplow)/launch/include/record_bag.launch"/>
 
      <!-- move_base ROS Nav Stack Navigation -->
     <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
