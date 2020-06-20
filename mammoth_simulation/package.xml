@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mammoth_snowplow</name>
+  <name>mammoth_simulation</name>
   <version>1.0.0</version>
-  <description>The Mammoth meta-package which contains the things necessary to deploy the Mammoth robot.</description>
+  <description>The Mammoth meta-package which contains things necessary to simulate Mammoth.</description>
 
   <maintainer email="isc-robotics@umich.edu">ISC Robotics - University of Michigan-Dearborn</maintainer> -->
   <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
