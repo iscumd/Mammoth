@@ -23,9 +23,6 @@ include_directories(
 add_executable(${PROJECT_NAME}_node src/waypoint_class.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} )
 
-add_executable(redirect_node src/redirect.cpp)
-target_link_libraries(redirect_node ${catkin_LIBRARIES} )
-
 add_executable(fake_laser_node src/map_laser_scan.cpp)
 target_link_libraries(fake_laser_node ${catkin_LIBRARIES} )
 
