@@ -1,0 +1,160 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="triple-I">
+    <static>true</static>
+
+    <link name='right_side'>
+      <pose>0 -1.5 0 0 0 1.5707</pose>
+      <collision name='rcollision'>
+        <geometry>
+         <box>
+            <size>0.03 15 0.03</size>
+         </box>
+        </geometry>
+      </collision>
+
+      <visual name='rvisual'>
+        <geometry>
+          <box>
+            <size>0.03 15 0.03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 0.5 1.0</diffuse>
+          <specular>0.0 0.0 0.5 1.0</specular>
+          <emissive>0.0 0.0 0.5 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+
+    <link name='left_side'>
+      <pose>0 5.5 0 0 0 1.5707</pose>
+      <collision name='lcollision'>
+        <geometry>
+          <box>
+            <size>0.03 15 0.03</size>
+         </box>
+        </geometry>
+      </collision>
+
+      <visual name='lvisual'>
+        <geometry>
+          <box>
+            <size>0.03 15 0.03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 0.5 1.0</diffuse>
+          <specular>0.0 0.0 0.5 1.0</specular>
+          <emissive>0.0 0.0 0.5 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+
+    <link name='manuevering_side'>
+      <pose>7.5 2 0 0 0 0</pose>
+      <collision name='mcollision'>
+        <geometry>
+          <box>
+            <size>0.03 7 0.03</size>
+         </box>
+        </geometry>
+      </collision>
+
+      <visual name='mvisual'>
+        <geometry>
+          <box>
+            <size>0.03 7 0.03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 0.5 1.0</diffuse>
+          <specular>0.0 0.0 0.5 1.0</specular>
+          <emissive>0.0 0.0 0.5 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+
+    <link name='garage_side'>
+      <pose>-7.5 2 0 0 0 0</pose>
+      <collision name='gcollision'>
+        <geometry>
+          <box>
+            <size>0.03 7 0.03</size>
+         </box>
+        </geometry>
+      </collision>
+
+      <visual name='gvisual'>
+        <geometry>
+          <box>
+            <size>0.03 7 .03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.5 1.0</ambient>
+          <diffuse>0.0 0.0 0.5 1.0</diffuse>
+          <specular>0.0 0.0 0.5 1.0</specular>
+          <emissive>0.0 0.0 0.5 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+
+    <link name='garage_boundary0'>
+      <pose>-4.5 3.5 0 0 0 0</pose>
+
+      <visual name='g0visual'>
+        <geometry>
+          <box>
+            <size>0.03 4 0.03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.0 0 1.0</ambient>
+          <diffuse>0.5 0.0 0 1.0</diffuse>
+          <specular>0.5 0.0 0 1.0</specular>
+          <emissive>0.5 0.0 0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+    
+    <link name='garage_boundary1'>
+      <pose>-6 1.5 0 0 0 1.5707</pose>
+
+      <visual name='g1visual'>
+        <geometry>
+          <box>
+            <size>0.03 3 0.03</size>
+         </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.0 0 1.0</ambient>
+          <diffuse>0.5 0.0 0 1.0</diffuse>
+          <specular>0.5 0.0 0 1.0</specular>
+          <emissive>0.5 0.0 0 1.0</emissive>
+        </material>
+      </visual>
+    </link>
+
+    <joint type='fixed' name='gr'>
+      <child>right_side</child>
+      <parent>garage_side</parent>
+    </joint>
+    <joint type='fixed' name='gl'>
+      <child>left_side</child>
+      <parent>garage_side</parent>
+    </joint>
+    <joint type='fixed' name='mr'>
+      <child>right_side</child>
+      <parent>manuevering_side</parent>
+    </joint>
+    <joint type='fixed' name='ml'>
+      <child>manuevering_side</child>
+      <parent>left_side</parent>
+    </joint>
+
+  </model>
+</sdf>
