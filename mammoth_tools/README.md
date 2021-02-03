@@ -12,7 +12,7 @@ The snow world needs to be optimized. It runs slowly. If you're using a laptop o
 2. Copy the text from the two files into an .SDF world file. 
 3. Move .SDF world into the worlds folder of the simulation part of the heirarchy. 
 4. Add or edit the launch file to reference the world file.
-5. Run the install_gazebo_models bash script.
+5. Run the install_gazebo_models bash script from the top level of the repo.
 6. Run the launch file.
 
 ## Development
