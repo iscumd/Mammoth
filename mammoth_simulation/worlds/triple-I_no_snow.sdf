@@ -40,7 +40,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>50 50</size>
             </plane>
           </geometry>
           <surface>
@@ -377,40 +377,6 @@
           <wrench>0.071817 0.177933 -24.2176 0 -0 0</wrench>
         </link>
       </model>
-      <model name='yeti'>
-        <pose frame=''>-7.33813 -0.02564 9e-06 2.4e-05 6e-06 0</pose>
-        <scale>1 1 1</scale>
-        <link name='chassis'>
-          <pose frame=''>-7.33813 -0.025649 0.395009 2.4e-05 6e-06 0</pose>
-          <velocity>0.002005 -0.000244 0.009386 0.000538 0.002263 -9.8e-05</velocity>
-          <acceleration>0.435103 0.269708 18.7727 2.50964 1.24348 -3.12941</acceleration>
-          <wrench>0.435103 0.269708 18.7727 0 -0 0</wrench>
-        </link>
-        <link name='left_back_wheel'>
-          <pose frame=''>-7.57113 0.289356 0.165017 1.5702 1.39894 3.14089</pose>
-          <velocity>0.001517 -0.000105 0.010069 0.000738 0.009919 -9.8e-05</velocity>
-          <acceleration>-0.013344 0.09239 18.9955 -0.691944 0.018443 0.012554</acceleration>
-          <wrench>-0.013344 0.09239 18.9955 0 -0 0</wrench>
-        </link>
-        <link name='left_front_wheel'>
-          <pose frame=''>-7.10513 0.289356 0.165005 1.57084 0.297781 3.14148</pose>
-          <velocity>0.001517 -0.000121 0.009005 0.000726 0.009233 -9.8e-05</velocity>
-          <acceleration>0.01828 0.202152 18.1174 -0.672782 -0.122923 0.011688</acceleration>
-          <wrench>0.01828 0.202152 18.1174 0 -0 0</wrench>
-        </link>
-        <link name='right_back_wheel'>
-          <pose frame=''>-7.57113 -0.340644 0.165007 1.57065 1.10249 3.14133</pose>
-          <velocity>0.001461 -0.000116 0.00977 0.000706 0.008814 -9.7e-05</velocity>
-          <acceleration>-0.020863 0.030956 19.4317 -0.700484 0.094219 0.01298</acceleration>
-          <wrench>-0.020863 0.030956 19.4317 0 -0 0</wrench>
-        </link>
-        <link name='right_front_wheel'>
-          <pose frame=''>-7.10513 -0.340644 0.165007 1.57076 0.793487 3.14143</pose>
-          <velocity>0.001453 -0.00015 0.008709 0.000721 0.009302 -9.9e-05</velocity>
-          <acceleration>-0.006327 0.096849 18.5549 -0.692216 0.01799 0.010539</acceleration>
-          <wrench>-0.006327 0.096849 18.5549 0 -0 0</wrench>
-        </link>
-      </model>
       <light name='sun'>
         <pose frame=''>0 0 10 0 -0 0</pose>
       </light>
@@ -475,12 +441,6 @@
         <uri>model://triple-I</uri>
       </include>
       <pose frame=''>-0.143919 -2.10016 0 0 -0 0</pose>
-    </model>
-    <model name='yeti'>
-      <include>
-        <uri>model://yeti_with_plow</uri>
-      </include>
-      <pose frame=''>-6.85122 0 0 0 0 0</pose>
     </model>
     <model name='person_standing'>
       <link name='link'>
