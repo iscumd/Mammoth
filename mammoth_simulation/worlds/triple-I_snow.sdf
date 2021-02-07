@@ -298,32 +298,32 @@
         </link>
       </model>
       <model name='pylon_orange'>
-        <pose frame=''>1.44449 1.05156 0 0 0 -8.1e-05</pose>
+        <pose frame=''>1.5 1.0 0 0 0 -8.1e-05</pose>
         <scale>1 1 1</scale>
         <link name='pylon_base'>
-          <pose frame=''>1.44449 1.05156 0.025 0 0 -8.1e-05</pose>
+          <pose frame=''>1.5 1.0 0.025 0 0 -8.1e-05</pose>
           <velocity>-1e-06 0 0.0043 0 -3.7e-05 0</velocity>
           <acceleration>-0.002633 8e-06 8.60049 -7.2e-05 -0.074271 -2.9e-05</acceleration>
           <wrench>-0.002633 8e-06 8.60049 0 -0 0</wrench>
         </link>
         <link name='pylon_body'>
-          <pose frame=''>1.44449 1.05156 0.775 0 0 -8.1e-05</pose>
+          <pose frame=''>1.5 1.0 0.775 0 0 -8.1e-05</pose>
           <velocity>-2.8e-05 0 0.0043 0 -3.7e-05 0</velocity>
           <acceleration>-0.056429 5e-06 8.60053 -1.2e-05 -0.073583 -4e-06</acceleration>
           <wrench>-0.056429 5e-06 8.60053 0 -0 0</wrench>
         </link>
       </model>
       <model name='pylon_yellow'>
-        <pose frame=''>-2.47353 0.023057 0 0 0 -8.1e-05</pose>
+        <pose frame=''>-2.5 0.0 0 0 0 -8.1e-05</pose>
         <scale>1 1 1</scale>
         <link name='pylon_base'>
-          <pose frame=''>-2.47353 0.023057 0.025 0 0 -8.1e-05</pose>
+          <pose frame=''>-2.5 0.0 0.025 0 0 -8.1e-05</pose>
           <velocity>-2e-06 0 0.004275 0 -9.7e-05 0</velocity>
           <acceleration>-0.005618 0 8.55064 0 -0.194657 0</acceleration>
           <wrench>-0.005618 0 8.55064 0 -0 0</wrench>
         </link>
         <link name='pylon_body'>
-          <pose frame=''>-2.47353 0.023057 0.775 0 0 -8.1e-05</pose>
+          <pose frame=''>-2.5 0.0 0.775 0 0 -8.1e-05</pose>
           <velocity>-7.4e-05 0 0.004275 0 -9.7e-05 0</velocity>
           <acceleration>-0.149625 0 8.55089 0 -0.193961 0</acceleration>
           <wrench>-0.149625 0 8.55089 0 -0 0</wrench>
@@ -7426,13 +7426,19 @@
       <include>
         <uri>model://pylon_yellow</uri>
       </include>
-      <pose frame=''>-2.47425 0.023075 0 0 -0 0</pose>
+      <pose frame=''>-6.85122 0 0 0 0 0</pose>
+    </model>
+    <model name='pylon_yellow'>
+      <include>
+        <uri>model://pylon_yellow</uri>
+      </include>
+      <pose frame=''>-2.5 0.0 0 0 -0 0</pose>
     </model>
     <model name='pylon_orange'>
       <include>
         <uri>model://pylon_orange</uri>
       </include>
-      <pose frame=''>1.44377 1.05158 0 0 -0 0</pose>
+      <pose frame=''>1.5 1.0 0 0 -0 0</pose>
     </model>
     <model name='unit_cylinder_clone_0'>
       <pose frame=''>-5 0.5 0.008111 0 0 0</pose>
