@@ -7,9 +7,9 @@ The Mammoth repository contains code which will be used on the Mammoth robot. Fo
 ## Building
 
 1. Change directory into your catkin workspace source folder. Example: `cd ~/catkin_ws/src`
-2. Clone the repository into your catkin workspace: `git clone https://github.com/iscumd/Mammoth.git --recurse-submodules`
+2. Clone the repository into your catkin workspace: `wstool init . https://raw.githubusercontent.com/iscumd/Mammoth/master/yeti.rosinstall`
 3. Change directory back to catkin workspace: `cd ..`
-4. Build the catkin workspace: `catkin_make` (hint: Don't forget to source your workspace)
+4. Build the catkin workspace: `catkin build` (hint: Don't forget to source your workspace)
 
 ## Launching
 
