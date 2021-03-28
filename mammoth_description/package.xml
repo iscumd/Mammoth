@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+    <name>lawnbot_description</name>
+    <version>0.0.1</version>
+    <description>Mammoth is a friendly snow plowing robot. This package contains modeling information for Mammoth.</description>
+
+    <author email="dcutting@umich.edu">David Cutting</author>
+
+    <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club, University of Michigan-Dearborn</maintainer>
+
+    <license>MIT</license>
+
+    <url type="website">http://www.iscumd.com</url>
+    <url type="repository">https://github.com/iscumd/Mammoth</url>
+    <url type="bugtracker">https://github.com/iscumd/Mammoth/issues</url>
+
+    <buildtool_depend>ament_cmake</buildtool_depend>
+
+    <depend>urdf</depend>
+
+    <test_depend>ament_lint_auto</test_depend>
+    <test_depend>ament_lint_common</test_depend>
+
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+</package>

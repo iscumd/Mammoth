@@ -6,16 +6,16 @@ The Mammoth repository contains code which will be used on the Mammoth robot. Fo
 
 ## Building
 
-1. Change directory into your catkin workspace source folder. Example: `cd ~/catkin_ws/src`
-2. Clone the repository into your catkin workspace: `wstool init . https://raw.githubusercontent.com/iscumd/Mammoth/master/yeti.rosinstall`
-3. Change directory back to catkin workspace: `cd ..`
-4. Build the catkin workspace: `catkin build` (hint: Don't forget to source your workspace)
+1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
+2. Clone the repository into your catkin workspace: `vcstool import src < https://raw.githubusercontent.com/iscumd/Mammoth/master/mammoth.rosinstall`
+3. Build the catkin workspace: `colcon build`
+4. Source the local workspace: `. install/local_setup.sh`
 
 ## Launching
 
-For information on launching and running the project, head to the following packages and view the readme.
+For information on launching and running the project, head to the following packages and view the ReadMe.
 - Robot -> mammoth_snowplow
-- Simulation -> mammoth_simulation
+- Simulation -> mammoth_gazebo
 
 ## Development
 
