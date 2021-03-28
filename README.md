@@ -7,7 +7,7 @@ The Mammoth repository contains code which will be used on the Mammoth robot. Fo
 ## Building
 
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
-2. Clone the repository into your catkin workspace: `vcstool import src < https://raw.githubusercontent.com/iscumd/Mammoth/ros2/mammoth.rosinstall`
+2. Clone the repository into your catkin workspace: `vcstool import src < https://raw.githubusercontent.com/iscumd/Mammoth/ros2/mammoth.repos`
 3. Build the catkin workspace: `colcon build`
 4. Source the local workspace: `. install/local_setup.sh`
 
