@@ -62,7 +62,7 @@ def generate_launch_description():
             name='spawn_entity',
             output='screen',
             arguments=[
-                '-entity', 'lawnbot',
+                '-entity', 'mammoth',
                 '-x', '0',
                 '-y', '0',
                 '-z', '0',
