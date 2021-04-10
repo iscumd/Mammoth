@@ -14,7 +14,7 @@
     <remap from="joy" to="$(arg input_base)/joy" />
     <remap from="joystick/xinput" to="$(arg input_base)/xinput" />
     <remap from="manual_control_vel" to="$(arg actuation_base)/manual_control" />
-    <include file="$(find isc_joy)/launch/joystick_xbox360.launch">
+    <include file="$(find isc_joy)/launch/joystick_xbone.launch">
         <arg name="speed_multiplier" value="0.3"/>
         <arg name="turn_multiplier" value="0.4"/>
     </include>
@@ -24,7 +24,7 @@
     <remap from="signal/kill" to="$(arg signal_base)/kill" />
     <remap from="signal/pause" to="$(arg signal_base)/pause" />
     <remap from="signal/soft_pause" to="$(arg signal_base)/soft_pause" />
-    <!-- TODO: <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" /> -->
+    <include file="$(find robot_state_controller)/launch/robot_state_controller/state_control.launch" />
 
     <!-- drive mode switch -->
     <remap from="robot_state" to="$(arg state_base)/system" />
@@ -41,11 +41,12 @@
     <include file="$(find mammoth_simulation)/launch/include/gmapping_simulation.launch"/>
 
     <!-- Custom Waypoints-->
-    <remap from="$(arg actuation_base)/control" to="/yeti/cmd_vel"/> <!-- cmd_vel topic in gazebo(?) -->
+    <!-- <remap from="$(arg actuation_base)/control" to="/yeti/cmd_vel"/> cmd_vel topic in gazebo(?) -->
     <include file="$(find mammoth_simulation)/launch/include/waypoint_publisher_simulation.launch"/>
 
     <!-- Start Gazebo Simulation -->
 	<param name="use_sim_time" value="true" />
+    <remap from="/yeti/cmd_vel" to="$(arg actuation_base)/control"/>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find mammoth_simulation)/worlds/single-I_nosnow.sdf"/>
 		<arg name="paused" value="false"/>
@@ -57,5 +58,6 @@
 
     <!-- Guidance -->
     <remap from="/cmd_vel" to="$(arg actuation_base)/auto_control"/>
+    <remap from="/odom" to="/yeti/odom" />
     <include file="$(find mammoth_simulation)/launch/include/move_base.launch"/>
 </launch>
