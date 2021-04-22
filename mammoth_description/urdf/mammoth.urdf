@@ -136,6 +136,36 @@
       <mass value="1e-5" />
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
+
+    <gazebo>
+      <sensor type="gpu_lidar" name="laser_link">
+        <topic>mammoth</topic>
+        <update_rate>10</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.396263</min_angle>
+              <max_angle>1.396263</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.261799</min_angle>
+              <max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.08</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+        <alwaysOn>1</alwaysOn>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
   </link>
 
   <joint name="base_to_laser" type="fixed">
@@ -144,88 +174,18 @@
     <child link="laser_link"/>
   </joint>
 
-  <gazebo reference="laser_link">
-    <sensor type="ray" name="laser_sensor">
-      <always_on>true</always_on>
-      <visualize>true</visualize>
-      <update_rate>30</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>10</samples>
-            <resolution>1</resolution>
-            <min_angle>-0.523</min_angle>
-            <max_angle>0.523</max_angle>
-          </horizontal>
-          <vertical>
-            <samples>10</samples>
-            <resolution>1</resolution>
-            <min_angle>-0.523</min_angle>
-            <max_angle>0.523</max_angle>
-          </vertical>
-        </scan>
-        <range>
-          <min>0.10</min>
-          <max>5.0</max>
-          <resolution>0.01</resolution>
-        </range>
-      </ray>
-      <noise>
-        <type>gaussian</type>
-        <mean>0.0</mean>
-        <stddev>0.01</stddev>
-      </noise>
-
-      <plugin name="gazebo_ros_block_laser_controller" filename="libgazebo_ros_ray_sensor.so">
-        <!-- Change namespace and output topic so published topic is /rrbot/laser/pointcloud -->
-        <ros>
-          <namespace>/gazebo</namespace>
-          <argument>~/out:=pointcloud</argument>
-        </ros>
-        <!-- Set output to sensor_msgs/PointCloud to get same output type as gazebo_ros_block_laser -->
-        <output_type>sensor_msgs/PointCloud2</output_type>
-        <frame_name>laser_link</frame_name>
-        <min_intensity>100.0</min_intensity>
-      </plugin>
-    </sensor>
-  </gazebo>
-
   <!--
+      Todo: add world tags for plugins...
       GAZEBO MOTION
   -->
   <gazebo>
-    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-
-      <ros>
-        <!-- gazebo namespace -->
-        <namespace>/gazebo</namespace>
-
-        <!-- Remapping gazebo topics
-        <argument>cmd_vel:=new_cmd_vel</argument>
-        <argument>odom:=new_odom</argument>
-        -->
-      </ros>
-
-      <update_rate>100</update_rate>
-
-      <!-- wheel joints -->
+    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
       <left_joint>base_to_wheel_bl</left_joint>
       <right_joint>base_to_wheel_br</right_joint>
-
-      <!-- kinematics -->
       <wheel_separation>0.475</wheel_separation>
-      <wheel_diameter>0.25</wheel_diameter>
-      <max_acceleration>1.0</max_acceleration>
-      <max_wheel_torque>20</max_wheel_torque>
-
-      <!-- tf -->
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-
-      <!-- output -->
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>false</publish_wheel_tf>
+      <wheel_radius>0.125</wheel_radius>
+      <odom_publish_frequency>1</odom_publish_frequency>
+      <topic>cmd_vel</topic>
     </plugin>
   </gazebo>
 
