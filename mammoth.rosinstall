@@ -3,3 +3,9 @@
         uri: "https://github.com/iscumd/Mammoth.git",
         version: ros2 
 }
+
+- git: {
+        local-name: ros-ign,
+        uri: "https://github.com/ignitionrobotics/ros_ign.git",
+        version: ros2
+}
