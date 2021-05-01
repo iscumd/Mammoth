@@ -139,7 +139,6 @@
 
     <gazebo>
       <sensor type="gpu_lidar" name="laser_link">
-        <topic>mammoth</topic>
         <update_rate>10</update_rate>
         <lidar>
           <scan>
@@ -179,13 +178,12 @@
       GAZEBO MOTION
   -->
   <gazebo>
-    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+    <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
       <left_joint>base_to_wheel_bl</left_joint>
       <right_joint>base_to_wheel_br</right_joint>
       <wheel_separation>0.475</wheel_separation>
       <wheel_radius>0.125</wheel_radius>
       <odom_publish_frequency>1</odom_publish_frequency>
-      <topic>cmd_vel</topic>
     </plugin>
   </gazebo>
 

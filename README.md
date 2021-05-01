@@ -4,6 +4,13 @@
 
 The Mammoth repository contains code which will be used on the Mammoth robot. For code that is compatible with Yeti, go to the [Yeti](https://github.com/iscumd/Yeti) repository, or use this code on Yeti/other robots at your own risk. This repository supports launches for both simulation and robot deployments of Mammoth.
 
+## Installing Dependencies
+
+You're going to want to have ROS2 installed. Here's the instructions for [Debian/Ubuntu 20](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html).
+
+If you are going to be running simulation, follow the Binary Install instructions for [Ignition Gazebo](https://ignitionrobotics.org/docs/edifice/install_ubuntu).
+
+
 ## Building
 
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`

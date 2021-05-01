@@ -32,6 +32,7 @@ def generate_launch_description():
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
+    pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -71,7 +72,11 @@ def generate_launch_description():
         arguments=['/model/mammoth/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
                    '/model/mammoth/points@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked'],
-        output='screen'
+        output='screen',
+        remappings=[
+            ('/model/mammoth/cmd_vel', '/cmd_vel'),
+            ('/model/mammoth/odometry', '/mammoth/odometry'),
+        ]
     )
 
     ign_spawn_robot = Node(
@@ -94,6 +99,16 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('use_rviz'))
     )
 
+    joy_with_teleop_twist = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
+        launch_arguments={
+            'joy_config': 'xbox',
+            'joy_dev': '/dev/input/js0',
+            'config_filepath': os.path.join(pkg_mammoth_gazebo, 'config', 'xbox.config.yaml')
+        }.items(),
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -106,6 +121,7 @@ def generate_launch_description():
         # Nodes
         robot_state_publisher,
         joint_state_publisher,
+        joy_with_teleop_twist,
 
         ign_gazebo,
         ign_bridge,

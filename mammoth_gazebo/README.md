@@ -4,4 +4,4 @@ This package contains launch and run information for simulating Mammoth with Gaz
 
 ## Launching
 
-Use `ros2 launch mammoth_gazebo base.launch.py` for simulation launches.
+Use `ros2 launch mammoth_gazebo mammoth.launch.py` for simulation launches.
