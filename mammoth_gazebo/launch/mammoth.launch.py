@@ -69,11 +69,13 @@ def generate_launch_description():
     ign_bridge = Node(
         package='ros_ign_bridge',
         executable='parameter_bridge',
-        arguments=['/model/mammoth/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
+        arguments=['/world/test/clock@rosgraph_msgs/msg/Clock@ignition.msgs.Clock',
+                   '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
                    '/model/mammoth/points@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked'],
         output='screen',
         remappings=[
+            ('/world/test/clock', '/clock'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odometry'),
         ]
