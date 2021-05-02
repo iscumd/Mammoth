@@ -1,2 +1,0 @@
-Invoking command in '/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/build/mammoth_gazebo': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/solanum/dev_ws/src/mammoth/mammoth_gazebo -DCMAKE_INSTALL_PREFIX=/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/install/mammoth_gazebo
-Invoked command in '/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/build/mammoth_gazebo' returned '1': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/solanum/dev_ws/src/mammoth/mammoth_gazebo -DCMAKE_INSTALL_PREFIX=/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/install/mammoth_gazebo

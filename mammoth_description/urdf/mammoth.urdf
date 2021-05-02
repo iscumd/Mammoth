@@ -25,9 +25,9 @@
     </inertial-->
   </link>
 
-<!--
-    BACK RIGHT WHEEL LINK AND JOINT
--->
+  <!--
+      BACK RIGHT WHEEL LINK AND JOINT
+  -->
 
   <link name="wheel_br">
     <visual>
@@ -38,8 +38,8 @@
     <collision>
       <geometry>
         <cylinder length="0.075" radius="0.125"/>
-    </geometry>
-	<contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+      </geometry>
+	    <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
     </collision>
     <inertial>
       <mass value="1.1"/>
@@ -71,7 +71,7 @@
       <geometry>
         <cylinder length="0.075" radius="0.125"/>
       </geometry>
-    <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
     </collision>
     <inertial>
       <mass value="1.1"/>
@@ -123,7 +123,7 @@
     <child link="wheel_fr"/>
   </joint>
 
-<!--
+  <!--
       FRONT LEFT WHEEL LINK AND JOINT
   -->
 
