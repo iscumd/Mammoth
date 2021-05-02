@@ -33,6 +33,8 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
+    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
+    pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -60,7 +62,8 @@ def generate_launch_description():
 
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')),
+            os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
+        ),
         launch_arguments={
             'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
         }.items(),
@@ -108,11 +111,34 @@ def generate_launch_description():
 
     joy_with_teleop_twist = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')),
+            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
+        ),
         launch_arguments={
             'joy_config': 'xbox',
             'joy_dev': '/dev/input/js0',
             'config_filepath': os.path.join(pkg_mammoth_gazebo, 'config', 'xbox.config.yaml')
+        }.items(),
+    )
+
+    slam_toolbox = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
+        ),
+        launch_arguments={
+            'use_sim_time': 'true',
+            'slam_params_file': os.path.join(pkg_mammoth_gazebo, 'config', 'slam_online_async.yaml')
+        }.items(),
+    )
+
+    nav2_stack = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_nav2_bringup, 'launch', 'navigation_launch.py')
+        ),
+        launch_arguments={
+            'namespace': '',
+            'use_sim_time': 'true',
+            'autostart': 'true',
+            'params_file': os.path.join(pkg_mammoth_gazebo, 'config', 'nav2_params.yaml')
         }.items(),
     )
 
@@ -134,5 +160,8 @@ def generate_launch_description():
         ign_bridge,
         ign_spawn_robot,
         
+        slam_toolbox,
+        nav2_stack,
+
         rviz,
     ])
