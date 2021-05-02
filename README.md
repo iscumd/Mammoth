@@ -40,3 +40,23 @@ For information on launching and running the project, head to the following pack
 ## Documentation
 
 Check the drive for what little we have.
+
+## Fun 
+Edit xbox.config.yaml in mammoth_gazebo and increase the values to 
+'teleop_twist_joy_node:
+  ros__parameters:
+    axis_linear:  # Left thumb stick vertical
+      x: 1
+    scale_linear:
+      x: 1.7
+    scale_linear_turbo:
+      x: 15.0
+
+    axis_angular:  # Left thumb stick horizontal
+      yaw: 5
+    scale_angular:
+      yaw: 10.0
+
+    enable_button: 2  # Left trigger button
+    enable_turbo_button: 5  # Right trigger button'
+Plug in an xbox controller and launch the file    

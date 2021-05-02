@@ -1,0 +1,38 @@
+[0.013s] Invoking command in '/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/build/mammoth_gazebo': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/solanum/dev_ws/src/mammoth/mammoth_gazebo -DCMAKE_INSTALL_PREFIX=/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/install/mammoth_gazebo
+[0.098s] -- The C compiler identification is GNU 9.3.0
+[0.167s] -- The CXX compiler identification is GNU 9.3.0
+[0.173s] -- Check for working C compiler: /usr/bin/cc
+[0.263s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.266s] -- Detecting C compiler ABI info
+[0.358s] -- Detecting C compiler ABI info - done
+[0.384s] -- Detecting C compile features
+[0.385s] -- Detecting C compile features - done
+[0.387s] -- Check for working CXX compiler: /usr/bin/c++
+[0.480s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.481s] -- Detecting CXX compiler ABI info
+[0.591s] -- Detecting CXX compiler ABI info - done
+[0.609s] -- Detecting CXX compile features
+[0.610s] -- Detecting CXX compile features - done
+[0.612s] -- Found ament_cmake: 0.9.8 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.643s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.5", minimum required is "3") 
+[0.643s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.856s] CMake Error at CMakeLists.txt:25 (find_package):
+[0.856s]   By not providing "Findmammoth_description.cmake" in CMAKE_MODULE_PATH this
+[0.856s]   project has asked CMake to find a package configuration file provided by
+[0.857s]   "mammoth_description", but CMake did not find one.
+[0.857s] 
+[0.857s]   Could not find a package configuration file provided by
+[0.857s]   "mammoth_description" with any of the following names:
+[0.857s] 
+[0.858s]     mammoth_descriptionConfig.cmake
+[0.858s]     mammoth_description-config.cmake
+[0.858s] 
+[0.858s]   Add the installation prefix of "mammoth_description" to CMAKE_PREFIX_PATH
+[0.858s]   or set "mammoth_description_DIR" to a directory containing one of the above
+[0.858s]   files.  If "mammoth_description" provides a separate development package or
+[0.858s]   SDK, be sure it has been installed.
+[0.859s] 
+[0.859s] 
+[0.859s] -- Configuring incomplete, errors occurred!
+[0.859s] See also "/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/build/mammoth_gazebo/CMakeFiles/CMakeOutput.log".
+[0.860s] Invoked command in '/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/build/mammoth_gazebo' returned '1': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/solanum/dev_ws/src/mammoth/mammoth_gazebo -DCMAKE_INSTALL_PREFIX=/home/solanum/dev_ws/src/mammoth/mammoth_gazebo/install/mammoth_gazebo
