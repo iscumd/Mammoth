@@ -55,6 +55,8 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
+    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
+    pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Config
     joy_config = os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
@@ -205,6 +207,9 @@ def generate_launch_description():
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,
+        
+        slam_toolbox,
+        nav2_stack,
 
         rviz,
     ])
