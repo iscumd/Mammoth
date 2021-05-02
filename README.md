@@ -43,7 +43,7 @@ Check the drive for what little we have.
 
 ## Fun 
 Edit xbox.config.yaml in mammoth_gazebo and increase the values to: 
-'''
+
   teleop_twist_joy_node:
     ros__parameters:
       axis_linear:  # Left thumb stick vertical
@@ -59,5 +59,6 @@ Edit xbox.config.yaml in mammoth_gazebo and increase the values to:
         yaw: 10.0
   
       enable_button: 2  # Left trigger button
-      enable_turbo_button: 5  # Right trigger button'''
+      enable_turbo_button: 5  # Right trigger button
+
 Plug in an xbox controller and launch the file    
