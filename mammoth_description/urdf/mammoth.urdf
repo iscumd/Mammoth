@@ -34,6 +34,169 @@
   </joint>
 
   <!--
+      BACK LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_bl">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+
+  </link>
+
+  <joint name="base_to_wheel_bl" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_bl"/>
+  </joint>
+
+  <!--
+      POSTERIOR LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_pl">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_pl" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="-0.15 -0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_pl"/>
+  </joint>
+
+  <!--
+      MIDDLE LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_ml">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_ml" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0 -0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_ml"/>
+  </joint>
+
+  <!--
+      ANTERIOR LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_al">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_al" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0.15 -0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_al"/>
+  </joint>
+
+
+  <!--
+      FRONT LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_fl">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+
+  <joint name="base_to_wheel_fl" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_fl"/>
+  </joint>
+
+  <!--
       BACK RIGHT WHEEL LINK AND JOINT
   -->
 
@@ -67,11 +230,42 @@
   </joint>
 
   <!--
-      BACK LEFT WHEEL LINK AND JOINT
+      POSTERIOR RIGHT WHEEL LINK AND JOINT
   -->
 
-  <link name="wheel_bl">
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
+  <link name="wheel_pr">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_pr" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="-0.15 0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_pr"/>
+  </joint>
+
+  <!--
+      MIDDLE RIGHT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_mr">
     <visual>
       <geometry>
         <cylinder length="0.075" radius="0.125"/>
@@ -93,11 +287,44 @@
 
   </link>
 
-  <joint name="base_to_wheel_bl" type="continuous">
+  <joint name="base_to_wheel_mr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0 0.2375 -0.1"/>
     <parent link="base_link"/>
-    <child link="wheel_bl"/>
+    <child link="wheel_mr"/>
+  </joint>
+
+
+  <!--
+      ANTERIOR RIGHT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_ar">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.125"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.1"/>
+      <inertia
+        ixx="0.0048125" ixy="0.0"       ixz="0.0"
+                        iyy="0.0048125" iyz="0.0"
+                                        izz="0.00859375"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_ar" type="continuous">
+    <axis xyz="0 0 1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0.15 0.2375 -0.1"/>
+    <parent link="base_link"/>
+    <child link="wheel_ar"/>
   </joint>
 
 
@@ -134,39 +361,6 @@
   </joint>
 
   <!--
-      FRONT LEFT WHEEL LINK AND JOINT
-  -->
-
-  <link name="wheel_fl">
-    <visual>
-      <geometry>
-        <cylinder length="0.075" radius="0.125"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.075" radius="0.125"/>
-      </geometry>
-      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
-    </collision>
-    <inertial>
-      <mass value="1.1"/>
-      <inertia
-        ixx="0.0048125" ixy="0.0"       ixz="0.0"
-                        iyy="0.0048125" iyz="0.0"
-                                        izz="0.00859375"/>
-    </inertial>
-  </link>
-
-  <joint name="base_to_wheel_fl" type="continuous">
-    <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>
-    <parent link="base_link"/>
-    <child link="wheel_fl"/>
-  </joint>
-
-
-  <!--
       LIDAR LINK AND JOINT
   -->
 
@@ -195,15 +389,23 @@
   </joint>
 
   <!--
-      Todo: add world tags for plugins...
-      GAZEBO MOTION
+      GAZEBO PLUGINS & SENSORS
   -->
   <gazebo>
-    <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+    <plugin filename="ignition-gazebo-diff-drive-system"
+              name="ignition::gazebo::systems::DiffDrive">
       <left_joint>base_to_wheel_bl</left_joint>
-      <right_joint>base_to_wheel_br</right_joint>
+      <left_joint>base_to_wheel_pl</left_joint>
+      <left_joint>base_to_wheel_ml</left_joint>
+      <left_joint>base_to_wheel_al</left_joint>
       <left_joint>base_to_wheel_fl</left_joint>
+      
+      <right_joint>base_to_wheel_br</right_joint>
+      <right_joint>base_to_wheel_pr</right_joint>
+      <right_joint>base_to_wheel_mr</right_joint>
+      <right_joint>base_to_wheel_ar</right_joint>
       <right_joint>base_to_wheel_fr</right_joint>
+      
       <wheel_separation>0.475</wheel_separation>
       <wheel_radius>0.125</wheel_radius>
       <odom_publish_frequency>1</odom_publish_frequency>
@@ -244,3 +446,4 @@
   </gazebo>
 
 </robot>
+
