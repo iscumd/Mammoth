@@ -71,15 +71,18 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=['/world/test/clock@rosgraph_msgs/msg/Clock@ignition.msgs.Clock',
                    '/model/mammoth/tf@tf2_msgs/msg/TFMessage@ignition.msgs.Pose_V',
-                   '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
-                   '/model/mammoth/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
-                   '/model/mammoth/points@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked'],
+                   '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+                   '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+                   '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
+                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked'],
         output='screen',
         remappings=[
             ('/world/test/clock', '/clock'),
             ('/model/mammoth/tf', '/tf'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
+            ('/lidar', '/mammoth/scan'),
+            ('/lidar/points', '/mammoth/points'),
         ]
     )
 
@@ -91,7 +94,7 @@ def generate_launch_description():
             '-x', '0',
             '-z', '0.25',
             '-Y', '0',
-            '-file', urdf_file
+            '-topic', '/robot_description'
         ],
         output='screen'
     )
