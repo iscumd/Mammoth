@@ -70,8 +70,8 @@ def generate_launch_description():
     ign_bridge = Node(
         package='ros_ign_bridge',
         executable='parameter_bridge',
-        arguments=['/world/test/clock@rosgraph_msgs/msg/Clock@ignition.msgs.Clock',
-                   '/model/mammoth/tf@tf2_msgs/msg/TFMessage@ignition.msgs.Pose_V',
+        arguments=['/world/test/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+                   '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
                    '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
                    '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
@@ -114,7 +114,7 @@ def generate_launch_description():
         launch_arguments={
             'joy_config': 'xbox',
             'joy_dev': '/dev/input/js0',
-            'config_filepath': os.path.join(pkg_mammoth_gazebo, 'config', 'xbox.config.yaml')
+            'config_filepath': os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
         }.items(),
     )
 
