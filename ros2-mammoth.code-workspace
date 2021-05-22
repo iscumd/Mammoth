@@ -2,7 +2,14 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../lidar_processor"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"memory": "cpp"
+		}
+	}
 }

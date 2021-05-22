@@ -25,6 +25,7 @@ find_package(ament_cmake REQUIRED)
 find_package(mammoth_description REQUIRED)
 # find_package(joint_state_publisher REQUIRED) # this errors out on foxy for some reason? not necessary to run :shrug:
 find_package(robot_state_publisher REQUIRED)
+find_package(lidar_processor REQUIRED)
 find_package(ros_ign_gazebo REQUIRED)
 find_package(ros_ign_bridge REQUIRED)
 find_package(joy REQUIRED)
