@@ -33,8 +33,6 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
-    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
-    pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -120,28 +118,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    slam_toolbox = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
-        ),
-        launch_arguments={
-            'use_sim_time': 'true',
-            'slam_params_file': os.path.join(pkg_mammoth_gazebo, 'config', 'slam_online_async.yaml')
-        }.items(),
-    )
-
-    nav2_stack = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_nav2_bringup, 'launch', 'navigation_launch.py')
-        ),
-        launch_arguments={
-            'namespace': '',
-            'use_sim_time': 'true',
-            'autostart': 'true',
-            'params_file': os.path.join(pkg_mammoth_gazebo, 'config', 'nav2_params.yaml')
-        }.items(),
-    )
-
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -159,9 +135,6 @@ def generate_launch_description():
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,
-        
-        slam_toolbox,
-        nav2_stack,
 
         rviz,
     ])
