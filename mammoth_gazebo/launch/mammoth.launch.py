@@ -55,8 +55,6 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
-    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
-    pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Config
     joy_config = os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
@@ -186,6 +184,19 @@ def generate_launch_description():
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
+<<<<<<< HEAD
+=======
+
+    mammoth_navigation = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_mammoth_gazebo, 'launch/include', 'navigation.launch.py')
+        ),
+        launch_arguments={
+            'use_sim_time': 'true'
+        }.items(),
+    )
+
+>>>>>>> get slam and nav launching
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -208,8 +219,7 @@ def generate_launch_description():
         ign_bridge,
         ign_spawn_robot,
         
-        slam_toolbox,
-        nav2_stack,
+        mammoth_navigation,
 
         rviz,
     ])

@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "../lidar_processor"
+<<<<<<< HEAD
+=======
+		},
+		{
+			"path": "../navigation2"
+>>>>>>> get slam and nav launching
 		}
 	],
 	"settings": {
