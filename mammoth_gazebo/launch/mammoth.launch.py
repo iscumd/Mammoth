@@ -82,7 +82,7 @@ def generate_launch_description():
             ('/model/mammoth/tf', '/tf'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
-            ('/lidar', '/mammoth/scan'),
+            ('/lidar', '/mammoth/raw_scan'),
             ('/lidar/points', '/mammoth/raw_points'),
         ]
     )
@@ -121,11 +121,13 @@ def generate_launch_description():
     lidar_processor = Node(
         package='lidar_processor',
         executable='lidar_processor',
-        name='robot_state_publisher',
+        name='lidar_processor',
         output='screen',
         remappings=[
             ('/lidar/raw_points', '/mammoth/raw_points'),
             ('/lidar/filtered_points', '/mammoth/filtered_points'),
+            ('/lidar/raw_scan', '/mammoth/raw_scan'),
+            ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
         ]
     )
 
