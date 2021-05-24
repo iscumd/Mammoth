@@ -16,7 +16,6 @@ def generate_launch_description():
 
     # ROS Packages
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
-    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
     pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Arguments
@@ -29,14 +28,16 @@ def generate_launch_description():
     nav2_params_file = LaunchConfiguration('nav2_params_file', default=nav2_params_file_path)
 
     # Nodes
-    slam_toolbox = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
-        ),
-        launch_arguments={
-            'use_sim_time': use_sim_time,
-            'slam_params_file': slam_params_file
-        }.items(),
+
+    async_slam_toolbox = Node(
+        parameters=[
+          slam_params_file,
+          {'use_sim_time': use_sim_time}
+        ],
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen'
     )
 
     nav2_stack = IncludeLaunchDescription(
@@ -64,6 +65,6 @@ def generate_launch_description():
         ),
 
         # Nodes
-        slam_toolbox,
+        async_slam_toolbox,
         #nav2_stack,
     ])
