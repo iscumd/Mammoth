@@ -66,5 +66,5 @@ def generate_launch_description():
 
         # Nodes
         async_slam_toolbox,
-        #nav2_stack,
+        #nav2_stack, # 5/23/21 dcutting133: currently this is very buggy. i have tried running navigation2 compiled from source to get rid of weirdness, and it kinda didnt work?
     ])

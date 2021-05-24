@@ -1,0 +1,23 @@
+- git: {
+        local-name: mammoth,
+        uri: "https://github.com/iscumd/Mammoth.git",
+        version: ros2 
+}
+
+- git: {
+        local-name: lidar_processor,
+        uri: "https://github.com/dcutting133/lidar_processor.git",
+        version: master
+}
+
+- git: {
+        local-name: slam_toolbox,
+        uri: "https://github.com/SteveMacenski/slam_toolbox.git",
+        version: ros2
+}
+
+- git: {
+        local-name: ros-ign,
+        uri: "https://github.com/ignitionrobotics/ros_ign.git",
+        version: ros2
+}
