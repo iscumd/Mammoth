@@ -18,13 +18,13 @@
         <box size="0.8 0.4 0.3"/>
       </geometry>
     </collision>
-    <!--inertial>
+    <inertial>
       <mass value="45"/>
       <inertia
         ixx="2.7375"  ixy="0.0" ixz="0.0"
                       iyy="3.0" iyz="0.0"
                                 izz="0.9375"/>
-    </inertial-->
+    </inertial>
   </link>
 
   <joint name="base_footprint_to_base_link" type="fixed">
@@ -408,7 +408,7 @@
       
       <wheel_separation>0.475</wheel_separation>
       <wheel_radius>0.125</wheel_radius>
-      <odom_publish_frequency>1</odom_publish_frequency>
+      <odom_publish_frequency>20</odom_publish_frequency>
 
       <frame_id>odom</frame_id>
       <child_frame_id>base_footprint</child_frame_id>
@@ -418,7 +418,7 @@
   <gazebo reference="laser_link">
     <sensor type="gpu_lidar" name="laser_link">
       <topic>lidar</topic> <!-- comes through as /lidar/points for pcl2 -->
-      <update_rate>10</update_rate>
+      <update_rate>20</update_rate>
       <lidar>
         <scan>
           <horizontal>
