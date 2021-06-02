@@ -21,7 +21,7 @@
     
     <exec_depend>joint_state_publisher</exec_depend>
     <exec_depend>robot_state_publisher</exec_depend>
-
+    <exec_depend>lidar_processor</exec_depend>
     <exec_depend>ros_ign_bridge</exec_depend>
     <exec_depend>ros_ign_gazebo</exec_depend>
 

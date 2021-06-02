@@ -82,8 +82,8 @@ def generate_launch_description():
             ('/model/mammoth/tf', '/tf'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
-            ('/lidar', '/mammoth/scan'),
-            ('/lidar/points', '/mammoth/points'),
+            ('/lidar', '/mammoth/raw_scan'),
+            ('/lidar/points', '/mammoth/raw_points'),
         ]
     )
 
@@ -93,7 +93,7 @@ def generate_launch_description():
         arguments=[
             '-name', 'mammoth',
             '-x', '0',
-            '-z', '0.25',
+            '-z', '0',
             '-Y', '0',
             '-topic', '/robot_description'
         ],
@@ -118,6 +118,19 @@ def generate_launch_description():
         }.items(),
     )
 
+    lidar_processor = Node(
+        package='lidar_processor',
+        executable='lidar_processor',
+        name='lidar_processor',
+        output='screen',
+        remappings=[
+            ('/lidar/raw_points', '/mammoth/raw_points'),
+            ('/lidar/filtered_points', '/mammoth/filtered_points'),
+            ('/lidar/raw_scan', '/mammoth/raw_scan'),
+            ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
+        ]
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -131,6 +144,7 @@ def generate_launch_description():
         robot_state_publisher,
         joint_state_publisher,
         joy_with_teleop_twist,
+        lidar_processor,
 
         ign_gazebo,
         ign_bridge,

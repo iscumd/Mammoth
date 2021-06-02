@@ -5,6 +5,12 @@
 }
 
 - git: {
+        local-name: lidar_processor,
+        uri: "https://github.com/dcutting133/lidar_processor.git",
+        version: master
+}
+
+- git: {
         local-name: ros-ign,
         uri: "https://github.com/ignitionrobotics/ros_ign.git",
         version: ros2
