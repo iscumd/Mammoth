@@ -38,7 +38,8 @@ from launch_ros.actions import Node
 # xacro_file = os.path.join(urdf_dir, 'test-desc.urdf.xacro')
 # doc = xacro.process_file(xacro_file)
 # robot_desc = doc.toprettyxml(indent='  ')
-# https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/
+#  https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/
+
 
 
 def generate_robot_model(pkg_description):
@@ -56,7 +57,7 @@ def generate_launch_description():
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
-    # Config
+    # Config arguments
     joy_config = os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
 
     # Launch arguments
@@ -73,24 +74,24 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': use_sim_time,
             'robot_description': robot_desc,
-        }]
-    )
+            }]
+        )
 
     joint_state_publisher = Node(
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
-    )
+        )
 
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
-        ),
+            ),
         launch_arguments={
             'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
         }.items(),
-    )
+        )
 
     ign_bridge = Node(
         package='ros_ign_bridge',
@@ -218,7 +219,7 @@ def generate_launch_description():
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,
-        
+
         mammoth_navigation,
 
         rviz,

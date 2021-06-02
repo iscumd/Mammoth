@@ -6,7 +6,10 @@
     <description>Mammoth is a friendly snow plowing robot. This package is for simulating the Mammoth robot.</description>
     <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
     <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
+<<<<<<< HEAD
     <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
+=======
+>>>>>>> clean up
     <license>MIT</license>
 
     <url type="website">http://www.iscumd.com</url>
