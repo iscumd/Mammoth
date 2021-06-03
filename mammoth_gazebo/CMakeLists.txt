@@ -39,7 +39,7 @@ find_package(teleop_twist_joy REQUIRED)
 
 install(
   DIRECTORY launch worlds config
-	DESTINATION share/${PROJECT_NAME}/
+  DESTINATION share/${PROJECT_NAME}/
 )
 
 ################################################################################
