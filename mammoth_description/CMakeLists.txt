@@ -30,8 +30,9 @@ find_package(urdf REQUIRED)
 
 ################################################################################
 
-install(DIRECTORY models rviz urdf
-	DESTINATION share/${PROJECT_NAME}
+install(
+  DIRECTORY models rviz urdf
+  DESTINATION share/${PROJECT_NAME}
 )
 
 ################################################################################

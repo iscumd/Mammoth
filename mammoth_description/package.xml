@@ -4,10 +4,8 @@
     <name>mammoth_description</name>
     <version>0.0.1</version>
     <description>Mammoth is a friendly snow plowing robot. This package contains modeling information for Mammoth.</description>
-
-    <author email="dcutting@umich.edu">David Cutting</author>
-
-    <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club, University of Michigan-Dearborn</maintainer>
+    <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
+    <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
 
     <license>MIT</license>
 
