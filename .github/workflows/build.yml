@@ -26,4 +26,4 @@ jobs:
         with:
           package-name: mammoth_description mammoth_gazebo
           target-ros2-distro: foxy
-          vcs-repo-file-url: https://raw.githubusercontent.com/iscumd/Mammoth/ros2/mammoth.repos
+          vcs-repo-file-url: https://raw.githubusercontent.com/iscumd/Mammoth/ros2/deps.repos
