@@ -100,7 +100,8 @@ def generate_launch_description():
                    '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
                    '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
-                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked'],
+                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
+                   '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'],
         output='screen',
         remappings=[
             ('/world/test/clock', '/clock'),
@@ -109,6 +110,7 @@ def generate_launch_description():
             ('/model/mammoth/odometry', '/mammoth/odom'),
             ('/lidar', '/mammoth/raw_scan'),
             ('/lidar/points', '/mammoth/raw_points'),
+            ('/imu', '/mammoth/imu'),
         ]
     )
 
