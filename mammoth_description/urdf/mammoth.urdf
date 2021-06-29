@@ -443,18 +443,18 @@
 
   <gazebo reference="laser_link">
     <sensor type="gpu_lidar" name="laser_link">
-      <topic>lidar</topic> <!-- comes through as /lidar/points for pcl2 -->
-      <update_rate>30</update_rate>
+      <topic>lidar</topic> <!-- comes through as /lidar/points for lidar processor -->
+      <update_rate>20</update_rate>
       <lidar>
         <scan>
           <horizontal>
-            <samples>640</samples>
+            <samples>1024</samples>
             <resolution>1</resolution>
-            <min_angle>-1.396263</min_angle>
-            <max_angle>1.396263</max_angle>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
           </horizontal>
           <vertical>
-            <samples>16</samples>
+            <samples>32</samples>
             <resolution>1</resolution>
             <min_angle>-0.261799</min_angle>
             <max_angle>0.261799</max_angle>
@@ -463,7 +463,7 @@
         <range>
           <min>0.08</min>
           <max>10.0</max>
-          <resolution>0.01</resolution>
+          <resolution>0.05</resolution>
         </range>
       </lidar>
       <alwaysOn>1</alwaysOn>
