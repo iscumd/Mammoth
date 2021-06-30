@@ -153,9 +153,11 @@ def generate_launch_description():
         remappings=[
             ('/lidar/raw_points', '/mammoth/raw_points'),
             ('/lidar/filtered_points', '/mammoth/filtered_points'),
+            ('/lidar/unfiltered_points', '/mammoth/unfiltered_points'),
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
             ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
-            ('/lidar/unfiltered_points', '/mammoth/unfiltered_points'),
+            ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
+                        
         ]
     )
 
