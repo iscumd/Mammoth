@@ -156,7 +156,7 @@ def generate_launch_description():
             ('/lidar/unfiltered_points', '/mammoth/unfiltered_points'),
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
             ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
-            ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),    
+            ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
 
