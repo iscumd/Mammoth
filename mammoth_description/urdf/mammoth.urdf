@@ -361,7 +361,7 @@
   </joint>
 
   <!--
-      LIDAR LINK AND JOINT
+      LIDAR LINK, IMU LINK AND JOINT
   -->
 
   <link name="laser_link">
@@ -387,6 +387,32 @@
     <parent link="base_link"/>
     <child link="laser_link"/>
   </joint>
+
+
+ <link name="imu_link">
+    <origin rpy="0 0 0" xyz="0.175 0 0.200"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-5" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="base_to_imu" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+
 
   <!--
       GAZEBO PLUGINS & SENSORS
@@ -417,18 +443,18 @@
 
   <gazebo reference="laser_link">
     <sensor type="gpu_lidar" name="laser_link">
-      <topic>lidar</topic> <!-- comes through as /lidar/points for pcl2 -->
+      <topic>lidar</topic> <!-- comes through as /lidar/points for lidar processor -->
       <update_rate>20</update_rate>
       <lidar>
         <scan>
           <horizontal>
-            <samples>640</samples>
+            <samples>1024</samples>
             <resolution>1</resolution>
-            <min_angle>-1.396263</min_angle>
-            <max_angle>1.396263</max_angle>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
           </horizontal>
           <vertical>
-            <samples>16</samples>
+            <samples>32</samples>
             <resolution>1</resolution>
             <min_angle>-0.261799</min_angle>
             <max_angle>0.261799</max_angle>
@@ -437,11 +463,31 @@
         <range>
           <min>0.08</min>
           <max>10.0</max>
-          <resolution>0.01</resolution>
+          <resolution>0.05</resolution>
         </range>
       </lidar>
       <alwaysOn>1</alwaysOn>
       <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+  
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor type="imu" name="imu_link">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>/imu</topic>
+        <topicName>/imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>20.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+
+      <pose>0 0 0 0 0 0</pose>
     </sensor>
   </gazebo>
 
