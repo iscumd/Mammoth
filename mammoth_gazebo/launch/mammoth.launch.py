@@ -126,6 +126,29 @@ def generate_launch_description():
         ],
         output='screen'
     )
+    
+    Pointcloud_to_Laserscan = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        remappings=[
+            ('cloud_in', '/mammoth/unfiltered_points'),
+            ('scan', [LaunchConfiguration(variable_name='scanner'), '/scan'])],
+        parameters=[{
+             'target_frame': 'laser_link',
+             'transform_tolerance': 0.01,
+             'min_height': 0.0,
+             'max_height': 20.0,
+             'angle_min': -1.5708,  
+             'angle_max':  1.5708,  
+             'angle_increment': 0.0087,  
+             'scan_time': 0.03333,
+             'range_min': 0.45,
+             'range_max': 35.0,
+             'use_inf': False,
+             'inf_epsilon': 1.0
+        }],
+        name='pointcloud_to_laserscan'
+    )
 
     rviz = Node(
         package='rviz2',
@@ -167,13 +190,17 @@ def generate_launch_description():
 
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
+                              
+        DeclareLaunchArgument(name='scanner', default_value='scanner',
+                              description='Namespace for sample topics'),
 
         # Nodes
         robot_state_publisher,
         joint_state_publisher,
         joy_with_teleop_twist,
         lidar_processor,
-
+        Pointcloud_to_Laserscan,
+        
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,

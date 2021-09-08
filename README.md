@@ -10,7 +10,8 @@ You're going to want to have ROS2 installed. Here's the instructions for [Debian
 
 If you are going to be running simulation, follow the Binary Install instructions for [Ignition Gazebo](https://ignitionrobotics.org/docs/edifice/install_ubuntu).
 
-
+Install gflags by running:
+	sudo apt-get install libgflags-dev
 ## Building
 
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
