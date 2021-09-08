@@ -127,7 +127,7 @@ def generate_launch_description():
         output='screen'
     )
     
-    Pointcloud_to_Laserscan = Node(
+    pointcloud_to_laserscan = Node(
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
         remappings=[
@@ -199,7 +199,7 @@ def generate_launch_description():
         joint_state_publisher,
         joy_with_teleop_twist,
         lidar_processor,
-        Pointcloud_to_Laserscan,
+        pointcloud_to_laserscan,
         
         ign_gazebo,
         ign_bridge,
