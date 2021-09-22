@@ -88,7 +88,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
         ),
         launch_arguments={
-            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/edifice(1).sdf'
+            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
         }.items(),
     )
 
