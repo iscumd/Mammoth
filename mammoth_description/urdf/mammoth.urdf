@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <robot name="mammoth">
 
+
+  <!-- Robot Footprint -->
+  <link name="base_footprint"/>
   <!--
       ROBOT BASE
   -->
-
-  <link name="base_footprint"/>
 
   <link name="base_link">
     <visual>
@@ -18,22 +19,17 @@
         <box size="0.8 0.4 0.3"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="45"/>
-      <inertia
-        ixx="2.7375"  ixy="0.0" ixz="0.0"
-                      iyy="3.0" iyz="0.0"
-                                izz="0.9375"/>
-    </inertial>
   </link>
+	
 
+  
   <joint name="base_footprint_to_base_link" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.225"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
 
-  <!--
+  <!--	
       BACK LEFT WHEEL LINK AND JOINT
   -->
 
@@ -417,7 +413,7 @@
   <!--
       GAZEBO PLUGINS & SENSORS
   -->
-  <gazebo>
+   <gazebo>
     <plugin filename="ignition-gazebo-diff-drive-system"
               name="ignition::gazebo::systems::DiffDrive">
       <left_joint>base_to_wheel_bl</left_joint>
@@ -440,7 +436,7 @@
       <child_frame_id>base_footprint</child_frame_id>
     </plugin>
   </gazebo>
-
+  
   <gazebo reference="laser_link">
     <sensor type="gpu_lidar" name="laser_link">
       <topic>lidar</topic> <!-- comes through as /lidar/points for lidar processor -->
@@ -486,10 +482,8 @@
         <rpyOffset>0 0 0</rpyOffset>
         <frameName>imu_link</frameName>
         <initialOrientationAsReference>false</initialOrientationAsReference>
-
       <pose>0 0 0 0 0 0</pose>
     </sensor>
   </gazebo>
 
 </robot>
-

@@ -88,7 +88,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
         ),
         launch_arguments={
-            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
+            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/edifice(1).sdf'
         }.items(),
     )
 
@@ -99,6 +99,7 @@ def generate_launch_description():
                    '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
                    '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+                   '/model/mammoth/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
                    '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
                    '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
                    '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'],
@@ -108,6 +109,7 @@ def generate_launch_description():
             ('/model/mammoth/tf', '/tf'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
+            ('/model/mammoth/joint_state', 'joint_states'),
             ('/lidar', '/mammoth/raw_scan'),
             ('/lidar/points', '/mammoth/raw_points'),
             ('/imu', '/mammoth/imu'),
@@ -122,7 +124,7 @@ def generate_launch_description():
             '-x', '0',
             '-z', '0',
             '-Y', '0',
-            '-topic', '/robot_description'
+            '-topic', 'robot_description'
         ],
         output='screen'
     )
@@ -132,7 +134,7 @@ def generate_launch_description():
         executable='pointcloud_to_laserscan_node',
         remappings=[
             ('cloud_in', '/mammoth/unfiltered_points'),
-            ('scan', [LaunchConfiguration(variable_name='scanner'), '/scan'])],
+            ('scan', '/scan')],
         parameters=[{
              'target_frame': 'laser_link',
              'transform_tolerance': 0.01,
@@ -141,7 +143,7 @@ def generate_launch_description():
              'angle_min': -1.5708,  
              'angle_max':  1.5708,  
              'angle_increment': 0.0087,  
-             'scan_time': 0.03333,
+             'scan_time': 0.01,
              'range_min': 0.45,
              'range_max': 35.0,
              'use_inf': False,
@@ -182,7 +184,6 @@ def generate_launch_description():
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
-
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -200,7 +201,7 @@ def generate_launch_description():
         joy_with_teleop_twist,
         lidar_processor,
         pointcloud_to_laserscan,
-        
+    
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,
