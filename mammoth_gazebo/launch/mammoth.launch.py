@@ -48,6 +48,7 @@ def generate_robot_model(pkg_description):
         robot_desc = infp.read()
     return robot_desc, urdf_file
 
+
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
