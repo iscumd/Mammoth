@@ -48,7 +48,6 @@ def generate_robot_model(pkg_description):
         robot_desc = infp.read()
     return robot_desc, urdf_file
 
-
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
@@ -140,9 +139,9 @@ def generate_launch_description():
              'transform_tolerance': 0.01,
              'min_height': 0.0,
              'max_height': 20.0,
-             'angle_min': -1.5708, 
+             'angle_min': -1.5708,
              'angle_max':  1.5708,
-             'angle_increment': 0.0087,  
+             'angle_increment': 0.0087,
              'scan_time': 0.01,
              'range_min': 0.45,
              'range_max': 35.0,
@@ -191,7 +190,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
-                        
+
         DeclareLaunchArgument(name='scanner', default_value='scanner',
                               description='Namespace for sample topics'),
 
@@ -201,7 +200,7 @@ def generate_launch_description():
         joy_with_teleop_twist,
         lidar_processor,
         pointcloud_to_laserscan,
-    
+
         ign_gazebo,
         ign_bridge,
         ign_spawn_robot,

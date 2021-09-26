@@ -71,6 +71,10 @@
         </visual>
       </link>
     </model>
-
+    <include>
+    <uri>
+     https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Depot
+    </uri>
+    </include>
   </world>
 </sdf>

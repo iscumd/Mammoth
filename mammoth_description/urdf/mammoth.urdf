@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <robot name="mammoth">
 
-
   <!-- Robot Footprint -->
   <link name="base_footprint"/>
+  
   <!--
       ROBOT BASE
   -->
-
+  
   <link name="base_link">
     <visual>
       <geometry>
@@ -21,8 +21,6 @@
     </collision>
   </link>
 	
-
-  
   <joint name="base_footprint_to_base_link" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.225"/>
     <parent link="base_footprint"/>

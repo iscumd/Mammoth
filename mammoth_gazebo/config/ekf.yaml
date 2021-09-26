@@ -16,7 +16,7 @@ ekf_filter_node:
         publish_acceleration: true
 
 # Whether to broadcast the transformation over the /tf topic. Defaultsto true if unspecified.
-        publish_tf: true
+        publish_tf: false
 
 # 1. Set the map_frame, odom_frame, and base_link frames to the appropriate frame names for your system.
 #     1a. If your system does not have a map_frame, just remove it, and make sure "world_frame" is set to the value of odom_frame.
@@ -27,9 +27,9 @@ ekf_filter_node:
 #     3a. Set your "world_frame" to your map_frame value
 #     3b. MAKE SURE something else is generating the odom->base_link transform. Note that this can even be another state estimation node
 #         from robot_localization! However, that instance should *not* fuse the global data.
-        map_frame: map              # Defaults to "map" if unspecified
+        map_frame: map           # Defaults to "map" if unspecified
         odom_frame: odom            # Defaults to "odom" if unspecified
-        base_link_frame: base_link  # Defaults to "base_link" ifunspecified
+        base_link_frame: base_footprint  # Defaults to "base_link" ifunspecified
         world_frame: odom           # Defaults to the value ofodom_frame if unspecified
 
         odom0: /mammoth/odom
