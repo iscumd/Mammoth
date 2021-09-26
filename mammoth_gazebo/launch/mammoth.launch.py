@@ -128,7 +128,7 @@ def generate_launch_description():
         ],
         output='screen'
     )
-    
+
     pointcloud_to_laserscan = Node(
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
@@ -140,8 +140,8 @@ def generate_launch_description():
              'transform_tolerance': 0.01,
              'min_height': 0.0,
              'max_height': 20.0,
-             'angle_min': -1.5708,  
-             'angle_max':  1.5708,  
+             'angle_min': -1.5708, 
+             'angle_max':  1.5708,
              'angle_increment': 0.0087,  
              'scan_time': 0.01,
              'range_min': 0.45,
@@ -191,7 +191,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
-                              
+                        
         DeclareLaunchArgument(name='scanner', default_value='scanner',
                               description='Namespace for sample topics'),
 
