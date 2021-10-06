@@ -99,6 +99,7 @@ def generate_launch_description():
                    '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
                    '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
                    '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+                   '/model/mammoth/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
                    '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
                    '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
                    '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'],
@@ -108,6 +109,7 @@ def generate_launch_description():
             ('/model/mammoth/tf', '/tf'),
             ('/model/mammoth/cmd_vel', '/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
+            ('/model/mammoth/joint_state', 'joint_states'),
             ('/lidar', '/mammoth/raw_scan'),
             ('/lidar/points', '/mammoth/raw_points'),
             ('/imu', '/mammoth/imu'),
@@ -122,9 +124,32 @@ def generate_launch_description():
             '-x', '0',
             '-z', '0',
             '-Y', '0',
-            '-topic', '/robot_description'
+            '-topic', 'robot_description'
         ],
         output='screen'
+    )
+
+    pointcloud_to_laserscan = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        remappings=[
+            ('cloud_in', '/mammoth/unfiltered_points'),
+            ('scan', '/scan')],
+        parameters=[{
+             'target_frame': 'laser_link',
+             'transform_tolerance': 0.01,
+             'min_height': 0.0,
+             'max_height': 20.0,
+             'angle_min': -1.5708,
+             'angle_max':  1.5708,
+             'angle_increment': 0.0087,
+             'scan_time': 0.01,
+             'range_min': 0.45,
+             'range_max': 35.0,
+             'use_inf': False,
+             'inf_epsilon': 1.0
+        }],
+        name='pointcloud_to_laserscan'
     )
 
     rviz = Node(
@@ -159,7 +184,6 @@ def generate_launch_description():
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
-
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -168,11 +192,15 @@ def generate_launch_description():
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
 
+        DeclareLaunchArgument(name='scanner', default_value='scanner',
+                              description='Namespace for sample topics'),
+
         # Nodes
         robot_state_publisher,
         joint_state_publisher,
         joy_with_teleop_twist,
         lidar_processor,
+        pointcloud_to_laserscan,
 
         ign_gazebo,
         ign_bridge,
