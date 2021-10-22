@@ -11,7 +11,7 @@ repositories:
     type: git
     url: https://github.com/ros-perception/pointcloud_to_laserscan.git
     version: foxy
-  ros2_ouster_os1_driver:
+  pointcloud_filter:
     type: git
-    url: https://github.com/ros-drivers/ros2_ouster_drivers.git
-    version: foxy-devel
+    url: https://github.com/girvenavery2022/Mammoth_filter.git
+    version: master
