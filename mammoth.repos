@@ -16,7 +16,6 @@ repositories:
     url: https://github.com/ros-perception/pointcloud_to_laserscan.git
     version: foxy
   pointcloud_filter:
-  pointcloud_filter/pointcloud_filter:
     type: git
     url: https://github.com/girvenavery2022/Mammoth_filter.git
     version: master
