@@ -184,6 +184,14 @@ def generate_launch_description():
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
+    
+    pointcloud_filter = Node(
+        package='pointcloud_filter',
+        executable='pointcloud_filter',
+        name='pointcloud_filter',
+        output='screen',
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -201,6 +209,8 @@ def generate_launch_description():
         joy_with_teleop_twist,
         lidar_processor,
         pointcloud_to_laserscan,
+        pointcloud_filter,
+
 
         ign_gazebo,
         ign_bridge,
