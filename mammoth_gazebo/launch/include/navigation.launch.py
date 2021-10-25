@@ -36,12 +36,13 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # ROS Packages
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
+    pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
     pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
-    slam_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config', 'slam_online_async.yaml')
+    slam_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config', 'mapper_params_online_async.yaml')
     slam_params_file = LaunchConfiguration('slam_params_file', default=slam_params_file_path)
 
     nav2_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config', 'nav2_params.yaml')
@@ -49,15 +50,15 @@ def generate_launch_description():
 
     # Nodes
 
-    async_slam_toolbox = Node(
-        parameters=[
-          slam_params_file,
-          {'use_sim_time': use_sim_time}
-        ],
-        package='slam_toolbox',
-        executable='async_slam_toolbox_node',
-        name='slam_toolbox',
-        output='screen'
+    slam_toolbox = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
+        ),
+        launch_arguments={
+            'namespace': 'navigation',
+            'use_sim_time': use_sim_time,
+            'params_file': nav2_params_file
+        }.items(),
     )
 
     nav2_stack = IncludeLaunchDescription(
@@ -84,7 +85,7 @@ def generate_launch_description():
                               description='The file path of the params file for Navigation2'),
 
         # Nodes
-        async_slam_toolbox,
+        slam_toolbox,
         nav2_stack,  # 5/23/21 dcutting133: currently this is very buggy.
         # i have tried running navigation2 compiled from source to get
         # rid of weirdness, and it kinda didnt work?

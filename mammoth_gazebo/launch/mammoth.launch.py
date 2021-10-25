@@ -73,24 +73,24 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': use_sim_time,
             'robot_description': robot_desc,
-            }]
-        )
+        }]
+    )
 
     joint_state_publisher = Node(
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
-        )
+    )
 
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
-            ),
+        ),
         launch_arguments={
             'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
         }.items(),
-        )
+    )
 
     ign_bridge = Node(
         package='ros_ign_bridge',

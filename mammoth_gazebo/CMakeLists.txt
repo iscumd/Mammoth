@@ -28,6 +28,7 @@ find_package(robot_state_publisher REQUIRED)
 find_package(lidar_processor REQUIRED)
 find_package(ros_ign_gazebo REQUIRED)
 find_package(ros_ign_bridge REQUIRED)
+find_package(slam_toolbox REQUIRED)
 find_package(joy REQUIRED)
 find_package(teleop_twist_joy REQUIRED)
 
