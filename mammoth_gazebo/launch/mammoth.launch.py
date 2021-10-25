@@ -133,7 +133,7 @@ def generate_launch_description():
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
         remappings=[
-            ('cloud_in', '/mammoth/unfiltered_points'),
+            ('cloud_in', '/mammoth/filtered_points'),
             ('scan', '/scan')],
         parameters=[{
              'target_frame': 'laser_link',
