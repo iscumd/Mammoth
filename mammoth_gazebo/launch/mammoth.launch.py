@@ -41,7 +41,6 @@ from launch_ros.actions import Node
 #  https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/
 
 
-
 def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
     urdf_file = os.path.join(urdf_dir, 'mammoth.urdf')
@@ -185,8 +184,6 @@ def generate_launch_description():
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
         ]
     )
-<<<<<<< HEAD
-=======
 
     mammoth_navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -197,7 +194,6 @@ def generate_launch_description():
         }.items(),
     )
 
->>>>>>> get slam and nav launching
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',

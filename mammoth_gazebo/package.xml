@@ -6,10 +6,8 @@
     <description>Mammoth is a friendly snow plowing robot. This package is for simulating the Mammoth robot.</description>
     <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
     <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
-<<<<<<< HEAD
     <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
-=======
->>>>>>> clean up
+    
     <license>MIT</license>
 
     <url type="website">http://www.iscumd.com</url>
@@ -27,6 +25,7 @@
     <exec_depend>ros_ign_gazebo</exec_depend>
     <exec_depend>robot_localization</exec_depend>
     <exec_depend>teleop_twist_joy</exec_depend>
+    <exec_depend>pointcloud_to_laserscan</exec_depend>
     <exec_depend>joy</exec_depend>
 
     <test_depend>ament_lint_auto</test_depend>

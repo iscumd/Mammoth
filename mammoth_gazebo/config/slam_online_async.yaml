@@ -12,17 +12,8 @@ slam_toolbox:
     # ROS Parameters
     odom_frame: odom
     map_frame: map
-<<<<<<< HEAD
-    base_frame: base_link
-    scan_topic: /scan
-=======
     base_frame: base_footprint
-<<<<<<< HEAD
-    scan_topic: /mammoth/scan
->>>>>>> get slam and nav launching
-=======
     scan_topic: /mammoth/filtered_scan
->>>>>>> get slam toolbox running, with some issues
     mode: mapping #localization
 
     # if you'd like to immediately start continuing a map at a given pose
