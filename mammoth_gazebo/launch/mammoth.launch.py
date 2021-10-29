@@ -55,9 +55,11 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
+    pkg_pointcloud_filter = get_package_share_directory('pointcloud_filter')
 
     # Config
     joy_config = os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
+    filter_config = os.path.join(pkg_pointcloud_filter, 'config', 'params.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -185,13 +187,6 @@ def generate_launch_description():
         ]
     )
     
-    pointcloud_filter = Node(
-        package='pointcloud_filter',
-        executable='pointcloud_filter',
-        name='pointcloud_filter',
-        output='screen',
-    )
-   
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -209,8 +204,6 @@ def generate_launch_description():
         joy_with_teleop_twist,
         lidar_processor,
         pointcloud_to_laserscan,
-        pointcloud_filter,
-
 
         ign_gazebo,
         ign_bridge,
