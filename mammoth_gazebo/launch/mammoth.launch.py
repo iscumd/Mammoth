@@ -55,11 +55,9 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
-    pkg_pointcloud_filter = get_package_share_directory('pointcloud_filter')
 
     # Config
     joy_config = os.path.join(pkg_mammoth_gazebo, 'config/joystick', 'xbone.config.yaml')
-    filter_config = os.path.join(pkg_pointcloud_filter, 'config', 'params.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -83,6 +81,9 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
 
     ign_gazebo = IncludeLaunchDescription(
@@ -142,14 +143,15 @@ def generate_launch_description():
              'transform_tolerance': 0.01,
              'min_height': 0.0,
              'max_height': 20.0,
-             'angle_min': -1.5708,
-             'angle_max':  1.5708,
+             'angle_min': -3.1415,
+             'angle_max':  3.1415,
              'angle_increment': 0.0087,
              'scan_time': 0.01,
              'range_min': 0.45,
              'range_max': 35.0,
              'use_inf': False,
-             'inf_epsilon': 1.0
+             'inf_epsilon': 1.0,
+             'use_sim_time': use_sim_time
         }],
         name='pointcloud_to_laserscan'
     )
@@ -184,9 +186,12 @@ def generate_launch_description():
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
             ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
-        ]
+        ],
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
-    
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
