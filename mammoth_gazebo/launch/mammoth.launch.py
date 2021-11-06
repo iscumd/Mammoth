@@ -81,6 +81,9 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
 
     ign_gazebo = IncludeLaunchDescription(
@@ -149,7 +152,8 @@ def generate_launch_description():
              'range_min': 0.45,
              'range_max': 35.0,
              'use_inf': False,
-             'inf_epsilon': 1.0
+             'inf_epsilon': 1.0,
+             'use_sim_time': use_sim_time
         }],
         name='pointcloud_to_laserscan'
     )
@@ -158,7 +162,10 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         arguments=['-d', os.path.join(pkg_mammoth_description, 'rviz', 'mammoth_gazebo.rviz')],
-        condition=IfCondition(use_rviz)
+        condition=IfCondition(use_rviz),
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
 
     joy_with_teleop_twist = IncludeLaunchDescription(
@@ -184,7 +191,10 @@ def generate_launch_description():
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
             ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
-        ]
+        ],
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
 
     mammoth_navigation = IncludeLaunchDescription(

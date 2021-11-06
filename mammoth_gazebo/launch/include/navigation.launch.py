@@ -68,7 +68,6 @@ def generate_launch_description():
             'namespace': 'navigation',
             'use_sim_time': use_sim_time,
             'autostart': 'true',
-            'params_file': nav2_params_file
         }.items(),
     )
 
@@ -85,7 +84,7 @@ def generate_launch_description():
 
         # Nodes
         slam_toolbox,
-        # nav2_stack,  # 5/23/21 dcutting133: currently this is very buggy.
+        #nav2_stack,  # 5/23/21 dcutting133: currently this is very buggy.
         # i have tried running navigation2 compiled from source to get
         # rid of weirdness, and it kinda didnt work?
     ])
