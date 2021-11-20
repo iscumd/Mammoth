@@ -71,13 +71,11 @@
         </visual>
       </link>
     </model>
-    <!--
     <include>
     <uri>
-     https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Depot
+      https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cafe
     </uri>
     </include>
-    -->
     <model name='cylinder'>
       <pose>-0.22577 -3.01015 0.5 0 -0 0</pose>
       <link name='cylinder_link'>

@@ -39,53 +39,50 @@ def generate_launch_description():
 
     # Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-
     slam_params_file_path = os.path.join(
         pkg_mammoth_gazebo, 'config', 'mapper_params_online_async.yaml')
     slam_params_file = LaunchConfiguration('slam_params_file', default=slam_params_file_path)
 
     nav2_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config', 'nav2_params.yaml')
     nav2_params_file = LaunchConfiguration('nav2_params_file', default=nav2_params_file_path)
-
+    
     # Nodes
-
     slam_toolbox = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
         ),
         launch_arguments={
-            'namespace': 'navigation',
+            'namespace': '',
             'use_sim_time': use_sim_time,
             'params_file': slam_params_file
         }.items(),
     )
-
+    
     nav2_stack = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_nav2_bringup, 'launch', 'navigation_launch.py')
+            os.path.join(pkg_mammoth_gazebo, 'launch/include/Slam_tool_box', 'nav.launch.py')
         ),
         launch_arguments={
-            'namespace': 'navigation',
+            'namespace': '',
             'use_sim_time': use_sim_time,
-            'autostart': 'true',
-            'params_file': nav2_params_file
+            'params_file':  nav2_params_file,
+            'autostart': 'true'
         }.items(),
     )
-
+                       
     return LaunchDescription([
-        # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='true',
-                              description='Use simulation (Gazebo) clock if true'),
 
         DeclareLaunchArgument('slam_params_file', default_value=slam_params_file_path,
                               description='The file path of the params file for SLAM ToolBox'),
-
+                              
         DeclareLaunchArgument('nav2_params_file', default_value=nav2_params_file_path,
                               description='The file path of the params file for Navigation2'),
+                              
+        DeclareLaunchArgument(
+            'use_sim_time', default_value='true',
+            description='Use simulation (Gazebo) clock if true'),
 
-        # Nodes
-        slam_toolbox,
-        # nav2_stack,  # 5/23/21 dcutting133: currently this is very buggy.
-        # i have tried running navigation2 compiled from source to get
-        # rid of weirdness, and it kinda didnt work?
+	 slam_toolbox,
+	 nav2_stack,
+
     ])
