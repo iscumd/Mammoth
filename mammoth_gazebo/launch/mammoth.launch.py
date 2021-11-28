@@ -81,6 +81,9 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
 
     ign_gazebo = IncludeLaunchDescription(
@@ -133,21 +136,22 @@ def generate_launch_description():
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
         remappings=[
-            ('cloud_in', '/mammoth/unfiltered_points'),
+            ('cloud_in', '/mammoth/filtered_points'),
             ('scan', '/scan')],
         parameters=[{
              'target_frame': 'laser_link',
              'transform_tolerance': 0.01,
              'min_height': 0.0,
              'max_height': 20.0,
-             'angle_min': -1.5708,
-             'angle_max':  1.5708,
+             'angle_min': -3.1415,
+             'angle_max':  3.1415,
              'angle_increment': 0.0087,
              'scan_time': 0.01,
              'range_min': 0.45,
              'range_max': 35.0,
              'use_inf': False,
-             'inf_epsilon': 1.0
+             'inf_epsilon': 1.0,
+             'use_sim_time': use_sim_time
         }],
         name='pointcloud_to_laserscan'
     )
@@ -182,8 +186,12 @@ def generate_launch_description():
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
             ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
             ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
-        ]
+        ],
+        parameters=[{
+            'use_sim_time': use_sim_time
+        }]
     )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
