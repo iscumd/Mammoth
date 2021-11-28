@@ -15,3 +15,7 @@ repositories:
     type: git
     url: https://github.com/ros-perception/pointcloud_to_laserscan.git
     version: foxy
+  ros2_ouster:
+    type: git
+    url: https://github.com/ros-drivers/ros2_ouster_drivers.git
+    version: foxy-devel
