@@ -21,11 +21,6 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-add_executable(mammoth_snowplow src/mammoth_snowplow.cpp)
-target_include_directories(mammoth_snowplow PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
-
 install(
   DIRECTORY launch config urdf
   DESTINATION share/${PROJECT_NAME}/
