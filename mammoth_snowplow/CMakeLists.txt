@@ -24,7 +24,7 @@ find_package(ros2_ouster REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 install(
-  DIRECTORY launch config urdf
+  DIRECTORY launch config 
   DESTINATION share/${PROJECT_NAME}/
 )
   
