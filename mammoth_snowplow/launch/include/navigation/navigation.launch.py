@@ -35,17 +35,16 @@ def generate_launch_description():
     # ROS Packages
     pkg_mammoth_snowplow = get_package_share_directory('mammoth_snowplow')
     pkg_slam_toolbox = get_package_share_directory('slam_toolbox')
-    pkg_nav2_bringup = get_package_share_directory('nav2_bringup')
 
     # Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     slam_params_file_path = os.path.join(
-        pkg_mammoth_snowplow, 'config/SLAM', 'mapper_params_online_async.yaml')
+        pkg_mammoth_snowplow, 'config/slam', 'mapper_params_online_async.yaml')
     slam_params_file = LaunchConfiguration('slam_params_file', default=slam_params_file_path)
 
-    nav2_params_file_path = os.path.join(pkg_mammoth_snowplow, 'config/Navigation', 'nav2_params.yaml')
+    nav2_params_file_path = os.path.join(pkg_mammoth_snowplow, 'config/navigation', 'nav2_params.yaml')
     nav2_params_file = LaunchConfiguration('nav2_params_file', default=nav2_params_file_path)
-    
+
     # Nodes
     slam_toolbox = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -57,10 +56,10 @@ def generate_launch_description():
             'params_file': slam_params_file
         }.items(),
     )
-    
+
     nav2_stack = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_mammoth_snowplow, 'launch/include/Slam_tool_box', 'nav.launch.py')
+            os.path.join(pkg_mammoth_snowplow, 'launch/include/navigation/nav2', 'nav.launch.py')
         ),
         launch_arguments={
             'namespace': '',
@@ -69,18 +68,18 @@ def generate_launch_description():
             'autostart': 'true'
         }.items(),
     )
-                       
+
     return LaunchDescription([
 
         DeclareLaunchArgument('slam_params_file', default_value=slam_params_file_path,
-                              description='The file path of the params file for SLAM ToolBox'),
-                              
+                              description='The file path of the params file for slam ToolBox'),
+
         DeclareLaunchArgument('nav2_params_file', default_value=nav2_params_file_path,
                               description='The file path of the params file for Navigation2'),
-                              
+
         DeclareLaunchArgument(
             'use_sim_time', default_value='true',
-            description='Use simulation (Gazebo) clock if true'),
+            description='Use simulation clock if true'),
 
 	 slam_toolbox,
 	 nav2_stack,

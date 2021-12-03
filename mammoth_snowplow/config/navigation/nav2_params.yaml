@@ -240,7 +240,7 @@ global_costmap:
 map_server:
   ros__parameters:
     use_sim_time: True
-    yaml_filename: "/install/mammoth_gazebo/share/mammoth_gazebo/config/Maps/Amcl/cafe.pgm"
+    yaml_filename: "/install/mammoth_snowplow/share/mammoth_snowplow/config/Maps/amcl/cafe.pgm"
     topic_name: "map"
     frame_id: "map"
 
