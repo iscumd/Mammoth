@@ -18,16 +18,22 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(mammoth_description REQUIRED)
+find_package(robot_state_publisher REQUIRED)
+find_package(joy REQUIRED)
+find_package(teleop_twist_joy REQUIRED)
 find_package(ros2_ouster REQUIRED)
+find_package(lidar_processor REQUIRED)
+find_package(realsense2_camera REQUIRED)
+find_package(isc_roboteq REQUIRED)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-install(
-  DIRECTORY launch config 
+install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}/
 )
-  
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
