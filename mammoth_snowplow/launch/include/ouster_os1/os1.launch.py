@@ -39,7 +39,7 @@ def generate_launch_description():
 
     params_declare = DeclareLaunchArgument('config',
                                            default_value=os.path.join(
-                                               share_dir, 'config/sensors/lidar', 'os1.yaml'),
+                                           share_dir, 'config/sensors/lidar', 'os1.yaml'),
                                            description='FPath to the ROS2 parameters file to use.')
 
     driver_node = LifecycleNode(package='ros2_ouster',
@@ -92,4 +92,5 @@ def generate_launch_description():
         activate_event,
         configure_event,
         shutdown_event,
+        ros2-snowplow
     ])

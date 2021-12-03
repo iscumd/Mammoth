@@ -30,8 +30,7 @@ find_package(isc_roboteq REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-install(
-  DIRECTORY launch config
+install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}/
 )
 
