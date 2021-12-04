@@ -359,7 +359,7 @@
   -->
 
   <link name="laser_link">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.175"/>
     <visual>
       <geometry>
         <cylinder length="0.05" radius="0.025"/>

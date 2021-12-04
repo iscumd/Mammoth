@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.5)
 project(mammoth_snowplow)
 
@@ -30,8 +31,7 @@ find_package(isc_roboteq REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-install(
-  DIRECTORY launch config
+install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}/
 )
 

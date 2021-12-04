@@ -71,12 +71,10 @@
         </visual>
       </link>
     </model>
-    <!--
     <include>
     <uri>
-     https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Depot
+      https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cafe
     </uri>
     </include>
-    -->
   </world>
 </sdf>
