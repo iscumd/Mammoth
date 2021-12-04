@@ -32,13 +32,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
-
-# import xarco
-# xacro_file = os.path.join(urdf_dir, 'test-desc.urdf.xacro')
-# doc = xacro.process_file(xacro_file)
-# robot_desc = doc.toprettyxml(indent='  ')
-# https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/
-
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_snowplow = get_package_share_directory('mammoth_snowplow')
@@ -46,7 +39,7 @@ def generate_launch_description():
 
     # Config
     joy_config = os.path.join(pkg_mammoth_snowplow, 'config/joystick', 'xbone.config.yaml')
-
+    
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
