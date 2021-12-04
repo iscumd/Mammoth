@@ -1,0 +1,29 @@
+name: ROS2 CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ ros2 ]
+  pull_request:
+    branches: [ ros2 ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ros-tooling/setup-ros@v0.2
+        with:
+          required-ros-distributions: foxy
+      - uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: mammoth_description mammoth_gazebo
+          target-ros2-distro: foxy
+          vcs-repo-file-url: https://raw.githubusercontent.com/iscumd/Mammoth/ros2/deps.repos

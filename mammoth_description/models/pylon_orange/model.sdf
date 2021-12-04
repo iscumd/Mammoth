@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="pylon_orange">
+    <static>false</static>
+
+
+
+    <link name='pylon_body'>
+
+      <inertial>
+        <mass>0.8</mass>
+      </inertial>
+
+      <pose>0 0 .775 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.05</radius>
+            <length>1.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.05</radius>
+            <length>1.5</length>
+          </cylinder>
+        </geometry>
+
+      </visual> -->
+
+      <visual name='visual'>
+        <pose>0 0 -.75 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://pylon_orange/meshes/OrangePylon.dae</uri>
+          </mesh>
+        </geometry>
+
+      </visual>
+
+    </link>
+    <link name='pylon_base'>
+
+      <inertial>
+        <mass>3.62</mass>
+      </inertial>
+
+      <pose>0 0 .025 0 0 0</pose>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>.25</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>.25</radius>
+            <length>.05</length>
+          </cylinder>
+        </geometry>
+
+      </visual> -->
+
+    </link>
+
+    <joint name="base_body" type="fixed">
+      <parent>pylon_base</parent>
+      <child>pylon_body</child>
+      <pose>0 0 0 0 0 0</pose>
+
+    </joint>
+
+  </model>
+</sdf>
