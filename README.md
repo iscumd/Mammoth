@@ -8,12 +8,23 @@ The Mammoth repository contains code which will be used on the Mammoth robot. Fo
 
 You're going to want to have ROS2 installed. Here's the instructions for [Debian/Ubuntu 20](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html).
 
-If you are going to be running simulation, follow the Binary Install instructions for [Ignition Gazebo](https://ignitionrobotics.org/docs/edifice/install_ubuntu).
+Install igntion gazebo by running:
+        `sudo apt install ros-foxy-ros-ign`
 
 Install gflags by running:
-	sudo apt-get install libgflags-dev
+	`sudo apt-get install libgflags-dev`
+	
+Install the realsense sdk by going to:
+        https://www.intelrealsense.com/sdk-2/
+	
+Install Realsense ros2:
+        `sudo apt-get install ros-foxy-realsense2-camera`
+## Install Dependencies
+        `cd ~/ros_ws/`
+        `rosdep update`
+        `rosdep install -i --from-path src --rosdistro $_ros_dist --skip-keys=librealsense2 -y`
+	
 ## Building
-
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
 2. Clone the repository into your colcon workspace: `vcs import src --input https://raw.githubusercontent.com/iscumd/Mammoth/ros2/mammoth.repos`
 3. Build the colcon workspace: `colcon build`
