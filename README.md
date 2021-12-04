@@ -19,6 +19,7 @@ Install the realsense sdk by going to:
 	
 Install Realsense ros2:
         `sudo apt-get install ros-foxy-realsense2-camera`
+        
 ## Install Dependencies
         `cd ~/ros_ws/`
         `rosdep update`
