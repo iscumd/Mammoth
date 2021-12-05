@@ -65,7 +65,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-    
+
     ign_gazebo = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
          pkg_mammoth_gazebo, 'launch'),
@@ -74,7 +74,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }.items(),
     )
-    
+
     joy_with_teleop_twist = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
          os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
@@ -85,7 +85,7 @@ def generate_launch_description():
           'config_filepath': joy_config
       }.items(),
     )
-    
+
     velocity_inverter = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
          pkg_mammoth_gazebo, 'launch'),
@@ -93,8 +93,8 @@ def generate_launch_description():
          launch_arguments={
             'use_sim_time': use_sim_time
         }.items(),
-    ) 
-      
+    )
+
     lidar_processor = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
          pkg_mammoth_gazebo, 'launch'),
@@ -120,7 +120,7 @@ def generate_launch_description():
          launch_arguments={
             'use_sim_time': use_sim_time
         }.items(),
-    ) 
+    )
 
     rviz = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
@@ -131,7 +131,7 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
          }.items(),
     )
-    
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',

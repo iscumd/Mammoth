@@ -82,5 +82,4 @@ def generate_launch_description():
 
 	 slam_toolbox,
 	 nav2_stack,
-
     ])

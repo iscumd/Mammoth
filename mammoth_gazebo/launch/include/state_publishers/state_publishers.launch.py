@@ -75,7 +75,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
-                              description='Use simulation clock if true'),         
+                              description='Use simulation clock if true'),       
         # Nodes
         robot_state_publisher,
         joint_state_publisher,

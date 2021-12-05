@@ -37,9 +37,9 @@ def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
     urdf_file = os.path.join(urdf_dir, 'mammoth.urdf')
     with open(urdf_file, 'r') as infp:
-        robot_desc = infp.read()     
+        robot_desc = infp.read()
     return robot_desc, urdf_file
-    
+
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
@@ -49,7 +49,7 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
-    
+
     # Nodes
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -96,7 +96,6 @@ def generate_launch_description():
         ],
         output='screen'
     )
-
 
     return LaunchDescription([
         # Launch Arguments
