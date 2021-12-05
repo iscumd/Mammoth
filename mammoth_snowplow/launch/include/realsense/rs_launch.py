@@ -89,7 +89,7 @@ configurable_parameters = [{'name': 'camera_name',                  'default': '
                            {'name': 'reconnect_timeout',            'default': '6.', 'description': 'Timeout(seconds) between consequtive reconnection attempts'},
                            {'name': 'odom_frame_id', 'default': 'odom', 'description': 'set odom frame'},   
                            {'name': 'pose_frame_id', 'default': 'base_footprint', 'description': 'set pose frame'},  
-                           {'name': 'publish_tf', 'default': 'false', 'description': 'publish tf'},                                                               
+                           {'name': 'publish_tf', 'default': 'true', 'description': 'publish tf'},                                                               
                                                        
                           ]
 
@@ -141,6 +141,10 @@ def generate_launch_description():
                 executable='realsense2_camera_node',
                 parameters=[set_configurable_parameters(configurable_parameters)
                             ],
+                remappings=[
+                   ('/camera/odom/sample', '/mammoth/odom'),
+
+                ],                            
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
                 emulate_tty=True,
@@ -154,6 +158,10 @@ def generate_launch_description():
                 parameters=[set_configurable_parameters(configurable_parameters)
                             , PythonExpression([LaunchConfiguration("config_file")])
                             ],
+                remappings=[
+                   ('/camera/odom/sample', '/mammoth/odom'),
+
+                ],                             
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
                 emulate_tty=True,

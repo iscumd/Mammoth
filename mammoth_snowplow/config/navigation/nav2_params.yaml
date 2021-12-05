@@ -52,7 +52,7 @@ bt_navigator:
     use_sim_time: True
     global_frame: map
     robot_base_frame: base_link
-    odom_topic: /odom
+    odom_topic: /mammoth/odom
     enable_groot_monitoring: True
     groot_zmq_publisher_port: 1666
     groot_zmq_server_port: 1667
@@ -93,7 +93,7 @@ controller_server:
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    odom_topic: "/zed/zed_node/odom"
+    odom_topic: "/mammoth/odom"
     progress_checker_plugin: "progress_checker"
     goal_checker_plugin: "goal_checker"
     controller_plugins: ["FollowPath"]
@@ -112,7 +112,7 @@ controller_server:
       debug_trajectory_details: True
       
       max_vel_x: 1.0      
-      min_vel_x: 1.0
+      min_vel_x: -1.0
       max_vel_y: 0.0      
       min_vel_y: 0.0
       max_vel_theta: 1.0
@@ -149,7 +149,7 @@ controller_server:
       GoalDist.scale: 24.0
       OscillationCritic.oscillation_reset_dist: 0.09
       RotateToGoal.scale: 32.0
-      RotateToGoal.slowing_factor: 10.0
+      RotateToGoal.slowing_factor: 20.0
       RotateToGoal.lookahead_time: 5.0
       
 controller_server_rclcpp_node:
