@@ -33,14 +33,6 @@ from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
-# import xarco
-
-# xacro_file = os.path.join(urdf_dir, 'test-desc.urdf.xacro')
-# doc = xacro.process_file(xacro_file)
-# robot_desc = doc.toprettyxml(indent='  ')
-# https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/
-
-
 def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
     urdf_file = os.path.join(urdf_dir, 'mammoth.urdf')
@@ -65,133 +57,81 @@ def generate_launch_description():
     robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'robot_description': robot_desc,
-        }]
-    )
-
-    joint_state_publisher = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        output='screen',
-        parameters=[{
+    state_publishers = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/state_publishers/state_publishers.launch.py']),
+         launch_arguments={
             'use_sim_time': use_sim_time
-        }]
+        }.items(),
     )
-
+    
     ign_gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
-        ),
-        launch_arguments={
-            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
-        }.items(),
-    )
-
-    ign_bridge = Node(
-        package='ros_ign_bridge',
-        executable='parameter_bridge',
-        arguments=['/world/test/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
-                   '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
-                   '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
-                   '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
-                   '/model/mammoth/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
-                   '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
-                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
-                   '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'],
-        output='screen',
-        remappings=[
-            ('/world/test/clock', '/clock'),
-            ('/model/mammoth/tf', '/tf'),
-            ('/model/mammoth/cmd_vel', '/cmd_vel'),
-            ('/model/mammoth/odometry', '/mammoth/odom'),
-            ('/model/mammoth/joint_state', 'joint_states'),
-            ('/lidar', '/mammoth/raw_scan'),
-            ('/lidar/points', '/mammoth/raw_points'),
-            ('/imu', '/mammoth/imu'),
-        ]
-    )
-
-    ign_spawn_robot = Node(
-        package='ros_ign_gazebo',
-        executable='create',
-        arguments=[
-            '-name', 'mammoth',
-            '-x', '0',
-            '-z', '0',
-            '-Y', '0',
-            '-topic', 'robot_description'
-        ],
-        output='screen'
-    )
-
-    pointcloud_to_laserscan = Node(
-        package='pointcloud_to_laserscan',
-        executable='pointcloud_to_laserscan_node',
-        remappings=[
-            ('cloud_in', '/mammoth/filtered_points'),
-            ('scan', '/scan')],
-        parameters=[{
-             'target_frame': 'laser_link',
-             'transform_tolerance': 0.01,
-             'min_height': 0.0,
-             'max_height': 20.0,
-             'angle_min': -3.1415,
-             'angle_max':  3.1415,
-             'angle_increment': 0.0087,
-             'scan_time': 0.01,
-             'range_min': 0.45,
-             'range_max': 35.0,
-             'use_inf': False,
-             'inf_epsilon': 1.0,
-             'use_sim_time': use_sim_time
-        }],
-        name='pointcloud_to_laserscan'
-    )
-
-    rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        arguments=['-d', os.path.join(pkg_mammoth_description, 'rviz', 'mammoth_gazebo.rviz')],
-        condition=IfCondition(use_rviz)
-    )
-
-    joy_with_teleop_twist = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
-        ),
-        launch_arguments={
-            'joy_config': 'xbox',
-            'joy_dev': '/dev/input/js0',
-            'config_filepath': joy_config
-        }.items(),
-    )
-
-    lidar_processor = Node(
-        package='lidar_processor',
-        executable='lidar_processor',
-        name='lidar_processor',
-        output='screen',
-        remappings=[
-            ('/lidar/raw_points', '/mammoth/raw_points'),
-            ('/lidar/filtered_points', '/mammoth/filtered_points'),
-            ('/lidar/unfiltered_points', '/mammoth/unfiltered_points'),
-            ('/lidar/raw_scan', '/mammoth/raw_scan'),
-            ('/lidar/filtered_scan', '/mammoth/filtered_scan'),
-            ('/lidar/unfiltered_scan', '/mammoth/unfiltered_scan'),
-        ],
-        parameters=[{
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/gazebo/gazebo.launch.py']),
+         launch_arguments={
             'use_sim_time': use_sim_time
-        }]
+        }.items(),
+    )
+    
+    joy_with_teleop_twist = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+         os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
+      ),
+      launch_arguments={
+          'joy_config': 'xbox',
+          'joy_dev': '/dev/input/js0',
+          'config_filepath': joy_config
+      }.items(),
+    )
+    
+    velocity_inverter = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/velocity_inverter/velocity_inverter.launch.py']),
+         launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    ) 
+      
+    lidar_processor = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/lidar_processor/lidar_processor.launch.py']),
+         launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
     )
 
+    pointcloud_to_laserscan = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py']),
+         launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    )
+
+    navigation = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/navigation/navigation.launch.py']),
+         launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items(),
+    ) 
+
+    rviz = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_mammoth_gazebo, 'launch'),
+         '/include/rviz/rviz.launch.py']),
+         launch_arguments={
+            'use_rviz': use_rviz,
+            'use_sim_time': use_sim_time
+         }.items(),
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='true',
@@ -200,19 +140,14 @@ def generate_launch_description():
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
 
-        DeclareLaunchArgument(name='scanner', default_value='scanner',
-                              description='Namespace for sample topics'),
-
         # Nodes
-        robot_state_publisher,
-        joint_state_publisher,
+        state_publishers,
+        ign_gazebo,
         joy_with_teleop_twist,
+        velocity_inverter,
+
         lidar_processor,
         pointcloud_to_laserscan,
-
-        ign_gazebo,
-        ign_bridge,
-        ign_spawn_robot,
-
+        navigation,
         rviz,
     ])
