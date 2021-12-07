@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
 <robot name="mammoth">
-<!-- Includes -->
-  <include filename="src/zed-ros2-wrapper/zed_wrapper/urdf/include/materials.urdf.xacro" />
-
-    <!-- Arguments -->
 
   <!-- Robot Footprint -->
   <link name="base_footprint"/>
@@ -405,52 +401,4 @@
     <parent link="base_link"/>
     <child link="imu_link"/>
   </joint>
-
-<!-- Camera Center -->
-    <joint name="zed_camera_center_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="zed_camera_center"/>
-        <origin xyz="0.4 0.0 0.0" rpy="0.0 0.0 0.0" />
-    </joint>
-
-    <link name="zed_camera_center">
-        <visual>
-            <origin xyz="0.4 0 0" rpy="0 0 0"/>
-            <geometry>
-                <mesh filename="/home/ros2_ws/src/zed-ros2-wrapper/zed_wrapper/urdf/models/zed.stl" />
-            </geometry>
-            <material name="zed_mat" />
-        </visual>
-    </link>
-
-<!-- Left Camera -->
-    <joint name="zed_left_camera_joint" type="fixed">
-        <parent link="zed_camera_center"/>
-        <child link="zed_left_camera_frame"/>
-        <origin xyz="0 0.06 0" rpy="0 0 0" />
-    </joint>
-    <link name="zed_left_camera_frame" />
-
-    <joint name="zed_left_camera_optical_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="-1.57 0.0 -1.57"/>
-        <parent link="zed_left_camera_frame"/>
-        <child link="zed_left_camera_optical_frame"/>
-    </joint>
-    <link name="zed_left_camera_optical_frame"/>
-
-<!-- Right Camera -->
-    <joint name="zed_right_camera_joint" type="fixed">
-        <parent link="zed_camera_center"/>
-        <child link="zed_right_camera_frame"/>
-        <origin xyz="0 -0.06 0" rpy="0 0 0" />
-    </joint>
-    <link name="zed_right_camera_frame" />
-
-    <joint name="zed_right_camera_optical_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="-1.57 0.0 -1.57"/>
-        <parent link="zed_right_camera_frame"/>
-        <child link="zed_right_camera_optical_frame"/>
-    </joint>
-    <link name="zed_right_camera_optical_frame"/>
-
 </robot>
