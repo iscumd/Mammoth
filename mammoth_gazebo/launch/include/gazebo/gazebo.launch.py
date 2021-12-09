@@ -48,7 +48,6 @@ def generate_launch_description():
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
@@ -99,9 +98,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='true',
-                              description='Use simulation time if true'),
         # Nodes
         ign_gazebo,
         ign_bridge,

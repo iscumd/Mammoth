@@ -51,7 +51,7 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
+    #robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
     state_publishers = IncludeLaunchDescription(
@@ -67,9 +67,6 @@ def generate_launch_description():
       PythonLaunchDescriptionSource([os.path.join(
          pkg_mammoth_gazebo, 'launch'),
          '/include/gazebo/gazebo.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
-        }.items(),
     )
 
     joy_with_teleop_twist = IncludeLaunchDescription(

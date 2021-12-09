@@ -31,6 +31,7 @@ from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
+
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
