@@ -41,7 +41,6 @@ def generate_robot_model(pkg_description):
 
 def generate_launch_description():
     # ROS packages
-    pkg_mammoth_description = get_package_share_directory('mammoth_description')
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
@@ -51,7 +50,6 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    #robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
     state_publishers = IncludeLaunchDescription(

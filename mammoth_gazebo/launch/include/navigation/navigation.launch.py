@@ -73,14 +73,13 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('slam_params_file', default_value=slam_params_file_path,
-            description='The file path of the params file for slam ToolBox'),
+                              description='The file path of the params file for slam ToolBox'),
 
         DeclareLaunchArgument('nav2_params_file', default_value=nav2_params_file_path,
-            description='The file path of the params file for Navigation2'),
+                              description='The file path of the params file for Navigation2'),
 
-        DeclareLaunchArgument(
-            'use_sim_time', default_value='true',
-            description='Use simulation clock if true'),
+        DeclareLaunchArgument('use_sim_time', default_value='true',
+                              description='Use simulation clock if true'),
 
         slam_toolbox,
         nav2_stack,
