@@ -20,22 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
-
-from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
-from launch.conditions import IfCondition
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    # ROS packages
-    pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')

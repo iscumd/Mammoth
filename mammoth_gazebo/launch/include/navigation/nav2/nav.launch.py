@@ -33,7 +33,7 @@ def generate_launch_description():
     params_file = LaunchConfiguration('config')
     default_bt_xml_filename = LaunchConfiguration('default_bt_xml_filename')
     map_subscribe_transient_local = LaunchConfiguration('map_subscribe_transient_local')
-    
+
     lifecycle_nodes = ['controller_server',
                        'planner_server',
                        'recoveries_server',
@@ -125,7 +125,7 @@ def generate_launch_description():
             output='screen',
             parameters=[configured_params],
             remappings=remappings),
-            
+
         Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',

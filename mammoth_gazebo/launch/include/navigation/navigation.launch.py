@@ -42,8 +42,10 @@ def generate_launch_description():
         pkg_mammoth_gazebo, 'config/slam', 'mapper_params_online_async.yaml')
     slam_params_file = LaunchConfiguration('slam_params_file', default=slam_params_file_path)
 
-    nav2_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config/navigation', 'nav2_params.yaml')
+    nav2_params_file_path = os.path.join(
+        pkg_mammoth_gazebo, 'config/navigation', 'nav2_params.yaml')
     nav2_params_file = LaunchConfiguration('nav2_params_file', default=nav2_params_file_path)
+
     # Nodes
     slam_toolbox = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -69,7 +71,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-
+        # Launch Arguments
         DeclareLaunchArgument('slam_params_file', default_value=slam_params_file_path,
                               description='The file path of the params file for slam ToolBox'),
 
@@ -80,6 +82,6 @@ def generate_launch_description():
             'use_sim_time', default_value='true',
             description='Use simulation clock if true'),
 
-	 slam_toolbox,
-	 nav2_stack,
+    slam_toolbox,
+    nav2_stack,
     ])
