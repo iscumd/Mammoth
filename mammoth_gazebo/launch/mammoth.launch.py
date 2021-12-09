@@ -31,7 +31,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 
-
 def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
     urdf_file = os.path.join(urdf_dir, 'mammoth.urdf')
@@ -44,7 +43,6 @@ def generate_launch_description():
     # ROS packages
     pkg_mammoth_description = get_package_share_directory('mammoth_description')
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
-    pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config

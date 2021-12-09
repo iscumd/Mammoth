@@ -27,8 +27,9 @@ from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
-def generate_launch_description():
 
+def generate_launch_description():
+    
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
