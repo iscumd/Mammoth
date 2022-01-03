@@ -22,4 +22,8 @@ repositories:
   velocity_inverter:
     type: git
     url: https://github.com/girvenavery2022/Velocity_Inverter.git
-    version: main          
+    version: main
+  waypoint_publisher:
+    type: git
+    url: https://github.com/iscumd/WayPoint_Publisher.git
+    version: master                    
