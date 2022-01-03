@@ -27,25 +27,13 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
-from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
-from launch_ros.actions import Node
-
-def generate_robot_model(pkg_description):
-    urdf_dir = os.path.join(pkg_description, 'urdf')
-    urdf_file = os.path.join(urdf_dir, 'mammoth.urdf')
-    with open(urdf_file, 'r') as infp:
-        robot_desc = infp.read()
-    return robot_desc, urdf_file
 
 
 def generate_launch_description():
     # ROS packages
-    pkg_mammoth_description = get_package_share_directory('mammoth_description')
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
-    pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
@@ -54,30 +42,28 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
     state_publishers = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/state_publishers/state_publishers.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
+        PythonLaunchDescriptionSource([os.path.join(
+          pkg_mammoth_gazebo, 'launch'),
+          '/include/state_publishers/state_publishers.launch.py']
+        ),
+        launch_arguments={
+        	'use_sim_time': use_sim_time
         }.items(),
     )
 
     ign_gazebo = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/gazebo/gazebo.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
-        }.items(),
+        PythonLaunchDescriptionSource([os.path.join(
+        	pkg_mammoth_gazebo, 'launch'),
+          '/include/gazebo/gazebo.launch.py']
+        ),
     )
 
     joy_with_teleop_twist = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
-         os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
+        os.path.join(pkg_teleop_twist_joy, 'launch', 'teleop-launch.py')
       ),
       launch_arguments={
           'joy_config': 'xbox',
@@ -87,49 +73,54 @@ def generate_launch_description():
     )
 
     velocity_inverter = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/velocity_inverter/velocity_inverter.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
+        PythonLaunchDescriptionSource([os.path.join(
+          pkg_mammoth_gazebo, 'launch'),
+          '/include/velocity_inverter/velocity_inverter.launch.py']
+        ),
+        launch_arguments={
+          'use_sim_time': use_sim_time
         }.items(),
     )
 
     lidar_processor = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/lidar_processor/lidar_processor.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
+        pkg_mammoth_gazebo, 'launch'),
+        	'/include/lidar_processor/lidar_processor.launch.py']
+				),
+        launch_arguments={
+        	'use_sim_time': use_sim_time
         }.items(),
     )
 
     pointcloud_to_laserscan = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
+        pkg_mammoth_gazebo, 'launch'),
+        	'/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py']
+				),
+        launch_arguments={
+        	'use_sim_time': use_sim_time
         }.items(),
     )
 
     navigation = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/navigation/navigation.launch.py']),
-         launch_arguments={
-            'use_sim_time': use_sim_time
+        pkg_mammoth_gazebo, 'launch'),
+        	'/include/navigation/navigation.launch.py']
+				),
+        launch_arguments={
+          'use_sim_time': use_sim_time
         }.items(),
     )
 
     rviz = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
-         pkg_mammoth_gazebo, 'launch'),
-         '/include/rviz/rviz.launch.py']),
-         launch_arguments={
-            'use_rviz': use_rviz,
-            'use_sim_time': use_sim_time
-         }.items(),
+        pkg_mammoth_gazebo, 'launch'),
+        '/include/rviz/rviz.launch.py']
+			),
+      launch_arguments={
+        'use_rviz': use_rviz,
+        'use_sim_time': use_sim_time
+      }.items(),
     )
 
     return LaunchDescription([
