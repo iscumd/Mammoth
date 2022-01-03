@@ -44,7 +44,8 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-
+    follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
+    
     # Nodes
     state_publishers = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
@@ -139,6 +140,17 @@ def generate_launch_description():
          }.items(),
     )
 
+    waypoint_publisher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([os.path.join(
+          pkg_mammoth_snowplow, 'launch'),
+          '/include/waypoint_publisher/waypoint.launch.py']
+        ),
+        launch_arguments={
+        	'use_sim_time': use_sim_time,
+        	'follow_waypoints': follow_waypoints
+        }.items(),
+    )
+    
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time', default_value='false',
@@ -147,6 +159,9 @@ def generate_launch_description():
         DeclareLaunchArgument('use_rviz', default_value='true',
                               description='Open rviz if true'),
 
+        DeclareLaunchArgument('follow_waypoints', default_value='false',
+                              description='follow way points if true'),
+                              
         # Nodes
         state_publishers,
         joy_with_teleop_twist,
@@ -160,4 +175,5 @@ def generate_launch_description():
         navigation,
 
         rviz,
+        waypoint_publisher,
     ])
