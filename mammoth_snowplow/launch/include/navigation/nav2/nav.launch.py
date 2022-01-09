@@ -34,7 +34,8 @@ def generate_launch_description():
     default_bt_xml_filename = LaunchConfiguration('default_bt_xml_filename')
     map_subscribe_transient_local = LaunchConfiguration('map_subscribe_transient_local')
     
-    lifecycle_nodes = ['controller_server',
+    lifecycle_nodes = ['ouster_driver',
+    			'controller_server',
                        'planner_server',
                        'recoveries_server',
                        'bt_navigator',
@@ -86,6 +87,14 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'map_subscribe_transient_local', default_value='false',
             description='Whether to set the map subscriber QoS to transient local'),
+
+        Node(
+            package='ros2_ouster',
+            executable='ouster_driver',
+            name='ouster_driver',
+            output='screen',
+            emulate_tty=True,
+            parameters=[configured_params]),
 
         Node(
             package='nav2_controller',
