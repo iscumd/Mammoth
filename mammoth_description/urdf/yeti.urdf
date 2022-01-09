@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<robot name="mammoth">
+
+  <!-- Robot Footprint -->
+  <link name="base_footprint"/>
+  
+  <!--
+      ROBOT BASE
+  -->
+  
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.9144 0.4572 0.5223"/>
+      </geometry>
+        <material name="blue">
+        <color rgba="0 0 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.9144 0.4572 0.5223"/>
+      </geometry>
+    </collision>
+    <inertial>
+     <mass value="163.0"/>
+     <inertia ixx="8.0996" ixy="0.0" ixz="0.0" iyy="14.1868" iyz="0.0" izz="16.6077"/>
+    </inertial>
+  </link>
+	
+  <joint name="base_footprint_to_base_link" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.3115"/>
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!--	
+      BACK LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_bl">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.8"/>
+      <inertia
+        ixx="0.009664" ixy="0.0"       ixz="0.0"
+                        iyy="0.009664" iyz="0.0"
+                                        izz="0.01764"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_bl" type="continuous">
+    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2660 -0.180"/>
+    <parent link="base_link"/>
+    <child link="wheel_bl"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!--
+      FRONT LEFT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_fl">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.8"/>
+      <inertia
+        ixx="0.009664" ixy="0.0"       ixz="0.0"
+                        iyy="0.009664" iyz="0.0"
+                                        izz="0.01764"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_fl" type="continuous">
+    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2660 -0.180"/>
+    <parent link="base_link"/>
+    <child link="wheel_fl"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!--
+      BACK RIGHT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_br">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.8"/>
+      <inertia
+        ixx="0.009664" ixy="0.0"       ixz="0.0"
+                        iyy="0.009664" iyz="0.0"
+                                        izz="0.01764"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_br" type="continuous">
+    <origin rpy="1.57 -3.14159 0" xyz="0.3 0.2660 -0.180"/>
+    <parent link="base_link"/>
+    <child link="wheel_br"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!--
+      FRONT RIGHT WHEEL LINK AND JOINT
+  -->
+
+  <link name="wheel_fr">  
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.075" radius="0.14"/>
+      </geometry>
+      <contact_coefficients mu="0.72" resitution="0"  k_p="0"  k_d="0" />
+    </collision>
+    <inertial>
+      <mass value="1.8"/>
+      <inertia
+        ixx="0.009664" ixy="0.0"       ixz="0.0"
+                        iyy="0.009664" iyz="0.0"
+                                        izz="0.01764"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_wheel_fr" type="continuous">
+    <origin rpy="1.57 -3.14159 0" xyz="-0.3 0.2660 -0.180"/>
+    <parent link="base_link"/>
+    <child link="wheel_fr"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!--
+      LIDAR LINK, IMU LINK AND JOINT
+  -->
+
+  <link name="laser_link">
+    <origin rpy="0 0 0" xyz="-0.3048 0 0.5233"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.072898" radius="0.064836"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.072898" radius="0.084836"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-5" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="base_to_laser" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.3048 0 0.2900"/>
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+  </joint>
+
+ <link name="imu_link">
+    <origin rpy="0 0 0" xyz=" 0 0.200"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-5" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="base_to_imu" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.3048 0 0.2900"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+</robot>
