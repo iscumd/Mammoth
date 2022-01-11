@@ -1,6 +1,6 @@
 isc_roboteq:
   ros__parameters:
     Max_Current: 30.0
-    USB_Port: '/dev/ttyUSB1'
+    USB_Port: ' '
     Baudrate: 9600
     ChunkSize: 64 
