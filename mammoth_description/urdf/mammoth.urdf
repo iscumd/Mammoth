@@ -55,7 +55,7 @@
 
   <joint name="base_to_wheel_bl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.3 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_bl"/>
   </joint>
@@ -87,7 +87,7 @@
 
   <joint name="base_to_wheel_pl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.15 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.15 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_pl"/>
   </joint>
@@ -119,7 +119,7 @@
 
   <joint name="base_to_wheel_ml" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_ml"/>
   </joint>
@@ -151,7 +151,7 @@
 
   <joint name="base_to_wheel_al" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.15 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.15 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_al"/>
   </joint>
@@ -185,7 +185,7 @@
 
   <joint name="base_to_wheel_fl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.3 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_fl"/>
   </joint>
@@ -218,7 +218,7 @@
 
   <joint name="base_to_wheel_br" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.3 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_br"/>
   </joint>
@@ -250,7 +250,7 @@
 
   <joint name="base_to_wheel_pr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.15 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.15 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_pr"/>
   </joint>
@@ -283,7 +283,7 @@
 
   <joint name="base_to_wheel_mr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_mr"/>
   </joint>
@@ -316,7 +316,7 @@
 
   <joint name="base_to_wheel_ar" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.15 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.15 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_ar"/>
   </joint>
@@ -349,7 +349,7 @@
 
   <joint name="base_to_wheel_fr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.3 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_fr"/>
   </joint>
@@ -414,6 +414,7 @@
    <gazebo>
     <plugin filename="ignition-gazebo-diff-drive-system"
               name="ignition::gazebo::systems::DiffDrive">
+              <!--
       <left_joint>base_to_wheel_bl</left_joint>
       <left_joint>base_to_wheel_pl</left_joint>
       <left_joint>base_to_wheel_ml</left_joint>
@@ -425,6 +426,18 @@
       <right_joint>base_to_wheel_mr</right_joint>
       <right_joint>base_to_wheel_ar</right_joint>
       <right_joint>base_to_wheel_fr</right_joint>
+      -->
+      <left_joint>base_to_wheel_br</left_joint>
+      <left_joint>base_to_wheel_pr</left_joint>
+      <left_joint>base_to_wheel_mr</left_joint>
+      <left_joint>base_to_wheel_ar</left_joint>
+      <left_joint>base_to_wheel_fr</left_joint>
+      
+      <right_joint>base_to_wheel_bl</right_joint>
+      <right_joint>base_to_wheel_pl</right_joint>
+      <right_joint>base_to_wheel_ml</right_joint>
+      <right_joint>base_to_wheel_al</right_joint>
+      <right_joint>base_to_wheel_fl</right_joint>      
       
       <wheel_separation>0.475</wheel_separation>
       <wheel_radius>0.125</wheel_radius>

@@ -53,9 +53,9 @@
 
   </link>
 
-  <joint name="base_to_wheel_bl" type="fixed">
+  <joint name="base_to_wheel_bl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.3 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_bl"/>
   </joint>
@@ -85,9 +85,9 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_pl" type="fixed">
+  <joint name="base_to_wheel_pl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.15 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.15 0.2375 -0.1"/>    
     <parent link="base_link"/>
     <child link="wheel_pl"/>
   </joint>
@@ -117,9 +117,9 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_ml" type="fixed">
+  <joint name="base_to_wheel_ml" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_ml"/>
   </joint>
@@ -149,12 +149,13 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_al" type="fixed">
+  <joint name="base_to_wheel_al" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.15 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.15 0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_al"/>
   </joint>
+
 
   <!--
       FRONT LEFT WHEEL LINK AND JOINT
@@ -182,9 +183,9 @@
   </link>
 
 
-  <joint name="base_to_wheel_fl" type="fixed">
+  <joint name="base_to_wheel_fl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.3 0.2375 -0.1"/>    
     <parent link="base_link"/>
     <child link="wheel_fl"/>
   </joint>
@@ -194,7 +195,7 @@
   -->
 
   <link name="wheel_br">
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="0.3 -0.2375 -0.1"/>
     <visual>
       <geometry>
         <cylinder length="0.075" radius="0.125"/>
@@ -215,9 +216,9 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_br" type="fixed">
+  <joint name="base_to_wheel_br" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.3 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.3 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_br"/>
   </joint>
@@ -247,9 +248,9 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_pr" type="fixed">
+  <joint name="base_to_wheel_pr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.15 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.15 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_pr"/>
   </joint>
@@ -279,12 +280,14 @@
     </inertial>
 
   </link>
-  <joint name="base_to_wheel_mr" type="fixed">
+
+  <joint name="base_to_wheel_mr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_mr"/>
   </joint>
+
 
   <!--
       ANTERIOR RIGHT WHEEL LINK AND JOINT
@@ -311,12 +314,13 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_ar" type="fixed">
+  <joint name="base_to_wheel_ar" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="0.15 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="0.15 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_ar"/>
   </joint>
+
 
   <!--
       FRONT RIGHT WHEEL LINK AND JOINT
@@ -343,9 +347,9 @@
     </inertial>
   </link>
 
-  <joint name="base_to_wheel_fr" type="fixed">
+  <joint name="base_to_wheel_fr" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 -3.14159" xyz="-0.3 -0.2375 -0.1"/>
     <parent link="base_link"/>
     <child link="wheel_fr"/>
   </joint>
@@ -355,7 +359,7 @@
   -->
 
   <link name="laser_link">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 0" xyz="0.3048 0 0.175"/>
     <visual>
       <geometry>
         <cylinder length="0.05" radius="0.025"/>
@@ -373,13 +377,13 @@
   </link>
 
   <joint name="base_to_laser" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 0" xyz="0.3048 0 0.175"/>
     <parent link="base_link"/>
     <child link="laser_link"/>
   </joint>
 
  <link name="imu_link">
-    <origin rpy="0 0 0" xyz="0.175 0 0.200"/>
+    <origin rpy="0 0 0" xyz="0.3048 0 0.200"/>
     <visual>
       <geometry>
         <cylinder length="0.05" radius="0.025"/>
@@ -397,7 +401,7 @@
   </link>
 
   <joint name="base_to_imu" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 0" xyz="0.3048 0 0.175"/>
     <parent link="base_link"/>
     <child link="imu_link"/>
   </joint>
