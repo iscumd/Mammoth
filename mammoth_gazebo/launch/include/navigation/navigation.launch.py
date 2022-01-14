@@ -38,19 +38,22 @@ def generate_launch_description():
 
     # Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    slam_params_file_path = os.path.join(
-        pkg_mammoth_gazebo, 'config/slam', 'mapper_params_online_async.yaml')
-    slam_params_file = LaunchConfiguration('slam_params_file', default=slam_params_file_path)
+    slam_params_file_path = os.path.join(pkg_mammoth_gazebo, 'config/slam',
+                                         'mapper_params_online_async.yaml')
+    slam_params_file = LaunchConfiguration('slam_params_file',
+                                           default=slam_params_file_path)
 
-    nav2_params_file_path = os.path.join(
-        pkg_mammoth_gazebo, 'config/navigation', 'nav2_params.yaml')
-    nav2_params_file = LaunchConfiguration('nav2_params_file', default=nav2_params_file_path)
+    nav2_params_file_path = os.path.join(pkg_mammoth_gazebo,
+                                         'config/navigation',
+                                         'nav2_params.yaml')
+    nav2_params_file = LaunchConfiguration('nav2_params_file',
+                                           default=nav2_params_file_path)
 
     # Nodes
     slam_toolbox = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_slam_toolbox, 'launch', 'online_async_launch.py')
-        ),
+            os.path.join(pkg_slam_toolbox, 'launch',
+                         'online_async_launch.py')),
         launch_arguments={
             'namespace': '',
             'use_sim_time': use_sim_time,
@@ -60,27 +63,29 @@ def generate_launch_description():
 
     nav2_stack = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_mammoth_gazebo, 'launch/include/navigation/nav2', 'nav.launch.py')
-        ),
+            os.path.join(pkg_mammoth_gazebo, 'launch/include/navigation/nav2',
+                         'nav.launch.py')),
         launch_arguments={
             'namespace': '',
             'use_sim_time': use_sim_time,
-            'params_file':  nav2_params_file,
+            'params_file': nav2_params_file,
             'autostart': 'true'
         }.items(),
     )
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('slam_params_file', default_value=slam_params_file_path,
-                              description='The file path of the params file for slam ToolBox'),
-
-        DeclareLaunchArgument('nav2_params_file', default_value=nav2_params_file_path,
-                              description='The file path of the params file for Navigation2'),
-
-        DeclareLaunchArgument('use_sim_time', default_value='true',
+        DeclareLaunchArgument(
+            'slam_params_file',
+            default_value=slam_params_file_path,
+            description='The file path of the params file for slam ToolBox'),
+        DeclareLaunchArgument(
+            'nav2_params_file',
+            default_value=nav2_params_file_path,
+            description='The file path of the params file for Navigation2'),
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='true',
                               description='Use simulation clock if true'),
-
         slam_toolbox,
         nav2_stack,
     ])

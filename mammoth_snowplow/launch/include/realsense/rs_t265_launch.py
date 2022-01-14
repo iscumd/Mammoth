@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # DESCRIPTION #
 # ----------- #
 # Use this launch file to launch a t265 device.
@@ -22,34 +21,63 @@
 # The Parameters available for definition in the command line are described in rs_launch.configurable_parameters
 # For example: to disable fisheye sensors:
 # ros2 launch realsense2_camera rs_t265_launch.py enable_fisheye1:=false enable_fisheye2:=false
-
-
 """Launch realsense2_camera node."""
-import copy
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
-from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from launch.substitutions import ThisLaunchFileDir
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 import sys
 import pathlib
+
 sys.path.append(str(pathlib.Path(__file__).parent.absolute()))
 import rs_launch
 
-local_parameters = [{'name': 'device_type', 'default': 't265', 'description': 'choose device by type'},
-                    {'name': 'enable_pose', 'default': 'true', 'description': 'enable pose stream'},
-                    {'name': 'enable_fisheye1',              'default': 'true', 'description': 'enable fisheye1 stream'},
-                    {'name': 'enable_fisheye2',              'default': 'true', 'description': 'enable fisheye2 stream'},  
-                    {'name': 'odom_frame_id', 'default': 'odom', 'description': 'set odom frame'},      
-                    {'name': 'pose_frame_id', 'default': 'base_footprint', 'description': 'set pose frame'},                                                         
-                    {'name': 'publish_tf', 'default': 'false', 'description': 'publish tf'},                                                          
-                   ]
+local_parameters = [
+    {
+        'name': 'device_type',
+        'default': 't265',
+        'description': 'choose device by type'
+    },
+    {
+        'name': 'enable_pose',
+        'default': 'true',
+        'description': 'enable pose stream'
+    },
+    {
+        'name': 'enable_fisheye1',
+        'default': 'true',
+        'description': 'enable fisheye1 stream'
+    },
+    {
+        'name': 'enable_fisheye2',
+        'default': 'true',
+        'description': 'enable fisheye2 stream'
+    },
+    {
+        'name': 'odom_frame_id',
+        'default': 'odom',
+        'description': 'set odom frame'
+    },
+    {
+        'name': 'pose_frame_id',
+        'default': 'base_footprint',
+        'description': 'set pose frame'
+    },
+    {
+        'name': 'publish_tf',
+        'default': 'false',
+        'description': 'publish tf'
+    },
+]
+
 
 def generate_launch_description():
     return LaunchDescription(
-        rs_launch.declare_configurable_parameters(local_parameters) + 
-        [
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/rs_launch.py']),
-            launch_arguments=rs_launch.set_configurable_parameters(local_parameters).items(),
-        ),
-    ])
+        rs_launch.declare_configurable_parameters(local_parameters) + [
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    [ThisLaunchFileDir(), '/rs_launch.py']),
+                launch_arguments=rs_launch.set_configurable_parameters(
+                    local_parameters).items(),
+            ),
+        ])

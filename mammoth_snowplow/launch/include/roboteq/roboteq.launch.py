@@ -26,24 +26,24 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
-from launch.conditions import IfCondition
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
+
 
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_snowplow = get_package_share_directory('mammoth_snowplow')
 
     # Config
-    roboteq_config = os.path.join(pkg_mammoth_snowplow, 'config/roboteq', 'roboteq.yaml')
+    roboteq_config = os.path.join(pkg_mammoth_snowplow, 'config/roboteq',
+                                  'roboteq.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     # Nodes
+<<<<<<< HEAD
     roboteq = Node(
         package='isc_roboteq',
         executable='isc_roboteq',
@@ -54,7 +54,8 @@ def generate_launch_description():
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='false',
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='false',
                               description='Use simulation time if true'),
         # Nodes
         roboteq,

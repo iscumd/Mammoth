@@ -25,10 +25,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
@@ -43,7 +41,8 @@ def generate_robot_model(pkg_description):
 
 def generate_launch_description():
     # ROS packages
-    pkg_mammoth_description = get_package_share_directory('mammoth_description')
+    pkg_mammoth_description = get_package_share_directory(
+        'mammoth_description')
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
     pkg_ros_ign_gazebo = get_package_share_directory('ros_ign_gazebo')
 
@@ -53,8 +52,8 @@ def generate_launch_description():
     # Nodes
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_ros_ign_gazebo, 'launch', 'ign_gazebo.launch.py')
-        ),
+            os.path.join(pkg_ros_ign_gazebo, 'launch',
+                         'ign_gazebo.launch.py')),
         launch_arguments={
             'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
         }.items(),
@@ -63,14 +62,16 @@ def generate_launch_description():
     ign_bridge = Node(
         package='ros_ign_bridge',
         executable='parameter_bridge',
-        arguments=['/world/test/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
-                   '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
-                   '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
-                   '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
-                   '/model/mammoth/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
-                   '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
-                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
-                   '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'],
+        arguments=[
+            '/world/test/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+            '/model/mammoth/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
+            '/model/mammoth/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+            '/model/mammoth/odometry@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+            '/model/mammoth/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+            '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
+            '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
+            '/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU'
+        ],
         output='screen',
         remappings=[
             ('/world/test/clock', '/clock'),
@@ -81,21 +82,15 @@ def generate_launch_description():
             ('/lidar', '/mammoth/raw_scan'),
             ('/lidar/points', '/mammoth/raw_points'),
             ('/imu', '/mammoth/imu'),
-        ]
-    )
+        ])
 
-    ign_spawn_robot = Node(
-        package='ros_ign_gazebo',
-        executable='create',
-        arguments=[
-            '-name', 'mammoth',
-            '-x', '0',
-            '-z', '0',
-            '-Y', '0',
-            '-topic', 'robot_description'
-        ],
-        output='screen'
-    )
+    ign_spawn_robot = Node(package='ros_ign_gazebo',
+                           executable='create',
+                           arguments=[
+                               '-name', 'mammoth', '-x', '0', '-z', '0', '-Y',
+                               '0', '-topic', 'robot_description'
+                           ],
+                           output='screen')
 
     return LaunchDescription([
         # Nodes
