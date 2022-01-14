@@ -73,16 +73,6 @@ def generate_launch_description():
       }.items(),
     )
 
-    velocity_inverter = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-          pkg_mammoth_gazebo, 'launch'),
-          '/include/velocity_inverter/velocity_inverter.launch.py']
-        ),
-        launch_arguments={
-          'use_sim_time': use_sim_time
-        }.items(),
-    )
-
     lidar_processor = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
         pkg_mammoth_gazebo, 'launch'),
@@ -150,9 +140,8 @@ def generate_launch_description():
         state_publishers,
         ign_gazebo,
         joy_with_teleop_twist,
-        velocity_inverter,
-
         lidar_processor,
+        
         pointcloud_to_laserscan,
         navigation,
         rviz,
