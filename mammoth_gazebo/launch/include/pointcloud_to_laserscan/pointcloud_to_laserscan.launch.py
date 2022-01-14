@@ -36,29 +36,29 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
 
     # Config
-    laserscan_config = os.path.join(
-        pkg_mammoth_gazebo, 'config/pointcloud_to_laserscan', 'pointcloud_to_laserscan.yaml')
+    laserscan_config = os.path.join(pkg_mammoth_gazebo,
+                                    'config/pointcloud_to_laserscan',
+                                    'pointcloud_to_laserscan.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
     # Nodes
-    pointcloud_to_laserscan = Node(
-        package='pointcloud_to_laserscan',
-        executable='pointcloud_to_laserscan_node',
-        remappings=[
-            ('cloud_in', '/mammoth/filtered_points'),
-            ('scan', '/scan')],
-        parameters=[{
-            'laserscan_config': laserscan_config,
-            'use_sim_time': use_sim_time,
-        }],
-        name='pointcloud_to_laserscan'
-    )
+    pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan',
+                                   executable='pointcloud_to_laserscan_node',
+                                   remappings=[('cloud_in',
+                                                '/mammoth/filtered_points'),
+                                               ('scan', '/scan')],
+                                   parameters=[{
+                                       'laserscan_config': laserscan_config,
+                                       'use_sim_time': use_sim_time,
+                                   }],
+                                   name='pointcloud_to_laserscan')
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='true',
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='true',
                               description='Use simulation time if true'),
         # Nodes
         pointcloud_to_laserscan,

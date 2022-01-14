@@ -26,12 +26,10 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
-from launch.conditions import IfCondition
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
+
 
 def generate_robot_model(pkg_description):
     urdf_dir = os.path.join(pkg_description, 'urdf')
@@ -43,39 +41,37 @@ def generate_robot_model(pkg_description):
 
 def generate_launch_description():
     # ROS packages
-    pkg_mammoth_description = get_package_share_directory('mammoth_description')
-    pkg_mammoth_snowplow = get_package_share_directory('mammoth_snowplow')
+    pkg_mammoth_description = get_package_share_directory(
+        'mammoth_description')
+    get_package_share_directory('mammoth_snowplow')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     robot_desc, urdf_file = generate_robot_model(pkg_mammoth_description)
 
     # Nodes
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'robot_description': robot_desc,
-        }]
-    )
+    robot_state_publisher = Node(package='robot_state_publisher',
+                                 executable='robot_state_publisher',
+                                 name='robot_state_publisher',
+                                 output='screen',
+                                 parameters=[{
+                                     'use_sim_time': use_sim_time,
+                                     'robot_description': robot_desc,
+                                 }])
 
-    joint_state_publisher = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time
-        }]
-    )
+    joint_state_publisher = Node(package='joint_state_publisher',
+                                 executable='joint_state_publisher',
+                                 name='joint_state_publisher',
+                                 output='screen',
+                                 parameters=[{
+                                     'use_sim_time': use_sim_time
+                                 }])
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='false',
-                              description='Use simulation clock if true'   ),         
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='false',
+                              description='Use simulation clock if true'),
         # Nodes
         robot_state_publisher,
         joint_state_publisher,
