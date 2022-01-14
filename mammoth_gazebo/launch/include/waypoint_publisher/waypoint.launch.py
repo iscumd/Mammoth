@@ -1,4 +1,3 @@
-
 # MIT License
 #
 # Copyright (c) 2021 Intelligent Systems Club
@@ -38,29 +37,31 @@ def generate_launch_description():
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
 
     # Config
-    waypoints = os.path.join(pkg_mammoth_gazebo, 'config/waypoints', 'single-I.csv')
+    waypoints = os.path.join(pkg_mammoth_gazebo, 'config/waypoints',
+                             'single-I.csv')
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='true')
 
     # Nodes
-    waypoint_publisher = Node(
-        package='waypoint',
-        executable='waypoint',
-        name='waypoint',
-        output='screen',
-	    parameters=[
-            {'filename': waypoints},
-            {'use_sim_time': use_sim_time}
-        ],
-	    condition=IfCondition(follow_waypoints)
-    )
+    waypoint_publisher = Node(package='waypoint',
+                              executable='waypoint',
+                              name='waypoint',
+                              output='screen',
+                              parameters=[{
+                                  'filename': waypoints
+                              }, {
+                                  'use_sim_time': use_sim_time
+                              }],
+                              condition=IfCondition(follow_waypoints))
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='false',
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='false',
                               description='Use simulation time if true'),
-        DeclareLaunchArgument('follow_waypoints', default_value='true',
+        DeclareLaunchArgument('follow_waypoints',
+                              default_value='true',
                               description='Follow waypoints if true'),
         # Nodes
         waypoint_publisher,
