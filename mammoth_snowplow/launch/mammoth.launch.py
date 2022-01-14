@@ -81,14 +81,6 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
 
-    ouster_os1 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/ouster_os1/os1.launch.py'
-        ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-    )
-
     realsense = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
@@ -160,11 +152,12 @@ def generate_launch_description():
         joy_with_teleop_twist,
         roboteq,
         velocity_inverter,
-        ouster_os1,
+        
         realsense,
         lidar_processor,
         pointcloud_to_laserscan,
         navigation,
+        
         rviz,
         waypoint_publisher,
     ])
