@@ -13,9 +13,40 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
+  # Auto formats the python code to avoid linter errors. 
+  autoflake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' 
+          architecture: 'x64' 
+      - name: Auto format python
+        continue-on-error: true # This will err on success, as this is useful on the CLI. Just ignore it here
+        run: |
+          python -m pip install --upgrade pip
+          pip install autoflake8
+          autoflake8 -v -r --in-place --remove-unused-variables .
+      # Push using the actions bot if files were changed. 
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'github-actions' 
+          git config --global user.email 'github-actions@github.com' 
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "Automated autoflake8 formatting"
+          git push
+ 
+
+  # test ros. 
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

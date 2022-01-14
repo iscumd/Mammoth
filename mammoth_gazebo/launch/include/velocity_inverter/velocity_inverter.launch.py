@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
@@ -33,19 +32,18 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
-    velocity_inverter = Node(
-        package='vel_processor',
-        executable='vel_processor',
-        name='vel_processor',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time
-        }]
-    )
+    velocity_inverter = Node(package='vel_processor',
+                             executable='vel_processor',
+                             name='vel_processor',
+                             output='screen',
+                             parameters=[{
+                                 'use_sim_time': use_sim_time
+                             }])
 
     return LaunchDescription([
         # Launch Arguments
-        DeclareLaunchArgument('use_sim_time', default_value='true',
+        DeclareLaunchArgument('use_sim_time',
+                              default_value='true',
                               description='Use simulation clock if true'),
 
         # Nodes
