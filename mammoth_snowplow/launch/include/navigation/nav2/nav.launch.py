@@ -32,13 +32,14 @@ def generate_launch_description():
     autostart = LaunchConfiguration('autostart')
     params_file = LaunchConfiguration('config')
     default_bt_xml_filename = LaunchConfiguration('default_bt_xml_filename')
-    map_subscribe_transient_local = LaunchConfiguration(
-        'map_subscribe_transient_local')
-
-    lifecycle_nodes = [
-        'controller_server', 'planner_server', 'recoveries_server',
-        'bt_navigator', 'waypoint_follower'
-    ]
+    map_subscribe_transient_local = LaunchConfiguration('map_subscribe_transient_local')
+    
+    lifecycle_nodes = ['ouster_driver',
+    			'controller_server',
+                       'planner_server',
+                       'recoveries_server',
+                       'bt_navigator',
+                       'waypoint_follower']
 
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
@@ -80,48 +81,62 @@ def generate_launch_description():
                 'behavior_trees', 'navigate_w_replanning_and_recovery.xml'),
             description='Full path to the behavior tree xml file to use'),
         DeclareLaunchArgument(
-            'map_subscribe_transient_local',
-            default_value='false',
-            description=
-            'Whether to set the map subscriber QoS to transient local'),
-        Node(package='nav2_controller',
-             executable='controller_server',
-             output='screen',
-             parameters=[configured_params],
-             remappings=remappings),
-        Node(package='nav2_planner',
-             executable='planner_server',
-             name='planner_server',
-             output='screen',
-             parameters=[configured_params],
-             remappings=remappings),
-        Node(package='nav2_recoveries',
-             executable='recoveries_server',
-             name='recoveries_server',
-             output='screen',
-             parameters=[configured_params],
-             remappings=remappings),
-        Node(package='nav2_bt_navigator',
-             executable='bt_navigator',
-             name='bt_navigator',
-             output='screen',
-             parameters=[configured_params],
-             remappings=remappings),
-        Node(package='nav2_waypoint_follower',
-             executable='waypoint_follower',
-             name='waypoint_follower',
-             output='screen',
-             parameters=[configured_params],
-             remappings=remappings),
-        Node(package='nav2_lifecycle_manager',
-             executable='lifecycle_manager',
-             name='lifecycle_manager_navigation',
-             output='screen',
-             parameters=[{
-                 'use_sim_time': use_sim_time
-             }, {
-                 'autostart': autostart
-             }, {
-                 'node_names': lifecycle_nodes
-             }]),
+            'map_subscribe_transient_local', default_value='false',
+            description='Whether to set the map subscriber QoS to transient local'),
+
+        Node(
+            package='ros2_ouster',
+            executable='ouster_driver',
+            name='ouster_driver',
+            output='screen',
+            emulate_tty=True,
+            parameters=[configured_params]),
+
+        Node(
+            package='nav2_controller',
+            executable='controller_server',
+            output='screen',
+            parameters=[configured_params],
+            remappings=remappings),
+
+        Node(
+            package='nav2_planner',
+            executable='planner_server',
+            name='planner_server',
+            output='screen',
+            parameters=[configured_params],
+            remappings=remappings),
+
+        Node(
+            package='nav2_recoveries',
+            executable='recoveries_server',
+            name='recoveries_server',
+            output='screen',
+            parameters=[configured_params],
+            remappings=remappings),
+
+        Node(
+            package='nav2_bt_navigator',
+            executable='bt_navigator',
+            name='bt_navigator',
+            output='screen',
+            parameters=[configured_params],
+            remappings=remappings),
+
+        Node(
+            package='nav2_waypoint_follower',
+            executable='waypoint_follower',
+            name='waypoint_follower',
+            output='screen',
+            parameters=[configured_params],
+            remappings=remappings),
+            
+        Node(
+            package='nav2_lifecycle_manager',
+            executable='lifecycle_manager',
+            name='lifecycle_manager_navigation',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time},
+                        {'autostart': autostart},
+                        {'node_names': lifecycle_nodes}]),
     ])
