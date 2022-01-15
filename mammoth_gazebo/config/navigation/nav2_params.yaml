@@ -51,7 +51,7 @@ bt_navigator:
   ros__parameters:
     use_sim_time: True
     global_frame: map
-    robot_base_frame: base_link
+    robot_base_frame: base_footprint
     odom_topic: /mammoth/odom
     enable_groot_monitoring: True
     groot_zmq_publisher_port: 1666
@@ -110,11 +110,11 @@ controller_server:
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -1.0
+      min_vel_x: 0.25
       min_vel_y: 0.0
-      max_vel_x: 1.0
+      max_vel_x: 2.0
       max_vel_y: 0.0
-      max_vel_theta: 2.0
+      max_vel_theta: 1.75
       min_speed_xy: 0.0
       max_speed_xy: 2.0
       min_speed_theta: 0.0
@@ -127,23 +127,25 @@ controller_server:
       vx_samples: 20
       vy_samples: 5
       vtheta_samples: 20
-      sim_time: 1.7
+      sim_time: 2.0
       linear_granularity: 0.05
       angular_granularity: 0.025
       transform_tolerance: 0.2
-      xy_goal_tolerance: 0.50
+      xy_goal_tolerance: 1.0
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       stateful: True
-      critics: ["Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      critics: ["ObstacleFootprint", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
       BaseObstacle.scale: 0.02
       PathAlign.scale: 32.0
       GoalAlign.scale: 26.0
-      PathAlign.forward_point_distance: 1.0
-      GoalAlign.forward_point_distance: 1.0
+      PathAlign.forward_point_distance: 3.0
+      GoalAlign.forward_point_distance: 3.0
       PathDist.scale: 32.0
       GoalDist.scale: 24.0
-          
+      ObstacleFootprint.sum_scores: False
+      ObstacleFootprint.scale: 32.0
+              
 controller_server_rclcpp_node:
   ros__parameters:
     use_sim_time: True
@@ -151,14 +153,14 @@ controller_server_rclcpp_node:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 8.0
-      publish_frequency: 8.0
+      update_frequency: 20.0
+      publish_frequency: 20.0
       global_frame: odom
-      robot_base_frame: base_link
+      robot_base_frame: base_footprint
       use_sim_time: True
       rolling_window: true
-      width: 100
-      height: 100
+      width: 10
+      height: 10
       resolution: 0.05
       footprint: "[ [0.45, 0.3], [0.45, -0.3], [-0.45, -0.3], [-0.45, 0.3] ]"
       plugins: ["voxel_layer", "inflation_layer"]
@@ -195,10 +197,10 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 2.0
-      publish_frequency: 2.0
+      update_frequency: 20.0
+      publish_frequency: 20.0
       global_frame: map
-      robot_base_frame: base_link
+      robot_base_frame: base_footprint
       use_sim_time: True
       footprint: "[ [0.45, 0.3], [0.45, -0.3], [-0.45, -0.3], [-0.45, 0.3] ]"
       resolution: 0.05
@@ -210,17 +212,23 @@ global_costmap:
         observation_sources: scan
         scan:
           topic: /scan
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+          raytrace_max_range: 5.0
+          raytrace_min_range: 0.0
           max_obstacle_height: 2.0
+          min_obstacle_height: 0.0
           clearing: True
           marking: True
           data_type: "LaserScan"
+          inf_is_valid: false         
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 0.01
-        inflation_radius: 0.6
+        inflation_radius: 0.5
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -268,7 +276,7 @@ recoveries_server:
     wait:
       plugin: "nav2_recoveries/Wait"
     global_frame: odom
-    robot_base_frame: base_link
+    robot_base_frame: base_footprint
     transform_timeout: 0.1
     use_sim_time: true
     simulate_ahead_time: 2.0
@@ -280,7 +288,6 @@ robot_state_publisher:
   ros__parameters:
     use_sim_time: True
     
-    
 waypoint_follower:
   ros__parameters:
     loop_rate: 20
@@ -288,5 +295,5 @@ waypoint_follower:
     waypoint_task_executor_plugin: "wait_at_waypoint"   
     wait_at_waypoint:
       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
-      enabled: True
+      enabled: False
       waypoint_pause_duration: 200

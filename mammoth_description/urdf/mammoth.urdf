@@ -22,7 +22,7 @@
   </link>
 	
   <joint name="base_footprint_to_base_link" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.225"/>
+    <origin rpy="0 0 3.14" xyz="0 0 0.225"/>
     <parent link="base_footprint"/>
     <child link="base_link"/>
   </joint>
@@ -87,7 +87,7 @@
 
   <joint name="base_to_wheel_pl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.15 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="-0.15 -0.2375 -0.1"/>    
     <parent link="base_link"/>
     <child link="wheel_pl"/>
   </joint>
@@ -185,7 +185,7 @@
 
   <joint name="base_to_wheel_fl" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>
+    <origin rpy="1.57 -3.14159 0" xyz="-0.3 -0.2375 -0.1"/>    
     <parent link="base_link"/>
     <child link="wheel_fl"/>
   </joint>
@@ -359,7 +359,7 @@
   -->
 
   <link name="laser_link">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 3.14" xyz="-0.3048 0 0.175"/>
     <visual>
       <geometry>
         <cylinder length="0.05" radius="0.025"/>
@@ -377,14 +377,14 @@
   </link>
 
   <joint name="base_to_laser" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 3.14" xyz="-0.3048 0 0.175"/>
     <parent link="base_link"/>
     <child link="laser_link"/>
   </joint>
 
 
  <link name="imu_link">
-    <origin rpy="0 0 0" xyz="0.175 0 0.200"/>
+    <origin rpy="0 0 3.14" xyz="-0.3048 0 0.175"/>
     <visual>
       <geometry>
         <cylinder length="0.05" radius="0.025"/>
@@ -402,7 +402,7 @@
   </link>
 
   <joint name="base_to_imu" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.175"/>
+    <origin rpy="0 0 3.14" xyz="-0.3048 0 0.175"/>
     <parent link="base_link"/>
     <child link="imu_link"/>
   </joint>
@@ -414,6 +414,7 @@
    <gazebo>
     <plugin filename="ignition-gazebo-diff-drive-system"
               name="ignition::gazebo::systems::DiffDrive">
+
       <left_joint>base_to_wheel_bl</left_joint>
       <left_joint>base_to_wheel_pl</left_joint>
       <left_joint>base_to_wheel_ml</left_joint>
@@ -425,7 +426,7 @@
       <right_joint>base_to_wheel_mr</right_joint>
       <right_joint>base_to_wheel_ar</right_joint>
       <right_joint>base_to_wheel_fr</right_joint>
-      
+   
       <wheel_separation>0.475</wheel_separation>
       <wheel_radius>0.125</wheel_radius>
       <odom_publish_frequency>20</odom_publish_frequency>
