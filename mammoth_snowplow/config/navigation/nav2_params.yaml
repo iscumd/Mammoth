@@ -135,7 +135,7 @@ controller_server:
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       stateful: True
-      critics: ["Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      critics: ["ObstacleFootprint", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
       BaseObstacle.scale: 0.02
       PathAlign.scale: 36.0
       GoalAlign.scale: 26.0
@@ -143,7 +143,9 @@ controller_server:
       GoalAlign.forward_point_distance: 5.0
       PathDist.scale: 32.0
       GoalDist.scale: 24.0
-     
+      ObstacleFootprint.sum_scores: False
+      ObstacleFootprint.scale: 32
+      
 controller_server_rclcpp_node:
   ros__parameters:
     use_sim_time: True
@@ -195,8 +197,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 2.0
-      publish_frequency: 2.0
+      update_frequency: 20.0
+      publish_frequency: 20.0
       global_frame: map
       robot_base_frame: base_footprint
       use_sim_time: True
@@ -220,7 +222,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 0.01
-        inflation_radius: 0.6
+        inflation_radius: 0.5
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
