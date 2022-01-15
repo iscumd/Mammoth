@@ -43,7 +43,6 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     # Nodes
-<<<<<<< HEAD
     roboteq = Node(
         package='isc_roboteq',
         executable='isc_roboteq',
