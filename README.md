@@ -12,14 +12,13 @@ If you are going to be running simulation, follow the Binary Install instruction
 
 Install gflags by running:
 	sudo apt-get install libgflags-dev
+
 ## Building
 
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
-2. Clone the repository into your colcon workspace: `vcs import src --input https://raw.githubusercontent.com/iscumd/Mammoth/ros2/mammoth.repos`
+2. Clone the repository into your colcon workspace: `vcs import src --input https://raw.githubusercontent.com/iscumd/Mammoth/master/mammoth.repos`
 3. Build the colcon workspace: `colcon build`
 4. Source the local workspace: `. install/setup.bash`
-
-Note: It should be building ros_ign and mammoth packages from source!
 
 ## Launching
 

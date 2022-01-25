@@ -2,10 +2,12 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>mammoth_snowplow</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="agirven@umich.edu">avery</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  <description>Mammoth is a friendly snow plowing robot. This package is for the Mammoth robot.</description>
+  <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
+  <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
+  <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
