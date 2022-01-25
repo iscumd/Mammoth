@@ -2,7 +2,7 @@ repositories:
   mammoth:
     type: git
     url: https://github.com/iscumd/Mammoth.git
-    version: ros2
+    version: master
   lidar_processor:
     type: git
     url: https://github.com/dcutting133/lidar_processor.git
