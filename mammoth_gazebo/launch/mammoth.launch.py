@@ -34,6 +34,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
+    pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
@@ -116,6 +117,16 @@ def generate_launch_description():
         }.items(),
     )
 
+    robot_state_controller = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_robot_state_controller, 'launch'),
+            'robot_state_controller.launch.py'
+        ]),
+        launch_arguments={
+            'switch_button': 8
+        }.items(),
+    )
+
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument(
@@ -139,4 +150,5 @@ def generate_launch_description():
         navigation,
         rviz,
         waypoint_publisher,
+        robot_state_controller,
     ])

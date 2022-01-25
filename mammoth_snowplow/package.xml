@@ -15,7 +15,8 @@
   <exec_depend>ros2_ouster</exec_depend> 
   <exec_depend>lidar_processor</exec_depend>
   <exec_depend>isc_roboteq</exec_depend>        
-  <exec_depend>realsense2_camera</exec_depend>   
+  <exec_depend>realsense2_camera</exec_depend>
+  <depend>robot_state_controller</depend>
   <test_depend>ament_lint_auto</test_depend>
 
   <test_depend>ament_lint_common</test_depend>

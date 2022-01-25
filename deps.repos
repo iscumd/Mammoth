@@ -23,3 +23,7 @@ repositories:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
     version: master                    
+  robot_state_controller:
+    type: git
+    url: https://github.com/iscumd/robot_state_controller.git
+    version: ros2
