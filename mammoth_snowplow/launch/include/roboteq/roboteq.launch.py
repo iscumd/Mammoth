@@ -43,14 +43,13 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     # Nodes
-    roboteq = Node(package='isc_roboteq',
-                   executable='isc_roboteq',
-                   name='isc_roboteq',
-                   output='screen',
-                   parameters=[roboteq_config],
-                   remappings=[
-                       ('/cmd_vel', '/mammoth/cmd_vel'),
-                   ])
+    roboteq = Node(
+        package='isc_roboteq',
+        executable='isc_roboteq',
+        name='isc_roboteq',
+        output='screen',
+        parameters=[roboteq_config],
+    )
 
     return LaunchDescription([
         # Launch Arguments

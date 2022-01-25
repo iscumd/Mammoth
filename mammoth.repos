@@ -22,11 +22,7 @@ repositories:
   serial_utils_ros2:
     type: git
     url: https://github.com/iscumd/isc_serial_utils.git
-    version: ros2     
-  velocity_inverter:
-    type: git
-    url: https://github.com/girvenavery2022/Velocity_Inverter.git
-    version: main     
+    version: ros2       
   waypoint_publisher:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
