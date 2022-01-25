@@ -4,18 +4,27 @@
 
 The Mammoth repository contains code which will be used on the Mammoth robot. For code that is compatible with Yeti, go to the [Yeti](https://github.com/iscumd/Yeti) repository, or use this code on Yeti/other robots at your own risk. This repository supports launches for both simulation and robot deployments of Mammoth.
 
+## Installing Dependencies
+
+You're going to want to have ROS2 installed. Here's the instructions for [Debian/Ubuntu 20](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html).
+
+If you are going to be running simulation, follow the Binary Install instructions for [Ignition Gazebo](https://ignitionrobotics.org/docs/edifice/install_ubuntu).
+
+Install gflags by running:
+	sudo apt-get install libgflags-dev
+
 ## Building
 
-1. Change directory into your catkin workspace source folder. Example: `cd ~/catkin_ws/src`
-2. Clone the repository into your catkin workspace: `wstool init . https://raw.githubusercontent.com/iscumd/Mammoth/master/yeti.rosinstall`
-3. Change directory back to catkin workspace: `cd ..`
-4. Build the catkin workspace: `catkin build` (hint: Don't forget to source your workspace)
+1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
+2. Clone the repository into your colcon workspace: `vcs import src --input https://raw.githubusercontent.com/iscumd/Mammoth/master/mammoth.repos`
+3. Build the colcon workspace: `colcon build`
+4. Source the local workspace: `. install/setup.bash`
 
 ## Launching
 
-For information on launching and running the project, head to the following packages and view the readme.
+For information on launching and running the project, head to the following packages and view the ReadMe.
 - Robot -> mammoth_snowplow
-- Simulation -> mammoth_simulation
+- Simulation -> mammoth_gazebo
 
 ## Development
 
@@ -31,3 +40,25 @@ For information on launching and running the project, head to the following pack
 ## Documentation
 
 Check the drive for what little we have.
+
+## Fun 
+Edit xbox.config.yaml in mammoth_gazebo and increase the values to: 
+
+  teleop_twist_joy_node:
+    ros__parameters:
+      axis_linear:  # Left thumb stick vertical
+        x: 1
+      scale_linear:
+        x: 1.7
+      scale_linear_turbo:
+        x: 15.0
+  
+      axis_angular:  # Left thumb stick horizontal
+        yaw: 5
+      scale_angular:
+        yaw: 10.0
+  
+      enable_button: 2  # Left trigger button
+      enable_turbo_button: 5  # Right trigger button
+
+Plug in an xbox controller and launch the file    

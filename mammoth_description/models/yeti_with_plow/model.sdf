@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="yeti_with_plow">
+    <static>false</static>
+    <include>
+	  <uri>model://yeti</uri>
+	  <name>yeti_body</name>
+	</include>
+
+	<link name='plow'>
+	
+     <inertial>
+        <mass>27.0</mass>
+     </inertial>
+
+      <pose>0.9 0 0.003 0 0 3.1416</pose>
+
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>model://yeti_with_plow/meshes/45degplow.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://yeti_with_plow/meshes/45degplow.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint type='revolute' name='plow_connection'>
+	<pose>0.4 0 0.05 0 0 0</pose>
+      <child>plow</child>
+      <parent>yeti_body::chassis</parent>
+	<axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

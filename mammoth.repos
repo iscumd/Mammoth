@@ -1,0 +1,29 @@
+repositories:
+  mammoth:
+    type: git
+    url: https://github.com/iscumd/Mammoth.git
+    version: master
+  lidar_processor:
+    type: git
+    url: https://github.com/dcutting133/lidar_processor.git
+    version: master
+  isc_roboteq:
+    type: git
+    url: https://github.com/iscumd/isc_roboteq_hdc2460.git
+    version: ros2
+  pointcloud_to_laserscan:
+    type: git
+    url: https://github.com/ros-perception/pointcloud_to_laserscan.git
+    version: foxy
+  serial_ros2:
+    type: git
+    url: https://github.com/iscumd/isc_serial.git
+    version: ros2
+  serial_utils_ros2:
+    type: git
+    url: https://github.com/iscumd/isc_serial_utils.git
+    version: ros2       
+  waypoint_publisher:
+    type: git
+    url: https://github.com/iscumd/WayPoint_Publisher.git
+    version: master        

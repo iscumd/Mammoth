@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+    <name>mammoth_gazebo</name>
+    <version>0.0.1</version>
+    <description>Mammoth is a friendly snow plowing robot. This package is for simulating the Mammoth robot.</description>
+    <maintainer email="isc-robotics@umich.edu">Intelligent Systems Club</maintainer>
+    <maintainer email="dcutting@umich.edu">David Cutting</maintainer>
+    <maintainer email="agirven@umich.edu">Avery Girven</maintainer>
+    <license>MIT</license>
+
+    <url type="website">http://www.iscumd.com</url>
+    <url type="repository">https://github.com/iscumd/Mammoth</url>
+    <url type="bugtracker">https://github.com/iscumd/Mammoth/issues</url>
+
+    <buildtool_depend>ament_cmake</buildtool_depend>
+
+    <exec_depend>mammoth_description</exec_depend>
+    <exec_depend>joint_state_publisher</exec_depend>
+    <exec_depend>robot_state_publisher</exec_depend>
+    <exec_depend>lidar_processor</exec_depend>
+    <exec_depend>slam_toolbox</exec_depend>
+    <exec_depend>navigation2</exec_depend>
+    <exec_depend>nav2-bringup</exec_depend>
+    <exec_depend>ros_ign_bridge</exec_depend>
+    <exec_depend>ros_ign_gazebo</exec_depend>
+    <exec_depend>teleop_twist_joy</exec_depend>
+    <exec_depend>joy</exec_depend>
+
+    <test_depend>ament_lint_auto</test_depend>
+    <test_depend>ament_lint_common</test_depend>
+
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+</package>
