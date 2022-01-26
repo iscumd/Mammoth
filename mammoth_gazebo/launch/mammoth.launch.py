@@ -42,6 +42,7 @@ def generate_launch_description():
                               'xbone.config.yaml')
 
     # Launch arguments
+    drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='8')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
@@ -119,16 +120,21 @@ def generate_launch_description():
 
     robot_state_controller = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            os.path.join(pkg_robot_state_controller, 'launch'),
+            os.path.join(pkg_robot_state_controller, 'launch/'),
             'robot_state_controller.launch.py'
         ]),
         launch_arguments={
-            'switch_button': 8
+            'switch_button': drive_mode_switch_button
         }.items(),
     )
 
     return LaunchDescription([
         # Launch Arguments
+        DeclareLaunchArgument(
+            'drive_mode_switch_button',
+            default_value='8',
+            description='Which button is used on the joystick to switch drive mode. (In joy message)'
+        ),
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='true',
