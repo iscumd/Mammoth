@@ -30,6 +30,7 @@ find_package(ros_ign_gazebo REQUIRED)
 find_package(ros_ign_bridge REQUIRED)
 find_package(joy REQUIRED)
 find_package(teleop_twist_joy REQUIRED)
+find_package(robot_state_controller REQUIRED)
 ################################################################################
 
 # INSTALL

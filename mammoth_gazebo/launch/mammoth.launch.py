@@ -34,6 +34,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_gazebo = get_package_share_directory('mammoth_gazebo')
+    pkg_robot_state_controller = get_package_share_directory('robot_state_controller')
     pkg_teleop_twist_joy = get_package_share_directory('teleop_twist_joy')
 
     # Config
@@ -41,6 +42,7 @@ def generate_launch_description():
                               'xbone.config.yaml')
 
     # Launch arguments
+    drive_mode_switch_button = LaunchConfiguration('drive_mode_switch_button', default='8')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     follow_waypoints = LaunchConfiguration('follow_waypoints', default='false')
@@ -116,8 +118,23 @@ def generate_launch_description():
         }.items(),
     )
 
+    robot_state_controller = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(pkg_robot_state_controller, 'launch/'),
+            'robot_state_controller.launch.py'
+        ]),
+        launch_arguments={
+            'switch_button': drive_mode_switch_button
+        }.items(),
+    )
+
     return LaunchDescription([
         # Launch Arguments
+        DeclareLaunchArgument(
+            'drive_mode_switch_button',
+            default_value='8',
+            description='Which button is used on the joystick to switch drive mode. (In joy message)'
+        ),
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='true',
@@ -139,4 +156,5 @@ def generate_launch_description():
         navigation,
         rviz,
         waypoint_publisher,
+        robot_state_controller,
     ])
