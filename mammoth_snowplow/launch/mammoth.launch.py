@@ -132,9 +132,10 @@ def generate_launch_description():
     robot_state_controller = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_robot_state_controller, 'launch/'),
-            'robot_state_controller.launch.py'
+            'rsc_with_ipp.launch.py'
         ]),
         launch_arguments={
+            'use_sim_time': use_sim_time,
             'switch_button': drive_mode_switch_button
         }.items(),
     )
