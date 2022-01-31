@@ -14,12 +14,12 @@ slam_toolbox:
     map_frame: map
     base_frame: base_footprint
     scan_topic: /scan
-    mode: localization
+    mode: mapping
     # if you'd like to immediately start continuing a map at a given pose
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose
-    #map_file_name: install/mammoth_snowplow/share/mammoth_snowplow/config/maps/slam_toolbox/cafe
-    #map_start_pose: [0.0, 0.0, 0.0]
+    map_file_name: install/mammoth_gazebo/share/mammoth_gazebo/config/maps/slam_toolbox/single-I
+    map_start_pose: [0.0, 0.0, 0.0]
     #map_start_at_dock: true
 
     debug_logging: false
@@ -28,7 +28,7 @@ slam_toolbox:
     map_update_interval: 5.0
     resolution: 0.03
     max_laser_range: 20.0 #for rastering images
-    minimum_time_interval: 0.5
+    minimum_time_interval: 0.4
     transform_timeout: 0.3
     tf_buffer_duration: 80.
     stack_size_to_use: 400000000 #// program needs a larger stack size to serialize large maps
@@ -37,9 +37,9 @@ slam_toolbox:
     # General Parameters
     use_scan_matching: true
     use_scan_barycenter: true
-    minimum_travel_distance: 0.01
-    minimum_travel_heading: 0.01
-    scan_buffer_size: 90
+    minimum_travel_distance: 0.08
+    minimum_travel_heading: 0.06
+    scan_buffer_size: 20
     scan_buffer_maximum_scan_distance: 10.0
     link_match_minimum_response_fine: 0.1  
     link_scan_maximum_distance: 3.0

@@ -108,17 +108,17 @@ controller_server:
       stateful: True
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      desired_linear_vel: 0.3
-      lookahead_dist: 1.5
-      min_lookahead_dist: 0.3
-      max_lookahead_dist: 0.9
-      lookahead_time: 1.5
-      rotate_to_heading_angular_vel: 2.0
+      desired_linear_vel: 0.75
+      lookahead_dist: 2.1
+      min_lookahead_dist: 2.0
+      max_lookahead_dist: 2.50
+      lookahead_time: 2.0
+      rotate_to_heading_angular_vel: 1.5
       transform_tolerance: 0.3
-      use_velocity_scaled_lookahead_dist: false
+      use_velocity_scaled_lookahead_dist: true
       min_approach_linear_velocity: 0.05
       max_allowed_time_to_collision_up_to_carrot: 1.0
-      use_regulated_linear_velocity_scaling: true
+      use_regulated_linear_velocity_scaling: false
       use_cost_regulated_linear_velocity_scaling: false
       regulated_linear_scaling_min_radius: 0.9
       regulated_linear_scaling_min_speed: 0.25
@@ -148,7 +148,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.40
+        inflation_radius: 0.30
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -209,7 +209,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 0.01
-        inflation_radius: 0.5
+        inflation_radius: 0.3
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -241,7 +241,7 @@ planner_server:
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
       tolerance: 0.5
-      use_astar: false
+      use_astar: true
       allow_unknown: true
               
 recoveries_server:
@@ -277,4 +277,4 @@ waypoint_follower:
     wait_at_waypoint:
       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
       enabled: False
-      waypoint_pause_duration: 200
+      waypoint_pause_duration: 0
