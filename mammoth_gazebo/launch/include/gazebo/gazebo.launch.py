@@ -55,7 +55,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_ign_gazebo, 'launch',
                          'ign_gazebo.launch.py')),
         launch_arguments={
-            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/test.sdf'
+            'ign_args': '-r ' + pkg_mammoth_gazebo + '/worlds/single-I.sdf'
         }.items(),
     )
 
@@ -87,8 +87,8 @@ def generate_launch_description():
     ign_spawn_robot = Node(package='ros_ign_gazebo',
                            executable='create',
                            arguments=[
-                               '-name', 'mammoth', '-x', '0', '-z', '0', '-Y',
-                               '0', '-topic', 'robot_description'
+                               '-name', 'mammoth', '-x', '5', '-y', '3.20', '-Y',
+                               '3.14', '-topic', 'robot_description'
                            ],
                            output='screen')
 
