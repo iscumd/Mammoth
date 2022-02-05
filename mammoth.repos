@@ -2,7 +2,7 @@ repositories:
   mammoth:
     type: git
     url: https://github.com/iscumd/Mammoth.git
-    version: master
+    version: galactic
   lidar_processor:
     type: git
     url: https://github.com/dcutting133/lidar_processor.git
@@ -30,4 +30,4 @@ repositories:
   waypoint_publisher:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
-    version: master        
+    version: galactic        

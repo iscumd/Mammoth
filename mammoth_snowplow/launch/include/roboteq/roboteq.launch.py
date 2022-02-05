@@ -48,7 +48,7 @@ def generate_launch_description():
         executable='isc_roboteq',
         name='isc_roboteq',
         output='screen',
-        remappings=[('/cmd_vel','/mammoth/cmd_vel')],
+        remappings=[('/cmd_vel','/robot/cmd_vel')],
         parameters=[roboteq_config],
     )
 
