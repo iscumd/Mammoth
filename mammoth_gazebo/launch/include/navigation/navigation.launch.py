@@ -87,5 +87,5 @@ def generate_launch_description():
                               default_value='true',
                               description='Use simulation clock if true'),
         slam_toolbox,
-        nav2_stack,
+        #nav2_stack,
     ])
