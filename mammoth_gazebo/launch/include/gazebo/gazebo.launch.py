@@ -76,7 +76,7 @@ def generate_launch_description():
         remappings=[
             ('/world/test/clock', '/clock'),
             ('/model/mammoth/tf', '/tf'),
-            ('/model/mammoth/cmd_vel', '/mammoth/cmd_vel'),
+            ('/model/mammoth/cmd_vel', '/robot/cmd_vel'),
             ('/model/mammoth/odometry', '/mammoth/odom'),
             ('/model/mammoth/joint_state', 'joint_states'),
             ('/lidar', '/mammoth/raw_scan'),

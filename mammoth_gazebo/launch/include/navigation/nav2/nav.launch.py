@@ -40,7 +40,7 @@ def generate_launch_description():
         'bt_navigator', 'waypoint_follower'
     ]
 
-    remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static'), ('/cmd_vel', '/nav_vel')]
+    remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static'), ('/cmd_vel', '/nav_vel'), ('/odom', '/mammoth/odom')]
 
     param_substitutions = {
         'use_sim_time': use_sim_time,
