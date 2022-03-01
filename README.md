@@ -17,7 +17,7 @@ Install gflags by running:
 
 1. Change directory into your colcon workspace folder. Example: `cd ~/ros_ws/`
 2. Clone the repository into your colcon workspace: `vcs import src --input https://raw.githubusercontent.com/iscumd/Mammoth/master/mammoth.repos`
-3. Run rosdep to get ros depependicies:  
+3. Run rosdep to get ros dependencies:  
    `sudo rosdep init`  
    `rosdep update`  
    `rosdep install --from-paths src --ignore-src -y`  
