@@ -1,8 +1,8 @@
 repositories:
-  lidar_processor:
+  pointcloud_pipeline:
     type: git
-    url: https://github.com/dcutting133/lidar_processor.git
-    version: galactic
+    url: https://github.com/davidcutting/pcpl.git
+    version: master
   isc_roboteq:
     type: git
     url: https://github.com/iscumd/isc_roboteq_hdc2460.git
@@ -22,7 +22,7 @@ repositories:
   waypoint_publisher:
     type: git
     url: https://github.com/iscumd/WayPoint_Publisher.git
-    version: galactic                   
+    version: master                    
   robot_state_controller:
     type: git
     url: https://github.com/iscumd/robot_state_controller.git
