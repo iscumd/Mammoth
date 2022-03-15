@@ -134,7 +134,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'drive_mode_switch_button',
             default_value='8',
-            description='Which button is used on the joystick to switch drive mode. (In joy message)'
+            description='Which button is used on the joystick to switch drive mode.(In joy message)'
         ),
         DeclareLaunchArgument(
             'use_sim_time',
@@ -152,7 +152,7 @@ def generate_launch_description():
         ign_gazebo,
         joy_with_teleop_twist,
         lidar_processor,
-        
+
         pointcloud_to_laserscan,
         navigation,
         rviz,

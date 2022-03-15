@@ -31,7 +31,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 
-
 def generate_launch_description():
     # ROS packages
     pkg_mammoth_snowplow = get_package_share_directory('mammoth_snowplow')
@@ -145,7 +144,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'drive_mode_switch_button',
             default_value='8',
-            description='Which button is used on the joystick to switch drive mode. (In joy message)'
+            description='Which button is used on the joystick to switch drive mode.(In joy message)'
         ),
         DeclareLaunchArgument('use_sim_time',
                               default_value='false',
@@ -162,12 +161,12 @@ def generate_launch_description():
         joy_with_teleop_twist,
         roboteq,
         realsense,
-        
+
         lidar_processor,
         pointcloud_to_laserscan,
         navigation,
         rviz,
-        
+
         waypoint_publisher,
         robot_state_controller,
     ])
