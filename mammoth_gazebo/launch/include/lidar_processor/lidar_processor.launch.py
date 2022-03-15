@@ -33,12 +33,13 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
     lidar_processor = Node(
-        package='lidar_processor',
-        executable='lidar_processor',
-        name='lidar_processor',
+        package='pcpl',
+        executable='pcpl',
+        name='pcpl',
         output='screen',
         remappings=[
             ('/lidar/raw_points', '/mammoth/raw_points'),
+            ('/lidar/ground_points', '/mammoth/ground_points'),
             ('/lidar/filtered_points', '/mammoth/filtered_points'),
             ('/lidar/unfiltered_points', '/mammoth/unfiltered_points'),
             ('/lidar/raw_scan', '/mammoth/raw_scan'),
