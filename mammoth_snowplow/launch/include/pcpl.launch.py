@@ -20,6 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
+from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
@@ -28,14 +31,16 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    # ROS packages
+    get_package_share_directory('mammoth_snowplow')
 
     # Launch arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
-    lidar_processor = Node(
-        package='lidar_processor',
-        executable='lidar_processor',
-        name='lidar_processor',
+    pcpl = Node(
+        package='pcpl',
+        executable='pcpl',
+        name='pcpl',
         output='screen',
         remappings=[
             ('/lidar/raw_points', '/mammoth/raw_points'),
@@ -52,9 +57,9 @@ def generate_launch_description():
     return LaunchDescription([
         # Launch Arguments
         DeclareLaunchArgument('use_sim_time',
-                              default_value='true',
+                              default_value='false',
                               description='Use simulation clock if true'),
 
         # Nodes
-        lidar_processor,
+        pcpl,
     ])

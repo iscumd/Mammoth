@@ -51,7 +51,7 @@ def generate_launch_description():
     state_publishers = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/state_publishers/state_publishers.launch.py'
+            '/include/state_publishers.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -59,7 +59,7 @@ def generate_launch_description():
     ign_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/gazebo/gazebo.launch.py'
+            '/include/gazebo.launch.py'
         ]), )
 
     joy_with_teleop_twist = IncludeLaunchDescription(
@@ -72,10 +72,10 @@ def generate_launch_description():
         }.items(),
     )
 
-    lidar_processor = IncludeLaunchDescription(
+    pcpl = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/lidar_processor/lidar_processor.launch.py'
+            '/include/pcpl.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -83,7 +83,7 @@ def generate_launch_description():
     pointcloud_to_laserscan = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py'
+            '/include/pointcloud_to_laserscan.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -99,7 +99,7 @@ def generate_launch_description():
     rviz = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/rviz/rviz.launch.py'
+            '/include/rviz.launch.py'
         ]),
         launch_arguments={
             'use_rviz': use_rviz,
@@ -110,7 +110,7 @@ def generate_launch_description():
     waypoint_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_gazebo, 'launch'),
-            '/include/waypoint_publisher/waypoint.launch.py'
+            '/include/waypoint.launch.py'
         ]),
         launch_arguments={
             'use_sim_time': use_sim_time,
@@ -151,7 +151,7 @@ def generate_launch_description():
         state_publishers,
         ign_gazebo,
         joy_with_teleop_twist,
-        lidar_processor,
+        pcpl,
         
         pointcloud_to_laserscan,
         navigation,
