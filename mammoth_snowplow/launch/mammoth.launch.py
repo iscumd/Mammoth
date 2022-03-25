@@ -52,7 +52,7 @@ def generate_launch_description():
     state_publishers = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/state_publishers/state_publishers.launch.py'
+            '/include/state_publishers.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -70,7 +70,7 @@ def generate_launch_description():
     roboteq = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/roboteq/roboteq.launch.py'
+            '/include/roboteq.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -83,10 +83,10 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
 
-    lidar_processor = IncludeLaunchDescription(
+    pcpl = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/lidar_processor/lidar_processor.launch.py'
+            '/include/pcpl.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -94,7 +94,7 @@ def generate_launch_description():
     pointcloud_to_laserscan = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/pointcloud_to_laserscan/pointcloud_to_laserscan.launch.py'
+            '/include/pointcloud_to_laserscan.launch.py'
         ]),
         launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
@@ -110,7 +110,7 @@ def generate_launch_description():
     rviz = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/rviz/rviz.launch.py'
+            '/include/rviz.launch.py'
         ]),
         launch_arguments={
             'use_rviz': use_rviz,
@@ -121,7 +121,7 @@ def generate_launch_description():
     waypoint_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             os.path.join(pkg_mammoth_snowplow, 'launch'),
-            '/include/waypoint_publisher/waypoint.launch.py'
+            '/include/waypoint.launch.py'
         ]),
         launch_arguments={
             'use_sim_time': use_sim_time,
@@ -163,7 +163,7 @@ def generate_launch_description():
         roboteq,
         realsense,
         
-        lidar_processor,
+        pcpl,
         pointcloud_to_laserscan,
         navigation,
         rviz,
