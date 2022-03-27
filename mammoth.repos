@@ -3,9 +3,9 @@ repositories:
     type: git
     url: https://github.com/iscumd/Mammoth.git
     version: galactic
-  lidar_processor:
+  pointcloud_pipeline:
     type: git
-    url: https://github.com/dcutting133/lidar_processor.git
+    url: https://github.com/davidcutting/pcpl.git
     version: master
   isc_roboteq:
     type: git
